@@ -1,0 +1,10 @@
+<div class="branch-office-card" [ngStyle]="{'background-color': color}">
+    <img class="branch-office-card__img" src="{{branchOffice.image | noimage}}" alt="">
+    <div class="branch-office-card__description">
+        <span class="branch-office-card__description__icon" 
+              nz-icon nzType="edit" nzTheme="outline"
+              (click)="editBranchOffice(branchOffice)"></span>
+        <span class="branch-office-card__description__title">{{branchOffice.name}}</span>
+        <p class="branch-office-card__description__paragraph">{{branchOffice.address}}</p>
+    </div>
+</div>

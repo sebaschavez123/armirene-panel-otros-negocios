@@ -1,0 +1,27 @@
+<nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+    <thead>
+        <tr>
+            <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+                {{ column.title }}
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of sortTable.data">
+            <td *ngFor="let object of objectKeys">
+                {{data[object]}}
+            </td>
+            <td>
+                <div style="display: flex; justify-content: space-around; ">
+                    <ng-container *ngFor="let action of actions">
+                        <span class="u-pointer font-20" *ngIf="action.show" nzTooltipTitle="{{action.tooltipText}}"
+                            nzTooltipPlacement="bottomLeft" nz-tooltip nz-icon nzType="{{action.icon}}"
+                            (click)="sendEventItem(action.type,data)"></span>
+                    </ng-container>
+
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</nz-table>

@@ -1,0 +1,28 @@
+<div [formGroup]="parentForm" class="phone-vzla-container">
+    <!-- <nz-form-item>
+        <nz-form-label>Télefono:</nz-form-label>
+        <nz-form-control>
+            <nz-select>
+                <nz-option [nzLabel]="'Option1'" [nzValue]="'Option1'"></nz-option>
+                <nz-option [nzLabel]="'Option2'" [nzValue]="'Option2'"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label></nz-form-label>
+        <nz-form-control>
+            <nz-select>
+                <nz-option [nzLabel]="'Option1'" [nzValue]="'Option1'"></nz-option>
+                <nz-option [nzLabel]="'Option2'" [nzValue]="'Option2'"></nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item> -->
+    <nz-form-item>
+        <nz-form-label>Teléfono <span id="required">*</span> </nz-form-label>
+        <nz-form-control class="w-100"
+            [nzErrorTip]="parentForm.controls['phone'].hasError('minlength') ? 'El teléfono debe tener 10 digitos!' : 'Por favor ingresa el télefono!'">
+            <input [maxlength]="10" [minlength]="10" required (keypress)="keyPress($event)" [readonly]="ifDisable"
+                formControlName="phone" nz-input placeholder="teléfono" type="text">
+        </nz-form-control>
+    </nz-form-item>
+</div>

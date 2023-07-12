@@ -1,0 +1,10 @@
+<div class="text-center" *ngIf="(errors$ | async) as errors">
+    <ng-container *ngIf="showMessages; else noerror">
+        <img src="assets/gif/gif-error-modal.gif" alt="Error" width="150px">
+        <p class="font-20 u-bold">TU PEDIDO NO HA SIDO CREADO</p>
+    </ng-container>
+    <ng-template #noerror>
+        <img src="assets/gif/gif-success-modal.gif" alt="Sucess" width="150px">
+        <p class="font-20 u-bold">TU PEDIDO HA SIDO CREADO EXITOSAMENTE</p>
+    </ng-template>
+</div>

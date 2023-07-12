@@ -1,0 +1,11 @@
+.map-container {
+    position: relative;
+    width: 100%;
+
+    #viewport-map {
+        width: 100%;
+        min-height: 25rem;
+        height: calc(100vh - 55rem);
+        transition: all 0.5s ease;
+    }
+}

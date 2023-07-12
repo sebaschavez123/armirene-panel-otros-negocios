@@ -1,0 +1,103 @@
+.nz-header {
+  background-color: white;
+  padding: 0 2rem;
+  box-shadow: 0 0.2rem 0.04rem 0 rgba(0, 0, 0, 0.12);
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+
+  &__logo {
+    width: 13rem;
+    height: 4rem;
+    background-image: url('../../../assets/images/logo-armi.webp');
+    background-size: cover;
+    margin: 1.2rem 2.4rem;
+    float: left;
+  }
+
+  &__trigger {
+    height: 6.4rem;
+    padding: 2rem 2.4rem;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all .3s, padding 0s;
+  }
+
+  &__trigger:hover {
+    color: #1890ff;
+  }
+
+  &__progress-bar {
+    position: absolute;
+    bottom: -3.8rem;
+    right: 0;
+    left: 0;
+  }
+
+  &__avatar {
+    float: right;
+
+    button {
+      border: none;
+    }
+  }
+}
+
+
+.menu-sidebar {
+  position: fixed;
+  z-index: 10;
+  min-height: 100vh;
+  box-shadow: 0.2rem 0 0.6rem rgba(0, 21, 41, .35);
+
+  &__logo-container {
+    height: 10rem;
+    align-items: center;
+    padding-left: 2.4rem;
+    background: #001529;
+    transition: all .3s;
+    margin: 2rem 0;
+    overflow: hidden;
+    line-height: 2rem;
+
+    &__logo {
+      border-radius: 50%;
+      height: 9rem;
+      width: 9rem;
+    }
+
+    &__change-business {
+      background-color: transparent;
+      border: none;
+    }
+
+    img {
+      display: inline-block;
+      height: 8.5rem;
+      width: 8.5rem;
+    }
+
+    p {
+      font-size: 2rem;
+      color: white;
+      padding: 0.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0;
+
+      span {
+        font-size: 1.6rem;
+        color: #b3b3b3;
+      }
+    }
+  }
+}
+
+.layout-content{
+  padding-top: 6.4rem
+}
+
+.content {
+  padding: 2rem 0;
+  height: 100vh
+}

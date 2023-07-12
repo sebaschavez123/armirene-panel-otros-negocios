@@ -1,0 +1,93 @@
+@import "src/assets/scss/general";
+
+.app-button {
+    border-radius: .5rem;
+    text-align: center;
+    font-family: Helvetica;
+    z-index: 1;
+
+    &:focus {
+        box-shadow: none;
+    }
+
+    &.bold {
+        font-weight: bold;
+    }
+
+    &.lighter {
+        font-weight: 300;
+    }
+
+    &.static {
+        position: static !important;
+    }
+
+    &.xs {
+        padding: 0 2rem;
+        font-size: 1.2rem;
+    }
+
+    &.sm {
+        padding: 0.3rem 2rem;
+    }
+
+    &.md {
+        padding: 0.5rem 1rem;
+        width: 50%;
+    }
+
+    &.lg {
+        padding: 0.7rem;
+        width: 90%;
+    }
+
+    &.xlg {
+        padding: 0.4rem;
+        width: 100%;
+    }
+
+    &.xxlg {
+        padding: 1rem 1.5rem;
+        width: 100%;
+    }
+
+    &.main {
+        border: none;
+        background-color: $black;
+        color: white;
+
+        &--h-40 {
+            height: 4rem;
+        }
+
+        &--form {
+            width: 18rem;
+        }
+    }
+
+    &.negative-main-btn {
+        background: transparent;
+        color: $black;
+        border: 0.1rem solid $black;
+
+        &--form {
+            width: 18rem;
+        }
+    }
+
+    &.second-btn {
+        background: $blueArmi ;
+        color: $white;
+        border: 0.1rem solid $blueArmi;
+    }
+
+    &.negative-second-btn {
+        background: $white ;
+        color: $blueArmi;
+        border: 0.1rem solid $blueArmi;
+    }
+
+    &.header {
+        width: 15.5rem;
+    }
+}

@@ -1,0 +1,67 @@
+<nz-layout>
+  <nz-header class="nz-header">
+    <!-- <div class="nz-header__logo" [routerLink]="'start-view'"></div> -->
+    <div class="nz-header__logo"></div>
+    <span class="nz-header__trigger" (click)="isCollapsed = !isCollapsed" *ngIf="showDrawerRef">
+      <span nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
+    </span>
+    <div class="nz-header__avatar">
+      <nz-avatar nzSize="large" nzIcon="user"></nz-avatar>
+      <button nz-button nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">
+        <span nz-icon [nzType]="'down'"></span>
+      </button>
+    </div>
+
+    <nz-dropdown-menu #menu="nzDropdownMenu">
+      <ul nz-menu>
+        <li nz-menu-item [routerLink]="'business'">Tus negocios</li>
+        <li nz-menu-item (click)="logout()">Cerrar sesión</li>
+      </ul>
+    </nz-dropdown-menu>
+    <div class="nz-header__progress-bar" *ngIf="_loadingService.loading$ | async">
+      <nz-progress [nzShowInfo]="false" [nzPercent]="100" nzStatus="active"></nz-progress>
+    </div>
+  </nz-header>
+  <nz-layout class="layout-content">
+    <nz-sider *ngIf="showDrawerRef" class="menu-sidebar" nzCollapsible nzWidth="250px" nzBreakpoint="md"
+      [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+      <div class="menu-sidebar__logo-container" [ngStyle]="{'display': ( isCollapsed ? 'none' : 'flex')}">
+        <div class="menu-sidebar__logo-container__logo">
+          <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+        </div>
+        <p>
+          <ng-container *ngIf="business$ | async as businessSelected">
+            {{businessSelected.name}}
+          </ng-container>
+          <br>
+          <span>Rol del usuario</span>
+        </p>
+      </div>
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+        <!-- <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
+          <ul>
+            <li nz-menu-item nzMatchRouter>
+              <a routerLink="/welcome">Welcome</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a>Monitor</a>
+            </li>
+            <li nz-menu-item nzMatchRouter>
+              <a>Workplace</a>
+            </li>
+          </ul>
+        </li>
+         -->
+        <li nz-menu-item *ngFor="let option of menuOptions" [routerLink]="option.route">
+          <span nz-icon nzType="{{option.icon}}"></span>
+          <span>{{option.label}}</span>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-content class="content"
+      [ngStyle]="{'padding-left': ((isCollapsed && showDrawerRef) ? '9rem' : '') || (( !showDrawerRef) ? '2rem' : '25rem') } ">
+      <app-spinner></app-spinner>
+      <router-outlet (activate)="onActivate($event)"></router-outlet>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

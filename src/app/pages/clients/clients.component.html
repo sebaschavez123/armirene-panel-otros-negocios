@@ -1,0 +1,23 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <h1 class="font-30 ">Clientes</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <app-searcher [placeHolder]="'Buscar cliente'" [listOfData]="listOfData"
+                (newListEvent)="setNewDataList($event)"></app-searcher>
+            <div class="d-inline-block float-r">
+                <app-button [title]="'Exportar'" [prefixIcon]="'export'"
+                    [customClasses]="'negative-second-btn pdd-x-15 font-16'" [isLoading]="false"></app-button>
+            </div>
+        </div>
+    </div>
+    <div class="row mg-y-30">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <app-table [objectKeys]="clientModelList" [listOfColumn]="listOfColumn" [isEditable]="true"
+                [isErasable]="true" [listOfData]="listOfData" (sendItem)="getTableActions($event)"></app-table>
+        </div>
+    </div>
+</div>

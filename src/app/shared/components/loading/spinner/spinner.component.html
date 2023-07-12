@@ -1,0 +1,3 @@
+<span class="spinner-wrapper" *ngIf="_loadingService.loading$ | async">
+    <img [src]="src" class="spin" alt="Spinner" [class.small]="small" [class.medium]="medium" [class.large]="large" />
+</span>

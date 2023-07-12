@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="enterprise-form col-lg-7 col-md-12 col-sm-12 col-xs-12 pdd-y-20">
+            <div class="enterprise-form__description">
+                <h1>INFORMACIÓN DE TU NEGOCIO</h1>
+                <p>La información que ingresas acá es para los domiciliarios y poder dar un soporte.
+                    Ingresa información detallada, explícita y sin errores. Esto servirá para que los domiciliarios
+                    encuentren fácilmente tus locales y podamos dar soporte de manera efectiva.</p>
+            </div>
+            <form [formGroup]="_businessForm.baseForm" class="pdd-20" nz-form nzLayout="vertical">
+                <app-messages></app-messages>
+                <nz-form-item>
+                    <nz-form-label>Nombre del negocio:</nz-form-label>
+                    <nz-form-control nzErrorTip="Por favor ingresa el nombre!">
+                        <input formControlName="name" type="name" nz-input placeholder="Nombre">
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label>Tipo de negocio: </nz-form-label>
+                    <nz-form-control nzErrorTip="Porfavor ingrese el tipo!">
+                        <nz-select formControlName="type" id="type_business" nzPlaceHolder="Tipo de negocio">
+                            <nz-option *ngFor="let type of businessTypes" nzValue="{{type}}"
+                                nzLabel="{{type}}"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label>Cantidad de domicilios que haces en la semana (Estimado)</nz-form-label>
+                    <nz-form-control nzErrorTip="Porfavor ingrese la cantidad de domicilios!">
+                        <input formControlName="deliveryPerWeek" type="number" nz-input
+                            placeholder="Cantidad de domicilios ">
+                    </nz-form-control>
+                </nz-form-item>
+                <!-- <nz-form-item *ngIf="!businessId">
+                    <nz-form-label>¿Cuántas sucursales tiene el negocio?</nz-form-label>
+                    <nz-form-control>
+                        <nz-select [ngModelOptions]="{standalone: true}"
+                            (ngModelChange)="onChangeBusinessQuantity($event)" [(ngModel)]="businessQuantity"
+                            nzPlaceHolder="Cantidad de sucursales">
+                            <nz-option *ngFor="let quantity of businessQuantityList" nzValue="{{quantity}}"
+                                nzLabel="{{quantity}}"></nz-option>
+                        </nz-select>
+                    </nz-form-control>
+                </nz-form-item> -->
+                <!-- <div formArrayName="branchOfficeList">
+                    <div class="branch-office-form-container"
+                        *ngFor="let branchOffice of _businessForm.branchOfficeList.controls; let i = index">
+                        <div class="branch-office-form-container__title">
+                            Sucursal #{{i + 1}}
+                        </div>
+                        <div class="branch-office-form-container__border">
+                            <app-branch-office-form [form]="branchOffice"></app-branch-office-form>
+                        </div>
+                    </div>
+                </div> -->
+            </form>
+            <div class="justify-content-center">
+                <app-button [title]="'Volver'"
+                    [customClasses]="'negative-main-btn negative-main-btn--form main--h-40 mg-right-5  font-16'"
+                    (clicked)="goBack()" [isLoading]="false"></app-button>
+                <app-button [title]="businessId ? 'Editar' : 'Guardar'"
+                    [customClasses]="'main main--form main--h-40  font-16'" (click)="submitForm()"
+                    [isLoading]="false"></app-button>
+            </div>
+        </div>
+    </div>
+</div>

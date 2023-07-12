@@ -1,0 +1,31 @@
+/* You can add global styles to this file, and also import other style files */
+@import "assets/scss/var-mixins",
+"assets/scss/general";
+
+html,
+body {
+    background-color: #f8f8f8 !important;
+    font-size: 10px !important;
+}
+
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", sans-serif !important;
+}
+
+nz-form-label{
+    font-weight: bold;
+}
+
+input {
+    height: 5rem;
+}
+
+nz-select-top-control {
+    height: 5rem !important;
+    align-items: center;
+}
+
+.ant-drawer-body {
+    padding: 0 !important;
+}

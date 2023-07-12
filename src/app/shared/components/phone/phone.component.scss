@@ -1,0 +1,19 @@
+.phone-vzla-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.5rem;
+
+    nz-form-item:first-of-type+nz-form-item {
+        width: 30%;
+    }
+
+    nz-form-item:first-child {
+        width: 20%;
+    }
+
+    nz-form-item:last-child {
+        // width: 50%;
+        width: 100%;
+    }
+}

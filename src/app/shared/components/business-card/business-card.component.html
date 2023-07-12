@@ -1,0 +1,14 @@
+<div class="business-card">
+    <img class="business-card__img" src="{{business.image | noimage}}" alt="">
+    <div class="business-card__actions">
+        <span (click)="updateBusiness(business)" class="u-pointer" nz-icon nzType="edit" nzTheme="outline"></span>
+        <span (click)="deleteBusinessModal()" class="u-pointer" nz-icon nzType="delete" nzTheme="outline"></span>
+    </div>
+    <div class="business-card__description">
+        <span class="business-card__description__title">{{business.name}}</span>
+        <div class="flex-container font-14 u-pointer" (click)="selectBusiness(business)">
+            Ver sucursales
+            <span class="business-card__description__icon" nz-icon nzType="right" nzTheme="outline"></span>
+        </div>
+    </div>
+</div>

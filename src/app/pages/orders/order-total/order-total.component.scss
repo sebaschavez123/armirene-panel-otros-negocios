@@ -1,0 +1,12 @@
+.order-total{
+    margin: 1rem 0;
+    width: 50%;
+    float: right;
+    font-size: 1.8rem;
+    &__price{
+        border-bottom: 0.1rem solid black;  
+        padding: 1rem 0; 
+        display: flex; 
+        justify-content: space-between;
+    }
+}

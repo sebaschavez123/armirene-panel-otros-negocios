@@ -1,0 +1,10 @@
+<button type="button" [class]="'app-button ' + customClasses" [class.disabled]="isDisabled" [disabled]="isDisabled"
+    [id]="buttonId" (click)="click()">
+    <ng-content *ngIf="isTemplate; else defaultButton"></ng-content>
+    <ng-template #defaultButton>
+        <span *ngIf="prefixIcon !== ''" class="mg-right-5" nz-icon nzType="{{prefixIcon}}" nzTheme="outline"></span>
+        <span [ngStyle]="{'color': color }" class="title">{{ title }}</span>
+        <span *ngIf="subfixIcon !== ''" class="mg-left-5" nz-icon nzType="{{subfixIcon}}" nzTheme="outline"></span>
+    </ng-template>
+    <app-spinner *ngIf="isLoading" [small]="true"></app-spinner>
+</button>

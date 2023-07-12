@@ -1,0 +1,42 @@
+<div class="container-fluid login-container">
+    <div class="login-container__row row">
+        <div class="login-container__row__paragraph col-lg-6 col-md-6 col-sm-12 col-xs-12 hide-down--md">
+            <p>Nosotros nos <br> encargamos de <br> tus domicilios</p>
+        </div>
+        <div class="login-container__row__login-form-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="login-container__row__login-form-container__card">
+                <div class="login-container__row__login-form-container__card__title">
+                    <p>Ingresa tus datos para gestionar<br> la entrega de tus pedidos</p>
+                </div>
+                <form nz-form [formGroup]="loginForm" nzLayout="vertical" >
+                    <nz-form-item>
+                        <nz-form-label nzFor="username">Ingresa tu usuario:</nz-form-label>
+                        <nz-form-control nzErrorTip="Por favor ingresa tu usuario!">
+                            <nz-input-group>
+                                <input type="text" nz-input formControlName="username"
+                                    placeholder="Escribe tu usuario…">
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <nz-form-label nzFor="password">Ingresa tu contraseña:</nz-form-label>
+                        <nz-form-control nzErrorTip="Por favor ingresa tu contraseña!">
+                            <nz-input-group>
+                                <input type="password" nz-input formControlName="password"
+                                    placeholder="Escribe tu contraseña…">
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                    <nz-form-item>
+                        <app-messages></app-messages>
+                        <nz-form-control>
+                            <app-button [title]="'Iniciar sesión'"
+                                [customClasses]="'main main--h-40 mg-y-10 w-100 font-16'" [isLoading]="false"
+                                (click)="submitForm()"></app-button>
+                        </nz-form-control>
+                    </nz-form-item>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

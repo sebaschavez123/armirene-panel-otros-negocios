@@ -1,0 +1,65 @@
+<div class="order-summary">
+    <div class="order-summary__title">
+        <span>Datos del cliente:</span>
+        <p>{{client_info.first_name}} {{client_info.last_name}}
+            {{client_info.phone}} </p>
+    </div>
+    <div class="order-summary__edit" (click)="clickClientDetail()" *ngIf="showActions">
+        Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
+    </div>
+</div>
+<div class="order-summary">
+    <div class="order-summary__title">
+        <span>Dirección cliente:</span>
+        <p>{{client_info.address}}</p>
+    </div>
+    <div class="order-summary__edit" (click)="clickClientDetail()" *ngIf="showActions">
+        Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
+    </div>
+</div>
+<div class="order-summary">
+    <div class="order-summary__title">
+        <span>Información de negocio:</span>
+        <p>{{branchOffice?.name}}</p>
+    </div>
+    <div class="order-summary__edit" (click)="clickOrderDetail()" *ngIf="showActions">
+        Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
+    </div>
+</div>
+<div class="order-summary">
+    <div class="order-summary__title">
+        <span>Método de pago:</span>
+        <p *ngIf="payment_method == 1"><img src="assets/svg/efectivo.svg" alt="">
+            Efectivo</p>
+        <p *ngIf="payment_method == 2"><img src="assets/svg/datafono.svg" alt="">
+            Punto de venta</p>
+        <p *ngIf="payment_method == 3"><img src="assets/svg/invoice-bill-svgrepo-com-1.svg" alt="">
+            Prepagado</p>
+    </div>
+    <div class="order-summary__edit" (click)="clickOrderDetail()" *ngIf="showActions">
+        Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
+    </div>
+</div>
+<div class="order-summary">
+    <div class="order-summary__title">
+        <span>Tipo de vehículo</span>
+        <p *ngIf="vehicle_type == 1"><img src="assets/svg/bicycle-svgrepo-com.svg" alt="">
+            Bicicleta</p>
+        <p *ngIf="vehicle_type == 2"><img src="assets/svg/motorbike-bike-svgrepo-com.svg" alt="">
+            Moto</p>
+        <p *ngIf="vehicle_type == 3"><img src="assets/svg/automobile-svgrepo-com.svg" alt="">
+            Carro</p>
+    </div>
+    <div class="order-summary__edit" (click)="clickOrderDetail()" *ngIf="showActions">
+        Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
+    </div>
+</div>
+<div class="order-summary">
+    <div class="order-summary__title">
+        <span>Comentarios al mensajero:</span>
+        <p>{{instructions}}</p>
+    </div>
+    <div class="order-summary__edit" (click)="clickOrderDetail()" *ngIf="showActions">
+        Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
+    </div>
+</div>

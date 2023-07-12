@@ -1,0 +1,40 @@
+<form [formGroup]="form" class="pdd-20" nz-form nzLayout="vertical">
+    <app-cities-select [parentForm]="form"> </app-cities-select>
+    <!-- <nz-form-item>
+        <nz-form-label>Dirección <span id="required">*</span></nz-form-label>
+        <nz-form-control nzErrorTip="Por favor ingresa la dirección!">
+            <input formControlName="address" type="text" nz-input placeholder="Dirección" required>
+        </nz-form-control>
+    </nz-form-item> -->
+    <app-adress-autocomplete [parentForm]="form"></app-adress-autocomplete>
+    <app-map (sendLatLng)="getCoordinates($event)" [selectedData]="form.value"></app-map>
+    <nz-form-item>
+        <nz-form-label>Indicaciones de dirección</nz-form-label>
+        <nz-form-control nzErrorTip="Por favor ingresa la dirección!">
+            <textarea formControlName="addressIndications" nz-input
+                placeholder="Escribe aquí las instrucciones o comentarios para ayudar al domiciliario…"
+                [nzAutosize]="{ minRows: 5, maxRows: 5 }"></textarea>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Nombre sucursal <span id="required">*</span></nz-form-label>
+        <nz-form-control nzErrorTip="Por favor ingresa el nombre!">
+            <input formControlName="name" type="name" nz-input placeholder="Nombre">
+        </nz-form-control>
+    </nz-form-item>
+    <app-phone [parentForm]="form"></app-phone>
+    <div class="add-img-container">
+        <label class="font-16 u-bold">Imagen de la fachada del negocio</label>
+        <img src="../../../../assets/svg/agregar-fachada.svg" alt="">
+    </div>
+    <span><span id="required">*</span>Campos obligatorios</span>
+</form>
+<div class="actions-container" *ngIf="showDrawerActions">
+    <a *ngIf="dataForm.id" (click)="deleteBranchOffice()">Eliminar sucursal</a>
+    <app-button [title]="'Atrás'" (click)="closeDrawer()"
+        [customClasses]="'negative-main-btn negative-main-btn--form main--h-40  font-16'"></app-button>
+    <app-button (click)="saveBranchOffice()" [title]="'Crear'" *ngIf="!dataForm.id"
+        [customClasses]="'main main--form main--h-40  font-16'" [isLoading]="false"></app-button>
+    <app-button (click)="updateBranchOffice(dataForm)" [title]="'Editar'" *ngIf="dataForm.id"
+        [customClasses]="'main main--form main--h-40  font-16'" [isLoading]="false"></app-button>
+</div>

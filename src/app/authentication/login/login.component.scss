@@ -1,0 +1,72 @@
+@import "../../../assets/scss/var-mixins";
+
+.login-container {
+    padding: 5rem;
+    justify-content: center;
+    padding-top: 5rem;
+
+    &__row {
+        background-image: url('../../../assets/images/login-img.webp');
+        background-size: cover;
+        background-position: 50% 50%;
+        height: 80vh;
+        border-radius: 2rem;
+
+        &__paragraph {
+            padding-left: 3rem;
+
+            p {
+                position: absolute;
+                bottom: 2rem;
+                text-shadow: 0 0.2rem 1.5rem #000;
+                font-size: 6.4rem;
+                font-weight: bold;
+                font-stretch: normal;
+                font-style: normal;
+                line-height: 0.95;
+                letter-spacing: normal;
+                color: #fff;
+            }
+        }
+
+        &__login-form-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            &__card {
+                height: 40rem;
+                width: 43rem;
+                background-color: white;
+                border-radius: 1rem;
+                padding: 2rem;
+
+                &__title {
+                    width: 100%;
+                    text-align: center;
+                    font-weight: bold;
+                    font-size: 1.6rem;
+                    text-transform: uppercase;
+                    line-height: 1.31;
+                }
+
+                input {
+                    height: 5rem;
+                    border-radius: 0.5rem;
+                }
+            }
+        }
+    }
+}
+
+@include mq-min-max(large, xs-large){
+    .login-container {
+        &__row {
+            &__paragraph {
+                p{
+                    font-size: 5rem ;
+                }
+            }
+        }
+    }
+}

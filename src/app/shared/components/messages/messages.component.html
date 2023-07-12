@@ -1,0 +1,8 @@
+<ng-container *ngIf="(errors$ | async) as errors">
+    <div class="messages-container" *ngIf="showMessages">
+        <div class="message" *ngFor="let error of errors">
+            {{error}}
+        </div>
+        <span class="close" (click)="onClose()" nz-icon nzType="close" nzTheme="outline"></span>
+    </div>
+</ng-container>

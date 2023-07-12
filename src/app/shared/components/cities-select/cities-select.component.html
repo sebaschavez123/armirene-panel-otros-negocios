@@ -1,0 +1,24 @@
+<form [formGroup]="parentForm" class="cities-container">
+    <nz-form-item>
+        <nz-form-label>Departamento <span id="required">*</span></nz-form-label>
+        <nz-form-control nzErrorTip="Porfavor ingrese el departamento!">
+            <nz-select [nzDisabled]="ifDisable" nzShowSearch formControlName="state" id="state" nzPlaceHolder="Departamento"
+                (ngModelChange)="changeState($event)">
+                <ng-container *ngFor="let state of states">
+                    <nz-option [nzValue]="state.name" nzLabel="{{state.name}}"></nz-option>
+                </ng-container>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+        <nz-form-label>Ciudad <span id="required">*</span></nz-form-label>
+        <nz-form-control nzErrorTip="Porfavor ingrese la ciudad!">
+            <nz-select [nzDisabled]="ifDisable" nzShowSearch formControlName="city" id="city" nzPlaceHolder="Ciudad"
+                (ngModelChange)="changeMunicipality($event)">
+                <ng-container *ngFor="let city of cities">
+                    <nz-option [nzValue]="city.name" nzLabel="{{city.name}}"></nz-option>
+                </ng-container>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+</form>

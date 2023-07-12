@@ -1,0 +1,22 @@
+.orders-list {
+    background: #ebebeb;
+    padding: 4rem 0.2rem 0.2rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    position: relative;
+
+    &__title {
+        position: absolute;
+        top: 0.5rem;
+        left: 0;
+        right: 0;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    &__content {
+        background-color: white;
+        padding: 2rem;
+        height: 100vh;
+    }
+}

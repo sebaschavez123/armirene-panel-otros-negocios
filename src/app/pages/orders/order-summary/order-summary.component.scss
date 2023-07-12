@@ -1,0 +1,17 @@
+.order-summary{
+    border-bottom: 0.1rem solid #ccc;  
+    display: flex;
+    align-items: center; 
+    justify-content: space-between; 
+    &__title{
+        span{
+            color: #0581ae; 
+            font-size: 1.8rem; 
+            font-weight: bold;
+        }
+    }
+    &__edit{
+        display: flex; 
+        align-items: center;
+    }
+}

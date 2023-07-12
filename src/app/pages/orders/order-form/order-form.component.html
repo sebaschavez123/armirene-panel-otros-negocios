@@ -1,0 +1,172 @@
+<div class="order-form-container">
+    <span *ngIf="!fourthContent" class="order-form-container__title">
+        {{orderId ? 'Detalles del pedido' : 'CREAR PEDIDO'}}
+    </span>
+    <nz-steps [nzCurrent]="current" [ngStyle]=" {'width' : fourthContent ? '15%' : '30%'}">
+        <nz-step></nz-step>
+        <nz-step></nz-step>
+        <nz-step></nz-step>
+    </nz-steps>
+    <form [formGroup]="form" nz-form nzLayout="vertical">
+        <div formGroupName="client_info" *ngIf="firstContent">
+            <span class="order-form-container__sub-title">
+                {{orderId ? 'Datos del cliente' : 'Completa los datos del cliente'}}
+            </span>
+            <nz-form-item>
+                <nz-form-label>Número de documento <span id="required">*</span> </nz-form-label>
+                <nz-form-control nzErrorTip="Por favor ingresa el número de documento!">
+                    <input formControlName="dni" type="number" nz-input placeholder="Escribe aquí…">
+                </nz-form-control>
+            </nz-form-item>
+            <div class="order-form-container__row">
+                <nz-form-item>
+                    <nz-form-label>Nombre <span id="required">*</span> </nz-form-label>
+                    <nz-form-control nzErrorTip="Por favor ingresa el nombre del cliente!">
+                        <input [readonly]=" orderId ? true : false" formControlName="first_name" type="text" nz-input
+                            placeholder="Escribe aquí…">
+                    </nz-form-control>
+                </nz-form-item>
+                <nz-form-item>
+                    <nz-form-label>Apellido <span id="required">*</span> </nz-form-label>
+                    <nz-form-control nzErrorTip="Por favor ingresa el apellido del cliente!">
+                        <input [readonly]=" orderId ? true : false" formControlName="last_name" type="text" nz-input
+                            placeholder="Escribe aquí…">
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            <app-phone [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false"></app-phone>
+            <nz-form-item>
+                <nz-form-label>Correo electrónico <span id="required">*</span></nz-form-label>
+                <nz-form-control
+                    [nzErrorTip]="form.get('client_info').controls['email'].hasError('pattern') ? 'Ingrese un correo electrónico valido' : 'Por favor ingresa el correo electrónico'">
+                    <input [readonly]=" orderId ? true : false" formControlName="email" type="email" nz-input
+                        placeholder="Correo electrónico">
+                </nz-form-control>
+            </nz-form-item>
+            <app-cities-select [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false">
+            </app-cities-select>
+            <app-adress-autocomplete [parentForm]="form.get('client_info')"></app-adress-autocomplete>
+            <!-- <nz-form-item>
+                <nz-form-label>Dirección <span id="required">*</span></nz-form-label>
+                <nz-form-control nzErrorTip="Por favor ingresa la dirección!">
+                    <input [readonly]=" orderId ? true : false" formControlName="address" type="text" nz-input
+                        placeholder="Escribe aquí…">
+                </nz-form-control>
+            </nz-form-item> -->
+            <nz-form-item>
+                <nz-form-label>Detalle de la dirección</nz-form-label>
+                <nz-form-control>
+                    <input [readonly]=" orderId ? true : false" type="text" nz-input
+                        placeholder="Número de casa / apto / oficina">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>Indicaciones de dirección</nz-form-label>
+                <nz-form-control>
+                    <textarea [readonly]=" orderId ? true : false" nz-input
+                        placeholder="Escribe aquí las instrucciones o comentarios para ayudar al domiciliario…"
+                        [nzAutosize]="{ minRows: 5, maxRows: 5 }"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <span><span id="required">*</span>Campos obligatorios</span>
+        </div>
+        <div *ngIf="secondContent">
+            <span class="order-form-container__sub-title">Confirma tu ubicación en el mapa</span>
+            <app-map (sendLatLng)="getCoordinates($event)" [selectedData]="form.get('client_info').value"></app-map>
+        </div>
+        <div *ngIf="thirdContent">
+            <span class="order-form-container__sub-title mb-bottom-15">Selecciona la información de tu negocio</span>
+            <!-- <div  class="justify-content-right p-relative">
+                <app-button [title]="'Añadir nueva sucursal'" [subfixIcon]="'plus'" class="p-absolute"
+                    [customClasses]="'negative-second-btn pdd-x-15 font-16 '" [isLoading]="false"></app-button>
+            </div> -->
+            <nz-form-item>
+                <nz-form-label class="mg-y-5">Selecciona la sucursal <span id="required">*</span> </nz-form-label>
+                <nz-form-control>
+                    <nz-select [ngModelOptions]="{standalone: true}" [(ngModel)]="branchOfficeSelected"
+                        id="branchOffice" nzPlaceHolder="Selecciona la surcusal"
+                        (ngModelChange)="changeBranchOffice(branchOfficeSelected)">
+                        <ng-container *ngFor="let branchOffice of branchOfficeList$ | async ">
+                            <nz-option [nzValue]="branchOffice" nzLabel="{{branchOffice.name}}"></nz-option>
+                        </ng-container>
+                    </nz-select>
+                </nz-form-control>
+                <div class="pdd-top-10" id="required" *ngIf="form.controls['storeId'].hasError('min')">
+                    Por favor ingresa la sucursal!
+                </div>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>Tipo de vehículo <span id="required">*</span></nz-form-label>
+                <nz-radio-group formControlName="vehicle_type" nzErrorTip="Por favor ingresa el tipo de vehiculo!">
+                    <label nz-radio [nzValue]="1">
+                        <img src="assets/svg/bicycle-svgrepo-com.svg" alt="">
+                        Bicicleta</label>
+                    <label nz-radio [nzValue]="2">
+                        <img src="assets/svg/motorbike-bike-svgrepo-com.svg" alt="">
+                        Moto</label>
+                    <!-- <label nz-radio [nzValue]="3">
+                        <img src="assets/svg/automobile-svgrepo-com.svg" alt="">
+                        Carro</label> -->
+                </nz-radio-group>
+                <div class="pdd-top-10" id="required" *ngIf="form.controls['vehicle_type'].hasError('min')">
+                    Por favor ingresa el tipo de vehiculo!!
+                </div>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>Forma de pago <span id="required">*</span></nz-form-label>
+                <nz-radio-group formControlName="payment_method" nzErrorTip="Por favor ingresa el metodo de pago!">
+                    <label nz-radio [nzValue]="1">
+                        <img src="assets/svg/efectivo.svg" alt="">
+                        Efectivo</label>
+                    <label nz-radio [nzValue]="2">
+                        <img src="assets/svg/datafono.svg" alt="">
+                        Punto de venta</label>
+                    <!-- <label nz-radio [nzValue]="3">
+                        <img src="assets/svg/invoice-bill-svgrepo-com-1.svg" alt="">
+                        Prepagado</label> -->
+                </nz-radio-group>
+                <div class="pdd-top-10" id="required" *ngIf="form.controls['payment_method'].hasError('min')">
+                    Por favor ingresa el metodo de pago!
+                </div>
+            </nz-form-item>
+            <nz-form-item *ngIf="form.get('payment_method').value == 1">
+                <nz-form-label>Total a cobrar al cliente</nz-form-label>
+                <nz-form-control>
+                    <input formControlName="total_value" type="number" nz-input placeholder="Escribe aquí…">
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>Comentarios al mensajero<span id="required">*</span></nz-form-label>
+                <nz-form-control nzErrorTip="Por favor ingresa comentarios para el mensajero!">
+                    <textarea formControlName="instructions" nz-input placeholder="Escribe los comentarios aquí…"
+                        [nzAutosize]="{ minRows: 5, maxRows: 5 }"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+            <!-- <app-order-total [order]="form.value"></app-order-total> -->
+        </div>
+        <div *ngIf="fourthContent" class="fourth-content">
+            <div>
+                <div class="map-container">
+                    <div id="viewport-map"></div>
+                </div>
+            </div>
+            <div>
+                <app-order-message></app-order-message>
+                <span class="order-form-container__title"> RESUMEN DEL PEDIDO </span>
+                <app-order-summary [order]="form.value" [showActions]="showActions"
+                    [branchOffice]="branchOfficeSelected"></app-order-summary>
+                <app-order-total [order]="form.value" *ngIf="form.get('total_value').value"></app-order-total>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="actions-container" *ngIf="showActions"
+    [ngClass]="current === 3 ? 'actions-container--order-summary p-absolute right-0' : '' || (current === 1 || current == 2)? 'p-absolute' : ''">
+    <app-button [title]="'Atrás'" (click)="pre()" [isLoading]="false"
+        [customClasses]="'negative-main-btn negative-main-btn--form main--h-40  font-16'"></app-button>
+    <app-button [title]="'Siguiente'" [customClasses]="'main main--form main--h-40  font-16'" (click)="next()"
+        *ngIf="current !== 3"></app-button>
+    <app-button [title]="'Crear pedido'" (click)="createOrder()" [customClasses]="'main main--form main--h-40  font-16'"
+        [isLoading]="true" *ngIf="current === 3"></app-button>
+</div>
