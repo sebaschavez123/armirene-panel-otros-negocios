@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "armirene-panel-otros-negocio": {
+    "armirene-panel-otros-negocios": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/armirene-panel-otros-negocio",
+            "outputPath": "dist/armirene-panel-otros-negocios",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -213,28 +213,28 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "armirene-panel-otros-negocio:build:production"
+              "browserTarget": "armirene-panel-otros-negocios:build:production"
             },
             "development": {
-              "browserTarget": "armirene-panel-otros-negocio:build:development"
+              "browserTarget": "armirene-panel-otros-negocios:build:development"
             },
             "hmr": {
-              "browserTarget": "armirene-panel-otros-negocio:build:hmr",
+              "browserTarget": "armirene-panel-otros-negocios:build:hmr",
               "hmr": true
             },
             "hmrcol": {
-              "browserTarget": "armirene-panel-otros-negocio:build:col",
+              "browserTarget": "armirene-panel-otros-negocios:build:col",
               "hmr": true
             },
             "hmrven": {
-              "browserTarget": "armirene-panel-otros-negocio:build:ven",
+              "browserTarget": "armirene-panel-otros-negocios:build:ven",
               "hmr": true
             },
             "col": {
-              "browserTarget": "armirene-panel-otros-negocio:build:col"
+              "browserTarget": "armirene-panel-otros-negocios:build:col"
             },
             "ven": {
-              "browserTarget": "armirene-panel-otros-negocio:build:ven"
+              "browserTarget": "armirene-panel-otros-negocios:build:ven"
             }
           },
           "defaultConfiguration": "development"
@@ -242,7 +242,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "armirene-panel-otros-negocio:build"
+            "browserTarget": "armirene-panel-otros-negocios:build"
           }
         },
         "test": {

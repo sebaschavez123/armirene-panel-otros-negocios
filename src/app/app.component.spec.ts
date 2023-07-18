@@ -16,16 +16,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'armirene-panel-otros-negocio'`, () => {
+  it(`should have as title 'armirene-panel-otros-negocios'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('armirene-panel-otros-negocio');
+    expect(app.title).toEqual('armirene-panel-otros-negocios');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('armirene-panel-otros-negocio app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('armirene-panel-otros-negocios app is running!');
   });
 });

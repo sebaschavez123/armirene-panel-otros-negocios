@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'armirene-panel-otros-negocio';
+  title = 'armirene-panel-otros-negocios';
 }

@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist/armirene-panel-otros-negocio",
+    "public": "dist/armirene-panel-otros-negocios",
     "ignore": [
       "firebase.json",
       "**/.*",
