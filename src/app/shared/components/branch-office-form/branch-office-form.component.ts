@@ -17,6 +17,8 @@ import { AdressAutocompleteComponent } from '../adress-autocomplete/adress-autoc
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/reducers/app.reducer';
 import { saveLatLng } from 'src/app/ngrx/actions/map.actions';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ImgUploadComponent } from '../img-upload/img-upload.component';
 
 const MODULES = [
   ButtonModule,
@@ -28,7 +30,8 @@ const MODULES = [
   CommonModule,
   MapComponent,
   CitiesSelectComponent,
-  AdressAutocompleteComponent
+  AdressAutocompleteComponent,
+  ImgUploadComponent
 ]
 @Component({
   selector: 'app-branch-office-form',
@@ -118,6 +121,10 @@ export class BranchOfficeFormComponent implements OnInit {
         control.updateValueAndValidity({ onlySelf: true });
       }
     });
+  }
+
+  getUrlFile(url) {
+    this.form.get('image')?.setValue(url);
   }
 
   ngOnDestroy() {
