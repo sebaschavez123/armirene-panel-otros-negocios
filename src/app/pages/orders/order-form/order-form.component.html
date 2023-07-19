@@ -14,8 +14,9 @@
             </span>
             <nz-form-item>
                 <nz-form-label>Número de documento <span id="required">*</span> </nz-form-label>
-                <nz-form-control nzErrorTip="Por favor ingresa el número de documento!">
-                    <input formControlName="dni" type="number" nz-input placeholder="Escribe aquí…">
+                <nz-form-control nzErrorTip="Por favor ingresa un número de documento valido!">
+                    <input formControlName="dni" type="number" nz-input placeholder="Escribe aquí…" min="0"
+                        (keydown)="onKeyDown($event)">
                 </nz-form-control>
             </nz-form-item>
             <div class="order-form-container__row">
@@ -23,14 +24,14 @@
                     <nz-form-label>Nombre <span id="required">*</span> </nz-form-label>
                     <nz-form-control nzErrorTip="Por favor ingresa el nombre del cliente!">
                         <input [readonly]=" orderId ? true : false" formControlName="first_name" type="text" nz-input
-                            placeholder="Escribe aquí…">
+                            placeholder="Escribe aquí…" appNoNumbers>
                     </nz-form-control>
                 </nz-form-item>
                 <nz-form-item>
                     <nz-form-label>Apellido <span id="required">*</span> </nz-form-label>
                     <nz-form-control nzErrorTip="Por favor ingresa el apellido del cliente!">
                         <input [readonly]=" orderId ? true : false" formControlName="last_name" type="text" nz-input
-                            placeholder="Escribe aquí…">
+                            placeholder="Escribe aquí…" appNoNumbers>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -132,7 +133,8 @@
             <nz-form-item *ngIf="form.get('payment_method').value == 1">
                 <nz-form-label>Total a cobrar al cliente</nz-form-label>
                 <nz-form-control>
-                    <input formControlName="total_value" type="number" nz-input placeholder="Escribe aquí…">
+                    <input min="0" formControlName="total_value" type="number" nz-input placeholder="Escribe aquí…"
+                        (keydown)="onKeyDown($event)">
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>

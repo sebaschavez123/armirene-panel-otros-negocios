@@ -25,29 +25,29 @@ export class ImgUploadComponent implements OnInit {
   }
 
   upload() {
-    console.log("click en upload")
-    this.http.post(`https://storage.googleapis.com/upload/storage/v1/b/panel-otros-negocios-393215.appspot.com/o?uploadType=media&name=${this.selectedFile.name}`, this.selectedFile, this.httpOptions())
+    const formData = new FormData();
+    formData.append('image', this.selectedFile, this.selectedFile.name);
+    this.http.post(`https://upload-images-dot-stunning-base-164402.appspot.com/upload`, formData)
       .subscribe((res: any) => {
-        this.uploadFile = `https://storage.cloud.google.com/panel-otros-negocios-393215.appspot.com/${this.selectedFile.name}`;
+        this.uploadFile = res.link;
         this.emitFileUrl.emit(this.uploadFile);
-      }
-      )
+      })
   }
 
+  //USAR BUCKET DE PANEL OTROS NEGOCIOS
 
-  protected httpOptions(): { headers: HttpHeaders } {
-    const data = {
-      'Accept': 'application/json',
-      'Authorization': `Bearer ya29.a0AbVbY6NuaWH2h1BSoZ_8-rg2fYlkL3H5bNVmFt35O97ZK7ZsGYiBl0QT19Ivd1XzsT4It38e0LeYiZjwf-TDPVnTSP54CCKRoXSWvhTu4f5ITjmRvi48iGIoNM9RVhxoRIQSB58KORkcuQ6DCNvLD5vkslTq-YcaCgYKAUsSARESFQFWKvPlqCZO2avbVocIkmurKdNRxg0166`,
-      'Content-Type': 'image/png',
-    };
-    return { headers: new HttpHeaders(data) };
-  }
+  // protected httpOptions(): { headers: HttpHeaders } {
+  //   const data = {
+  //     'Accept': 'application/json',
+  //     'Authorization': `Bearer ya29.a0AbVbY6NuaWH2h1BSoZ_8-rg2fYlkL3H5bNVmFt35O97ZK7ZsGYiBl0QT19Ivd1XzsT4It38e0LeYiZjwf-TDPVnTSP54CCKRoXSWvhTu4f5ITjmRvi48iGIoNM9RVhxoRIQSB58KORkcuQ6DCNvLD5vkslTq-YcaCgYKAUsSARESFQFWKvPlqCZO2avbVocIkmurKdNRxg0166`,
+  //     'Content-Type': 'image/png',
+  //   };
+  //   return { headers: new HttpHeaders(data) };
+  // }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
     this.uploadFile = null;
-    console.log(file)
     this.displayImage(file);
   }
 

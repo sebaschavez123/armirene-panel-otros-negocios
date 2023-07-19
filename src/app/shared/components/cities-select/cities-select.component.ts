@@ -9,12 +9,14 @@ import { CitiesSelectVM } from 'src/app/core/view-model/cities-select.vm';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/reducers/app.reducer';
 import { saveLatLng } from 'src/app/ngrx/actions/map.actions';
+import { DirectivesModule } from 'src/app/core/directives/directives.module';
 const MODULES = [
   ReactiveFormsModule,
   NzFormModule,
   NzInputModule,
   NzSelectModule,
   CommonModule,
+  DirectivesModule
 ]
 @Component({
   selector: 'app-cities-select',

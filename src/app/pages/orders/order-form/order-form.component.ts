@@ -87,6 +87,13 @@ export class OrderFormComponent implements OnInit {
     this.changeContent();
   }
 
+  onKeyDown(event: KeyboardEvent): void {
+    const allowedKeys = ["e", "E", "+", "-"];
+    if (allowedKeys.includes(event.key)) {
+      event.preventDefault();
+    }
+  }
+
   next(): void {
     if (this.validClientForm && this.current != 2) {
       this.setCity();
@@ -207,6 +214,13 @@ export class OrderFormComponent implements OnInit {
 
   closeDrawer() {
     this._drawerEvent.changeCloseComponent(true)
+  }
+
+  validateInput(input) {
+    console.log(input)
+    if (input.value < 0) {
+      input.value = '';
+    }
   }
 
   ngOnDestroy() {
