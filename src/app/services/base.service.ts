@@ -31,7 +31,7 @@ export class BaseService {
       // 'correoUsuario': this.getLocalUser().email,
       // 'employeeNumber':  this.getLocalUser().employeeNumber,
       'Accept': 'application/json',
-      'Authorization': `Bearer ${Storage.getAll(AUTH_DATA).token}`,
+      'Authorization': `Bearer ${Storage.getAll(AUTH_DATA)?.token}`,
       'Content-Type': 'application/json',
       'COUNTRY': environment.indicator
     };
