@@ -23,10 +23,7 @@
         </nz-form-control>
     </nz-form-item>
     <app-phone [parentForm]="form"></app-phone>
-    <div class="add-img-container">
-        <label class="font-16 u-bold">Imagen de la fachada del negocio</label>
-        <img src="../../../../assets/svg/agregar-fachada.svg" alt="">
-    </div>
+    <app-img-upload (emitFileUrl)="getUrlFile($event)" [parentForm]="form"></app-img-upload>
     <span><span id="required">*</span>Campos obligatorios</span>
 </form>
 <div class="actions-container" *ngIf="showDrawerActions">

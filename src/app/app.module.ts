@@ -11,6 +11,7 @@ import { LayoutsModule } from './layouts/layouts.module';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './ngrx/reducers/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 registerLocaleData(en);
 
@@ -29,7 +30,9 @@ registerLocaleData(en);
     }),
   ],
   providers: [
-    { provide: NZ_I18N, useValue: en_US }
+    { provide: NZ_I18N, useValue: en_US },
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
+
   ],
   bootstrap: [AppComponent]
 })

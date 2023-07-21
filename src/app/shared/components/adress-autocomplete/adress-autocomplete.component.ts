@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { Subscription } from 'rxjs';
 import { saveLatLng } from 'src/app/ngrx/actions/map.actions';
 import { AppState } from 'src/app/ngrx/reducers/app.reducer';
 import { environment } from 'src/environments/environment';
@@ -23,15 +24,16 @@ import { environment } from 'src/environments/environment';
     NzInputModule
   ]
 })
-export class AdressAutocompleteComponent {
+export class AdressAutocompleteComponent implements OnDestroy {
   center;
   defaultBounds;
   options;
   formattedAddress;
   @Input() parentForm: any;
+  closeAddressAutocomplete: Subscription;
 
   constructor(private _store: Store<AppState>) {
-    this._store.select('map').subscribe(res => {
+    this.closeAddressAutocomplete = this._store.select('map').subscribe(res => {
       console.log(res, "res")
       let { latLng, latLng: { lat, lng } } = res;
       this.center = { lat, lng };
@@ -47,7 +49,6 @@ export class AdressAutocompleteComponent {
           country: [environment.indicator],
         },
         bounds: this.defaultBounds,
-        strictBounds: true,
         types: ['geocode'],
       }
       console.log(this.options)
@@ -58,5 +59,9 @@ export class AdressAutocompleteComponent {
     this.parentForm.get('address').setValue(address.formatted_address)
     var latLng = { lat: address.geometry.location.lat(), lng: address.geometry.location.lng() };
     this._store.dispatch(saveLatLng({ latLng }))
+  }
+
+  ngOnDestroy() {
+    this.closeAddressAutocomplete.unsubscribe();
   }
 }

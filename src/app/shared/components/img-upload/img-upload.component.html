@@ -1,0 +1,15 @@
+<label class="color-black u-bold mg-y-5" for="">Imagen fachada de la sucursal</label>
+<div class="image-uploader">
+    <div class="image-uploader__drop-area" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+        <p>Arrastra el archivo aquí, o</p>
+        <span class="image-uploader__span" flow-btn (click)="fInput.click()">Selecciona el archivo</span>
+        <div *ngIf="imageSrc || uploadFile" class="image-uploader__preview">
+            <img [src]="imageSrc ? imageSrc : uploadFile" alt="Imagen subida" width="250px" />
+            <button (click)="upload()" [ngClass]="uploadFile ? 'upload-image' : ''">
+                {{ uploadFile ? 'Imagen cargada ✓✓' : 'Cargar imagen'}}
+            </button>
+            <span *ngIf="!uploadFile" id="required">Recuerda cargar la imagen antes de crear la sucursal</span>
+        </div>
+        <input #fInput type="file" style="visibility: hidden; display: none;" (change)="onFileSelected($event)">
+    </div>
+</div>
