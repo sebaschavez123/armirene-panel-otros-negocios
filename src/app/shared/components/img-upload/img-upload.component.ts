@@ -25,9 +25,7 @@ export class ImgUploadComponent implements OnInit {
   }
 
   upload() {
-    const formData = new FormData();
-    formData.append('image', this.selectedFile, this.selectedFile.name);
-    this.http.post(`https://upload-images-dot-stunning-base-164402.appspot.com/upload`, formData)
+    this.http.post(`https://us-central1-panel-otros-negocios-393215.cloudfunctions.net/uploadImage`, this.selectedFile, this.httpOptions())
       .subscribe((res: any) => {
         this.uploadFile = res.link;
         this.emitFileUrl.emit(this.uploadFile);
@@ -36,14 +34,13 @@ export class ImgUploadComponent implements OnInit {
 
   //USAR BUCKET DE PANEL OTROS NEGOCIOS
 
-  // protected httpOptions(): { headers: HttpHeaders } {
-  //   const data = {
-  //     'Accept': 'application/json',
-  //     'Authorization': `Bearer ya29.a0AbVbY6NuaWH2h1BSoZ_8-rg2fYlkL3H5bNVmFt35O97ZK7ZsGYiBl0QT19Ivd1XzsT4It38e0LeYiZjwf-TDPVnTSP54CCKRoXSWvhTu4f5ITjmRvi48iGIoNM9RVhxoRIQSB58KORkcuQ6DCNvLD5vkslTq-YcaCgYKAUsSARESFQFWKvPlqCZO2avbVocIkmurKdNRxg0166`,
-  //     'Content-Type': 'image/png',
-  //   };
-  //   return { headers: new HttpHeaders(data) };
-  // }
+  protected httpOptions(): { headers: HttpHeaders } {
+    const data = {
+      'Accept': '*/*',
+      'Content-Type': 'image/png',
+    };
+    return { headers: new HttpHeaders(data) };
+  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
