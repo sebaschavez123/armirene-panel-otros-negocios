@@ -10,6 +10,7 @@ import { map } from "rxjs";
 export class AuthVm {
     constructor(
         private _authManager: AuthManager,
+        private _businessManager: BusinessManager
     ) { }
 
     login(data) {
@@ -27,7 +28,7 @@ export class AuthVm {
     }
 
     getBusinessList(userId) {
-        return this._authManager.getBusinessList(userId)
+        return this._businessManager.getBusinessList(userId)
     }
 
 }
