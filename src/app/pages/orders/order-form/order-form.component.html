@@ -37,7 +37,7 @@
             </div>
             <app-phone [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false"></app-phone>
             <nz-form-item>
-                <nz-form-label>Correo electrónico <span id="required">*</span></nz-form-label>
+                <nz-form-label>Correo electrónico</nz-form-label>
                 <nz-form-control
                     [nzErrorTip]="form.get('client_info').controls['email'].hasError('pattern') ? 'Ingrese un correo electrónico valido' : 'Por favor ingresa el correo electrónico'">
                     <input [readonly]=" orderId ? true : false" formControlName="email" type="email" nz-input
@@ -121,7 +121,13 @@
                         Efectivo</label>
                     <label nz-radio [nzValue]="2">
                         <img src="assets/svg/datafono.svg" alt="">
-                        Punto de venta</label>
+                        Datafono</label>
+                    <label nz-radio [nzValue]="3">
+                        <img src="assets/svg/invoice-bill-svgrepo-com-1.svg" alt="">
+                        Transacción en línea</label>
+                    <label nz-radio [nzValue]="4">
+                        <img src="assets/svg/pse.svg" width="20px" alt="">
+                        PSE</label>
                     <!-- <label nz-radio [nzValue]="3">
                         <img src="assets/svg/invoice-bill-svgrepo-com-1.svg" alt="">
                         Prepagado</label> -->
@@ -138,7 +144,7 @@
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <nz-form-label>Comentarios al mensajero<span id="required">*</span></nz-form-label>
+                <nz-form-label>Comentarios al mensajero</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa comentarios para el mensajero!">
                     <textarea formControlName="instructions" nz-input placeholder="Escribe los comentarios aquí…"
                         [nzAutosize]="{ minRows: 5, maxRows: 5 }"></textarea>

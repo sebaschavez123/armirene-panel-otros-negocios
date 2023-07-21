@@ -54,7 +54,7 @@
         Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
     </div>
 </div>
-<div class="order-summary">
+<div class="order-summary" *ngIf="instructions">
     <div class="order-summary__title">
         <span>Comentarios al mensajero:</span>
         <p>{{instructions}}</p>
