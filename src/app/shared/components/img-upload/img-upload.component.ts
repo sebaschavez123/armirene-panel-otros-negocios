@@ -25,22 +25,13 @@ export class ImgUploadComponent implements OnInit {
   }
 
   upload() {
-    this.http.post(`https://us-central1-panel-otros-negocios-393215.cloudfunctions.net/uploadImage`, this.selectedFile, this.httpOptions())
+    this.http.post(`https://us-central1-panel-otros-negocios-393215.cloudfunctions.net/uploadImage`, this.selectedFile)
       .subscribe((res: any) => {
         this.uploadFile = res.link;
         this.emitFileUrl.emit(this.uploadFile);
       })
   }
 
-  //USAR BUCKET DE PANEL OTROS NEGOCIOS
-
-  protected httpOptions(): { headers: HttpHeaders } {
-    const data = {
-      'Accept': '*/*',
-      'Content-Type': 'image/png',
-    };
-    return { headers: new HttpHeaders(data) };
-  }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
