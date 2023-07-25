@@ -21,7 +21,9 @@ export class BusinessManager {
         private _messages: MessagesService,
         private _loading: LoadingService,
     ) {
-        this.getBusinessList(Storage.getOne(USER_DATA)?.id);
+        if (Storage.getOne(USER_DATA)?.id) {
+            this.getBusinessList(Storage.getOne(USER_DATA)?.id);
+        }
     }
 
     createBusiness(data: Business) {

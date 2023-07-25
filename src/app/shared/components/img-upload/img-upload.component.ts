@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
@@ -25,11 +25,13 @@ export class ImgUploadComponent implements OnInit {
   }
 
   upload() {
-    this.http.post(`https://us-central1-panel-otros-negocios-393215.cloudfunctions.net/uploadImage`, this.selectedFile)
+    const formData = new FormData();
+    formData.append('file', this.selectedFile);
+    this.http.post('https://us-central1-panel-otros-negocios-393215.cloudfunctions.net/upload-img', formData)
       .subscribe((res: any) => {
-        this.uploadFile = res.link;
+        this.uploadFile = `https://storage.googleapis.com/pon-images/${res.file?.name}`
         this.emitFileUrl.emit(this.uploadFile);
-      })
+      });
   }
 
 
