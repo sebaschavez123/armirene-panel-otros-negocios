@@ -1,5 +1,5 @@
 <div class="business-card">
-    <img class="business-card__img" src="{{business.image | noimage}}" alt="">
+    <img class="business-card__img" src="{{business.imageUrl | noimage}}" alt="">
     <div class="business-card__actions">
         <span (click)="updateBusiness(business)" class="u-pointer" nz-icon nzType="edit" nzTheme="outline"></span>
         <span (click)="deleteBusinessModal()" class="u-pointer" nz-icon nzType="delete" nzTheme="outline"></span>

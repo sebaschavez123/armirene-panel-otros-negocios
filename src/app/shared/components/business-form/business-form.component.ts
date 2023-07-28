@@ -16,6 +16,7 @@ import { BranchOfficeFormComponent } from '../branch-office-form/branch-office-f
 import { BusinessFormVm } from 'src/app/core/view-model/business-form.vm';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ImgUploadComponent } from '../img-upload/img-upload.component';
 const antdModule = [
   NzFormModule,
   NzInputModule,
@@ -26,7 +27,8 @@ const antdModule = [
   ReactiveFormsModule,
   MessagesComponent,
   BranchOfficeFormComponent,
-  CommonModule
+  CommonModule,
+  ImgUploadComponent
 ]
 @Component({
   selector: 'app-business-form',
@@ -131,6 +133,10 @@ export class BusinessFormComponent {
         control.updateValueAndValidity({ onlySelf: true });
       }
     });
+  }
+
+  getUrlFile(url) {
+    this._businessForm.baseForm.get('imageUrl')?.setValue(url);
   }
 
   goBack() {

@@ -15,6 +15,7 @@ export class BaseFormBusinessService {
             type: [null, Validators.required],
             ownerId: [Storage.getOne(USER_DATA).id],
             deliveryPerWeek: [null, Validators.required],
+            imageUrl: [null],
             branchOfficeList: this.fb.array([]),
         });
     }

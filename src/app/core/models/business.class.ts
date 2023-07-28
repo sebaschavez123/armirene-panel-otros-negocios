@@ -6,7 +6,7 @@ export class Business {
     type: string;
     ownerId: number;
     deliveryPerWeek: number;
-    image : string;
+    imageUrl : string;
     branchOfficeList: Array<BranchOffice>
     constructor() {
         this.name = '';
@@ -14,5 +14,6 @@ export class Business {
         this.ownerId = 0;
         this.deliveryPerWeek = 0;
         this.branchOfficeList = [];
+        this.imageUrl = '';
     }
 }

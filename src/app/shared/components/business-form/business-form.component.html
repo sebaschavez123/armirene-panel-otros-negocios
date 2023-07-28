@@ -31,6 +31,9 @@
                             placeholder="Cantidad de domicilios ">
                     </nz-form-control>
                 </nz-form-item>
+                <app-img-upload (emitFileUrl)="getUrlFile($event)"
+                    [parentForm]="_businessForm.baseForm"></app-img-upload>
+
                 <!-- <nz-form-item *ngIf="!businessId">
                     <nz-form-label>¿Cuántas sucursales tiene el negocio?</nz-form-label>
                     <nz-form-control>
