@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ORDER_TABLE } from 'src/app/core/tables-info';
 import { Order } from 'src/app/core/models/order.class';
+import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
 
 @Component({
   selector: 'app-orders',
@@ -17,7 +18,7 @@ export class OrdersComponent implements OnInit {
 
   listOfData$: Observable<any>;
   orderModelList: any = {
-    clientFirstName: '', clientLastName: '', clientPhone: '', clientAddress: '', state: ''
+    orderId: '', clientFirstName: '', clientLastName: '', clientPhone: '', clientAddress: '', state: ''
   };
   listOfColumn = ORDER_TABLE.columns;
   constructor(
@@ -64,7 +65,8 @@ export class OrdersComponent implements OnInit {
   }
 
   cancelOrder({ orderId }) {
-    this._vm.cancelOrder(orderId).subscribe()
+    let filterPipe = new RemoveLeadingZerosPipe()
+    this._vm.cancelOrder(filterPipe.transform(orderId)).subscribe()
   }
 
   createOrder() {

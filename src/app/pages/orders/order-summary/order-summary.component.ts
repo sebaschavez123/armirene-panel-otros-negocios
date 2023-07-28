@@ -24,6 +24,7 @@ export class OrderSummaryComponent implements OnInit {
   public payment_method;
   public vehicle_type;
   public instructions;
+  public orderInvoice;
 
   constructor(
     public orderFormComponent: OrderFormComponent,
@@ -32,11 +33,12 @@ export class OrderSummaryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    let { client_info, payment_method, vehicle_type, instructions } = this.order;
+    let { client_info, payment_method, vehicle_type, instructions, orderInvoice } = this.order;
     this.client_info = client_info;
     this.payment_method = payment_method;
     this.vehicle_type = vehicle_type;
     this.instructions = instructions;
+    this.orderInvoice = orderInvoice;
     this.getBranchOfficeByBusiness();
   }
 

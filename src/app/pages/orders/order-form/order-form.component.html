@@ -13,7 +13,7 @@
                 {{orderId ? 'Datos del cliente' : 'Completa los datos del cliente'}}
             </span>
             <nz-form-item>
-                <nz-form-label>Número de documento <span id="required">*</span> </nz-form-label>
+                <nz-form-label>Número de documento</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa un número de documento valido!">
                     <input formControlName="dni" type="number" nz-input placeholder="Escribe aquí…" min="0"
                         (keydown)="onKeyDown($event)">
@@ -95,6 +95,12 @@
                 <div class="pdd-top-10" id="required" *ngIf="form.controls['storeId'].hasError('min')">
                     Por favor ingresa la sucursal!
                 </div>
+            </nz-form-item>
+            <nz-form-item>
+                <nz-form-label>Número de factura <span id="required">*</span></nz-form-label>
+                <nz-form-control nzErrorTip="Por favor ingresa un número de factura valido!">
+                    <input formControlName="orderInvoice" type="text" nz-input placeholder="Escribe aquí…">
+                </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-label>Tipo de vehículo <span id="required">*</span></nz-form-label>

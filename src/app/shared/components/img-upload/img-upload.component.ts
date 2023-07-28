@@ -21,7 +21,7 @@ export class ImgUploadComponent implements OnInit {
 
 
   ngOnInit() {
-    this.uploadFile = this.parentForm.controls['image'].value
+    this.uploadFile = this.parentForm.controls['image']?.value
   }
 
   upload() {

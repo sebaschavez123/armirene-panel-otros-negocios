@@ -43,7 +43,7 @@ export class BaseFormBusinessService {
 
     setValidators(branchOffice: BranchOffice, form: FormGroup) {
         Object.keys(branchOffice).forEach(key => {
-            if (key != 'image' && key != 'addressIndications') {
+            if (key != 'imageUrl' && key != 'addressIndications') {
                 form.get(key)?.setValidators(Validators.required)
             }
         })

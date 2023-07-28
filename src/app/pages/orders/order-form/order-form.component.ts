@@ -163,6 +163,11 @@ export class OrderFormComponent implements OnInit {
   }
 
   createOrder() {
+    let { value } = this.form.controls['products']
+    value.forEach(element => {
+      element.description = this.form.controls['orderInvoice'].value;
+      element.name = "Product";
+    });
     if (!this.form.invalid) {
       this._loadingService.loadingOn()
       this._vm.saveOrder(this.form.value)

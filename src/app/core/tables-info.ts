@@ -39,6 +39,11 @@ export const CLIENT_TABLE = {
 export const ORDER_TABLE = {
     columns: [
         {
+            title: 'Id',
+            compare: (a: any, b: any) => a.orderId.localeCompare(b.orderId),
+            priority: false
+        },
+        {
             title: 'Nombre cliente',
             compare: (a: any, b: any) => a.clientFirstName.localeCompare(b.clientFirstName),
             priority: false

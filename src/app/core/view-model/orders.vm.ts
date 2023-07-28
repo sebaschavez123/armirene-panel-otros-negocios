@@ -17,7 +17,7 @@ export class OrdersVm {
         return this._orderManager.returnOrderByBusiness().pipe(
             map(orders => orders.map(order => {
                 order.business_id = Number(order.businessId),
-                    order.orderId = Number(order.orderId),
+                    order.orderId = order.orderId,
                     order.country = order.country,
                     order.token = 0,
                     order.state = order.state,

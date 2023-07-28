@@ -63,3 +63,12 @@
         Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
     </div>
 </div>
+<div class="order-summary" *ngIf="instructions">
+    <div class="order-summary__title">
+        <span>Factura:</span>
+        <p>{{orderInvoice}}</p>
+    </div>
+    <div class="order-summary__edit" (click)="clickOrderDetail()" *ngIf="showActions">
+        Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
+    </div>
+</div>

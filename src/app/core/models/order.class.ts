@@ -6,6 +6,7 @@ import { environment } from "src/environments/environment";
 export class Order {
     orderId: number;
     business_id: number;
+    orderInvoice: string;
     business_order_id: number;
     total_value: number;
     user_tip: number;
@@ -24,6 +25,7 @@ export class Order {
     constructor() {
         this.orderId = 0;
         this.business_id = Storage.getAll(BUSINESS_DATA).id;
+        this.orderInvoice = '';
         this.business_order_id = 0;
         this.total_value = 0;
         this.user_tip = 0;
