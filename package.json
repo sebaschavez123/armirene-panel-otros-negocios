@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy-app-engine-col": "ng build --c col && gcloud app deploy --project=panel-otros-negocios-393215 --no-promote --version"
   },
   "private": true,
   "dependencies": {
