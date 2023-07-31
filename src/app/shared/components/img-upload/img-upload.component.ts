@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-img-upload',
@@ -9,7 +9,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
   standalone: true,
   imports: [CommonModule]
 })
-export class ImgUploadComponent implements OnInit {
+export class ImgUploadComponent implements OnInit, OnChanges {
   @Input() parentForm: any;
   @Output() emitFileUrl = new EventEmitter<string>();
   imageSrc: string | ArrayBuffer | null = null;
@@ -20,8 +20,14 @@ export class ImgUploadComponent implements OnInit {
   ) { }
 
 
-  ngOnInit() {
-    this.uploadFile = this.parentForm.controls['image']?.value
+  ngOnInit() {}
+
+  ngOnChanges(changes: SimpleChanges) {
+    let imageUrl = changes['parentForm'].currentValue.imageUrl ?
+      changes['parentForm'].currentValue.imageUrl : changes['parentForm'].currentValue.image
+    if (imageUrl) {
+      this.uploadFile = imageUrl;
+    }
   }
 
   upload() {
