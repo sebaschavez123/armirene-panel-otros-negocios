@@ -1,0 +1,20 @@
+runtime: python27
+api_version: 1
+threadsafe: true,
+service: staging
+handlers:
+  - url: /
+    static_files: dist/armirene-panel-otros-negocios/index.html
+    upload: dist/armirene-panel-otros-negocios/index.html
+  - url: /
+    static_dir: dist/armirene-panel-otros-negocios
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - coverage
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json$
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
