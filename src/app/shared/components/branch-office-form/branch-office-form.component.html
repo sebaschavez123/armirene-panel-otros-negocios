@@ -23,7 +23,7 @@
         </nz-form-control>
     </nz-form-item>
     <app-phone [parentForm]="form"></app-phone>
-    <app-img-upload (emitFileUrl)="getUrlFile($event)" [parentForm]="form"></app-img-upload>
+    <app-img-upload (emitFileUrl)="getUrlFile($event)" [parentForm]="form.value"></app-img-upload>
     <span><span id="required">*</span>Campos obligatorios</span>
 </form>
 <div class="actions-container" *ngIf="showDrawerActions">
