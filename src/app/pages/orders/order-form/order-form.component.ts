@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, filter, finalize, switchMap, tap, throwError } from 'rxjs';
+import { Observable, Subscription, catchError, finalize, switchMap, tap, throwError } from 'rxjs';
 import { BaseFormOrderService } from 'src/app/core/baseForm/base-form-order.service';
 import { BranchOffice } from 'src/app/core/models/branch-office.class';
 import { Order } from 'src/app/core/models/order.class';
@@ -40,6 +40,7 @@ export class OrderFormComponent implements OnInit {
   showActions: boolean = true;
   orderId;
   messenger: any;
+  private subsGetOrderMessenger: Subscription;
   constructor(
     private drawerEvent: DrawerEvent,
     public _orderForm: BaseFormOrderService,
@@ -72,7 +73,7 @@ export class OrderFormComponent implements OnInit {
       this.current = 3;
       this.showActions = false;
       this.changeContent();
-      this.branchOfficeList$.pipe(
+      this.subsGetOrderMessenger = this.branchOfficeList$.pipe(
         tap(branchOfficeList => {
           this.branchOfficeSelected = branchOfficeList.filter(branchOffice => branchOffice.id == this.dataForm.storeId)[0]
         }),
@@ -175,6 +176,7 @@ export class OrderFormComponent implements OnInit {
       element.name = "Product";
     });
     if (!this.form.invalid) {
+      this.showActions = false;
       this._loadingService.loadingOn()
       this._vm.saveOrder(this.form.value)
         .pipe(
@@ -182,12 +184,12 @@ export class OrderFormComponent implements OnInit {
           catchError(err => {
             let { error: { message } } = err;
             this._messagesService.showErrors(message);
+            this.showActions = true;
             return throwError(() => err);
           }),
         ).subscribe(res => {
           let { message, data: { orderId } } = res;
           this.orderId = orderId;
-          this.showActions = false;
           this._messagesService.showErrors(message);
         })
     } else {
@@ -237,6 +239,7 @@ export class OrderFormComponent implements OnInit {
 
   ngOnDestroy() {
     let latLng = {};
-    this._store.dispatch(saveLatLng({ latLng }))
+    this._store.dispatch(saveLatLng({ latLng }));
+    this.subsGetOrderMessenger.unsubscribe();
   }
 }

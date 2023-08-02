@@ -1,3 +1,9 @@
+<div class="order-summary" *ngIf="orderId">
+    <div class="order-summary__title">
+        <span>Id de la orden:</span>
+        <p>{{orderId}}</p>
+    </div>
+</div>
 <div class="order-summary">
     <div class="order-summary__title">
         <span>Datos del cliente:</span>
@@ -63,7 +69,7 @@
         Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
     </div>
 </div>
-<div class="order-summary" *ngIf="instructions">
+<div class="order-summary">
     <div class="order-summary__title">
         <span>Factura:</span>
         <p>{{orderInvoice}}</p>
