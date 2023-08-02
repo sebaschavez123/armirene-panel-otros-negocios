@@ -65,20 +65,20 @@ export class OrderFormComponent implements OnInit {
     this.form.patchValue({ ...this.dataForm, storeId: Number(this.dataForm.storeId) });
   }
 
-  async goDetailsForm() {
+  goDetailsForm() {
     this.orderId = this.dataForm.orderId;
     console.log(this.orderId, "ORDERID")
     if (this.orderId) {
       this.current = 3;
       this.showActions = false;
       this.changeContent();
-      await this.branchOfficeList$.pipe(
+      this.branchOfficeList$.pipe(
         tap(branchOfficeList => {
           this.branchOfficeSelected = branchOfficeList.filter(branchOffice => branchOffice.id == this.dataForm.storeId)[0]
         }),
         switchMap(a => this._vm.getOrderMessenger(this.orderId))
-      ).subscribe(async messenger => {
-        let { data } = await messenger;
+      ).subscribe(messenger => {
+        let { data } = messenger;
         this.messenger = data;
       })
     }
@@ -185,7 +185,8 @@ export class OrderFormComponent implements OnInit {
             return throwError(() => err);
           }),
         ).subscribe(res => {
-          let { message } = res;
+          let { message, data: { orderId } } = res;
+          this.orderId = orderId;
           this.showActions = false;
           this._messagesService.showErrors(message);
         })

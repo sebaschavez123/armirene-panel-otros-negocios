@@ -1,12 +1,21 @@
 <div class="messenger">
-    <div class="messenger__state">
+    <div class="messenger__state" *ngIf="messenger">
         El domiciliario va camino a tu dirección
     </div>
     <div class="messenger__container">
-        <img class="messenger__container__image" src="assets/images/user.png" alt="Descripción de la imagen">
-        <p class="messenger__container__description">
-            <strong>{{messenger?.messengerName}}</strong><br>
-            {{messenger?.messengerPhone}}
-        </p>
+        <ng-container *ngIf="messenger; else noMesseger">
+            <img class="messenger__container__image" src="assets/images/user.png" alt="Descripción de la imagen">
+            <p class="messenger__container__description">
+                <strong>{{messenger?.messengerName}}</strong><br>
+                {{messenger?.messengerPhone}}
+            </p>
+        </ng-container>
+        <ng-template #noMesseger>
+            <img class="messenger__container__image" src="assets/svg/moto.svg" alt="Descripción de la imagen">
+            <p class="messenger__container__description messenger__container__description--no-messenger">ESTAMOS
+                BUSCANDO TU
+                DOMICILIARIO</p>
+            <img src="assets/svg/icon-spinner.svg" class="spin mg-x-50" alt="Spinner" [class.medium]="true" />
+        </ng-template>
     </div>
 </div>
