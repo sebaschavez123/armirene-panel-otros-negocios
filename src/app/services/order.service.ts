@@ -30,4 +30,8 @@ export class OrderService {
         return this._baseService.get(`${this.url}/${order.order}/${order.cancel}/${orderId}`)
     }
 
+    getOrderMessenger(orderId){
+        return this._baseService.get(`${this.url}/${order.order}/${order.messenger}/${98}`)
+    }
+
 }

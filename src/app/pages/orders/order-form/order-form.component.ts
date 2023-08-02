@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Observable, catchError, filter, finalize, tap, throwError } from 'rxjs';
+import { Observable, catchError, filter, finalize, switchMap, tap, throwError } from 'rxjs';
 import { BaseFormOrderService } from 'src/app/core/baseForm/base-form-order.service';
 import { BranchOffice } from 'src/app/core/models/branch-office.class';
 import { Order } from 'src/app/core/models/order.class';
@@ -39,6 +39,7 @@ export class OrderFormComponent implements OnInit {
   onGPS = false;
   showActions: boolean = true;
   orderId;
+  messenger: any;
   constructor(
     private drawerEvent: DrawerEvent,
     public _orderForm: BaseFormOrderService,
@@ -64,17 +65,22 @@ export class OrderFormComponent implements OnInit {
     this.form.patchValue({ ...this.dataForm, storeId: Number(this.dataForm.storeId) });
   }
 
-  goDetailsForm() {
+  async goDetailsForm() {
     this.orderId = this.dataForm.orderId;
+    console.log(this.orderId, "ORDERID")
     if (this.orderId) {
       this.current = 3;
       this.showActions = false;
       this.changeContent();
-      this.branchOfficeList$.pipe(
+      await this.branchOfficeList$.pipe(
         tap(branchOfficeList => {
           this.branchOfficeSelected = branchOfficeList.filter(branchOffice => branchOffice.id == this.dataForm.storeId)[0]
         }),
-      ).subscribe()
+        switchMap(a => this._vm.getOrderMessenger(this.orderId))
+      ).subscribe(async messenger => {
+        let { data } = await messenger;
+        this.messenger = data;
+      })
     }
   }
 

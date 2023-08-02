@@ -167,6 +167,7 @@
             <div>
                 <app-order-message></app-order-message>
                 <span class="order-form-container__title"> RESUMEN DEL PEDIDO </span>
+                <app-order-messenger [messenger]="messenger"></app-order-messenger>
                 <app-order-summary [order]="form.value" [showActions]="showActions"
                     [branchOffice]="branchOfficeSelected"></app-order-summary>
                 <app-order-total [order]="form.value" *ngIf="form.get('total_value').value"></app-order-total>

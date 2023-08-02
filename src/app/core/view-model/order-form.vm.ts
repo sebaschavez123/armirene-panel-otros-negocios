@@ -19,4 +19,8 @@ export class OrderFormVm {
     returnBranchOfficeByBusiness() {
         return this._branchOfficeManager.returnBranchOfficeByBusiness()
     }
+
+    getOrderMessenger(orderId) {
+        return this._orderManager.getOrderMessenger(orderId)
+    }
 }

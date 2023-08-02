@@ -72,4 +72,9 @@ export class OrderManager {
         )
     }
 
+    getOrderMessenger(orderId) {
+        return this._orderService.getOrderMessenger(orderId)
+    }
+
+
 }

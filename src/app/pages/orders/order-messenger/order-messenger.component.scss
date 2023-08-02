@@ -1,0 +1,45 @@
+.messenger {
+    height: 7.5rem;
+    border: 0.1rem solid #ccc;
+    width: 100%;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 2.5rem 1rem;
+
+    &__state {
+        position: absolute;
+        background-color: #0581ae;
+        height: 2rem;
+        color: white;
+        padding: 0 0.5rem;
+        font-size: 1.1rem;
+        font-stretch: normal;
+        font-style: normal;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        left: -0.5rem;
+        top: -1.3rem;
+        border-radius: 0.5rem;
+        line-height: 1.45;
+    }
+
+    &__container{
+        display: flex;
+        align-items: center;
+        &__image{
+            border-radius: 50%;
+            height: 50px;
+            width: 50px;
+            margin-right: 20px;
+        }
+        &__description{
+            font-size: 16px;
+            margin: 0; 
+            line-height: 1.3
+        }
+    }
+}
