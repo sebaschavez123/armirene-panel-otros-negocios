@@ -21,7 +21,7 @@ export class Order {
     country: string;
     token: number;
     state: string;
-    storeId: number
+    storeId: number;
     constructor() {
         this.orderId = 0;
         this.business_id = Storage.getAll(BUSINESS_DATA).id;
@@ -54,7 +54,9 @@ export class Order {
             lng: 0,
             phone: '',
             state: '',
-            dni: ''
+            dni: '',
+            addressDetail : '',
+            indications : ''
         };
         this.country = environment.indicator;
         this.token = 0;

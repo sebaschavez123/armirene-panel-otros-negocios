@@ -57,14 +57,14 @@
             <nz-form-item>
                 <nz-form-label>Detalle de la dirección</nz-form-label>
                 <nz-form-control>
-                    <input [readonly]=" orderId ? true : false" type="text" nz-input
+                    <input formControlName="addressDetail" [readonly]=" orderId ? true : false" type="text" nz-input
                         placeholder="Número de casa / apto / oficina">
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <nz-form-label>Indicaciones de dirección</nz-form-label>
                 <nz-form-control>
-                    <textarea [readonly]=" orderId ? true : false" nz-input
+                    <textarea formControlName="indications" [readonly]=" orderId ? true : false" nz-input
                         placeholder="Escribe aquí las instrucciones o comentarios para ayudar al domiciliario…"
                         [nzAutosize]="{ minRows: 5, maxRows: 5 }"></textarea>
                 </nz-form-control>

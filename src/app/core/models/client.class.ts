@@ -9,6 +9,8 @@ export class Client {
     phone: string;
     state: string;
     dni: string;
+    addressDetail: string;
+    indications: string;
     constructor() {
         this.address = '';
         this.city = '';
@@ -20,5 +22,7 @@ export class Client {
         this.phone = '';
         this.state = '';
         this.dni = '';
+        this.addressDetail = '';
+        this.indications = '';
     }
 }

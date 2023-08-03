@@ -170,11 +170,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   createOrder() {
-    let { value } = this.form.controls['products']
-    value.forEach(element => {
-      element.description = this.form.controls['orderInvoice'].value;
-      element.name = "Product";
-    });
+    this.setCreateOrder();
     if (!this.form.invalid) {
       this.showActions = false;
       this._loadingService.loadingOn()
@@ -195,6 +191,16 @@ export class OrderFormComponent implements OnInit {
     } else {
       this.showFormError(this._orderForm.baseForm);
     }
+  }
+
+  setCreateOrder() {
+    let { value } = this.form.controls['products']
+    value.forEach(element => {
+      element.description = this.form.controls['orderInvoice'].value;
+      element.name = "Product";
+    });
+    this.form.get('instructions')?.
+      setValue(`${this.form.controls['client_info']?.get('addressDetail')?.value}\n${this.form.controls['client_info']?.get('indications')?.value}\n${this.form.get('instructions')?.value}`)
   }
 
   showFormError(form: FormGroup) {
