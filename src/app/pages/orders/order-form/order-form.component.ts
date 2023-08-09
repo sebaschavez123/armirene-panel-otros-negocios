@@ -246,6 +246,6 @@ export class OrderFormComponent implements OnInit {
   ngOnDestroy() {
     let latLng = {};
     this._store.dispatch(saveLatLng({ latLng }));
-    this.subsGetOrderMessenger.unsubscribe();
+    this.subsGetOrderMessenger?.unsubscribe();
   }
 }

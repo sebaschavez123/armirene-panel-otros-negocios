@@ -167,6 +167,7 @@
             <div>
                 <app-order-message></app-order-message>
                 <span class="order-form-container__title"> RESUMEN DEL PEDIDO </span>
+                <app-spinner [default]="false" [large]="true"></app-spinner>
                 <app-order-messenger *ngIf="orderId" [messenger]="messenger"></app-order-messenger>
                 <app-order-summary [order]="form.value" [showActions]="showActions"
                     [branchOffice]="branchOfficeSelected"></app-order-summary>

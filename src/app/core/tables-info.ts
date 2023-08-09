@@ -1,37 +1,40 @@
-import { Client } from "./models/client.class";
-
 export const CLIENT_TABLE = {
     columns: [
-        // {
-        //     title: 'Nombre cliente',
-        //     compare: (a: Client, b: Client) => a.name.localeCompare(b.name),
-        //     priority: false
-        // },
-        // {
-        //     title: 'Documento',
-        //     compare: (a: Client, b: Client) => a.document.localeCompare(b.document),
-        //     priority: false
-        // },
-        // {
-        //     title: 'Correo electrónico',
-        //     compare: (a: Client, b: Client) => a.email.localeCompare(b.email),
-        //     priority: false
-        // },
-        // {
-        //     title: 'Dirección',
-        //     compare: (a: Client, b: Client) => a.address.localeCompare(b.address),
-        //     priority: false
-        // },
-        // {
-        //     title: 'Teléfono',
-        //     compare: (a: Client, b: Client) => a.phone.localeCompare(b.phone),
-        //     priority: false
-        // },
-        // {
-        //     title: '# Pedidos',
-        //     compare: (a: Client, b: Client) => a.orders - b.orders,
-        //     priority: false
-        // }
+        {
+            title: 'Nombre ',
+            compare: (a: any, b: any) => a.firstName.localeCompare(b.firstName),
+            priority: false
+        },
+        {
+            title: 'Apellido',
+            compare: (a: any, b: any) => a.lastName.localeCompare(b.lastName),
+            priority: false
+        },
+        {
+            title: 'Documento',
+            compare: (a: any, b: any) => a.dni.localeCompare(b.dni),
+            priority: false
+        },
+        {
+            title: 'Correo electrónico',
+            compare: (a: any, b: any) => a.email.localeCompare(b.email),
+            priority: false
+        },
+        {
+            title: 'Dirección',
+            compare: (a: any, b: any) => a.address.localeCompare(b.address),
+            priority: false
+        },
+        {
+            title: 'Teléfono',
+            compare: (a: any, b: any) => a.phone.localeCompare(b.phone),
+            priority: false
+        },
+        {
+            title: '# Pedidos',
+            compare: (a: any, b: any) => a.orders - b.orders,
+            priority: false
+        }
     ]
 }
 

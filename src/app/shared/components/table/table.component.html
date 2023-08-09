@@ -13,13 +13,12 @@
                 {{data[object]}}
             </td>
             <td>
-                <div style="display: flex; justify-content: space-around; ">
+                <div class="justify-content-space-around">
                     <ng-container *ngFor="let action of actions">
                         <span class="u-pointer font-20" *ngIf="action.show" nzTooltipTitle="{{action.tooltipText}}"
                             nzTooltipPlacement="bottomLeft" nz-tooltip nz-icon nzType="{{action.icon}}"
                             (click)="sendEventItem(action.type,data)"></span>
                     </ng-container>
-
                 </div>
             </td>
         </tr>

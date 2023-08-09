@@ -23,10 +23,12 @@
     "@ngrx/store": "^16.1.0",
     "@ngrx/store-devtools": "^16.1.0",
     "crypto-js": "^4.1.1",
+    "file-saver": "^2.0.5",
     "leaflet": "^1.9.4",
     "ng-zorro-antd": "^16.0.0",
     "ngx-google-places-autocomplete": "^2.0.5",
     "rxjs": "~7.8.1",
+    "xlsx": "^0.18.5",
     "zone.js": "~0.13.1"
   },
   "devDependencies": {

@@ -1,23 +1,20 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-searcher',
   templateUrl: './searcher.component.html',
   styleUrls: ['./searcher.component.scss']
 })
-export class SearcherComponent implements OnInit {
+export class SearcherComponent {
 
   @Input() placeHolder: String = '';
-  @Input() listOfData: any = [];
-  @Output() newListEvent = new EventEmitter<any[]>();
+  @Input() listOfData: any;
+  @Output() newListEvent = new EventEmitter<Observable<any>>();
   copylistOfData: any[] = [];
-  constructor() { }
-
-  ngOnInit(): void {
-    this.copylistOfData = [...this.listOfData];
-  }
 
   search(search: any) {
+    this.copylistOfData = [...this.listOfData];
     const targetValue: any[] = [];
     this.copylistOfData.forEach((value: any) => {
       let keys = Object.keys(value);
@@ -28,8 +25,6 @@ export class SearcherComponent implements OnInit {
         }
       }
     });
-    this.newListEvent.emit(targetValue);
+    this.newListEvent.emit(of(targetValue));
   }
 }
-
-

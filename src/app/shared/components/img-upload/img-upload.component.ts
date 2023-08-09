@@ -15,6 +15,7 @@ export class ImgUploadComponent implements OnInit, OnChanges {
   imageSrc: string | ArrayBuffer | null = null;
   selectedFile;
   uploadFile;
+  loading: boolean = false;
   constructor(
     private http: HttpClient
   ) { }
@@ -32,9 +33,11 @@ export class ImgUploadComponent implements OnInit, OnChanges {
 
   upload() {
     const formData = new FormData();
+    this.loading = true;
     formData.append('file', this.selectedFile);
     this.http.post('https://us-central1-panel-otros-negocios-393215.cloudfunctions.net/upload-img', formData)
       .subscribe((res: any) => {
+        this.loading = false;
         this.uploadFile = `https://storage.googleapis.com/pon-images/${res.file?.name}`
         this.emitFileUrl.emit(this.uploadFile);
       });

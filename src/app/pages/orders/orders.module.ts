@@ -24,6 +24,7 @@ import { TableModule } from 'src/app/shared/components/table/table.module';
 import { AdressAutocompleteComponent } from 'src/app/shared/components/adress-autocomplete/adress-autocomplete.component';
 import { DirectivesModule } from 'src/app/core/directives/directives.module';
 import { OrderMessengerComponent } from './order-messenger/order-messenger.component';
+import { LoadingModule } from 'src/app/shared/components/loading/loading.module';
 
 const antdModule = [
   NzFormModule,
@@ -57,6 +58,7 @@ const antdModule = [
     AdressAutocompleteComponent,
     TableModule,
     DirectivesModule,
+    LoadingModule,
     ...antdModule
   ]
 })

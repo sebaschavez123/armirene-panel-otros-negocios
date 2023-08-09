@@ -7,6 +7,8 @@
             <img [src]="imageSrc ? imageSrc : uploadFile" alt="Imagen subida" width="250px" />
             <button (click)="upload()" [ngClass]="uploadFile ? 'upload-image' : ''">
                 {{ uploadFile ? 'Imagen cargada ✓✓' : 'Cargar imagen'}}
+                <img *ngIf="loading" src="assets/svg/icon-spinner.svg" class="spin" alt="Spinner"
+                    [class.small]="true" />
             </button>
             <span *ngIf="!uploadFile" id="required">Recuerda cargar la imagen antes de crear la sucursal</span>
         </div>
