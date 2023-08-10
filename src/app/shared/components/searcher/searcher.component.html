@@ -1,6 +1,6 @@
 <div class="d-inline-block">
     <nz-input-group [nzPrefix]="prefixIconSearch">
-        <input #searchText type="text" nz-input placeholder="{{placeHolder}}" />
+        <input #searchText type="text" nz-input placeholder="{{placeHolder}}" (input)="search(searchText.value)" />
     </nz-input-group>
     <ng-template #prefixIconSearch>
         <span class="color-blue-armi" nz-icon nzType="search"></span>

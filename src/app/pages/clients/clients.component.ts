@@ -34,8 +34,8 @@ export class ClientsComponent implements OnInit {
     this.getClientsByBusiness(null);
   }
 
-  getClientsByBusiness(list) {
-    this.listOfData$ = list ? list : this._vm.returnClientsByBusiness();
+  getClientsByBusiness(values) {
+    this.listOfData$ = (values && values[1].length >= 1) ? values[0] : this._vm.returnClientsByBusiness();
   }
 
   getTableActions(item): void {

@@ -10,7 +10,7 @@ export class SearcherComponent {
 
   @Input() placeHolder: String = '';
   @Input() listOfData: any;
-  @Output() newListEvent = new EventEmitter<Observable<any>>();
+  @Output() newListEvent = new EventEmitter<any>();
   copylistOfData: any[] = [];
 
   search(search: any) {
@@ -25,6 +25,7 @@ export class SearcherComponent {
         }
       }
     });
-    this.newListEvent.emit(of(targetValue));
+    let values = [of(targetValue), search]
+    this.newListEvent.emit(values);
   }
 }
