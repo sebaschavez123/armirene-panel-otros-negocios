@@ -12,6 +12,7 @@ import { StoreModule } from '@ngrx/store';
 import { appReducers } from './ngrx/reducers/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
 
 registerLocaleData(en);
 
@@ -27,6 +28,12 @@ registerLocaleData(en);
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       autoPause: true,
+    }),
+    NgxGpAutocompleteModule.forRoot({
+      loaderOptions: {
+        apiKey: 'AIzaSyD4jPeNYRX_bOi_ECG32OH3U6v9ePnZUdQ',
+        libraries: ['places']
+      }
     }),
   ],
   providers: [

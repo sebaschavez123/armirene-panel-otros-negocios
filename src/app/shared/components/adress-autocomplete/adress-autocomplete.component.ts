@@ -4,12 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import { Subscription } from 'rxjs';
 import { saveLatLng } from 'src/app/ngrx/actions/map.actions';
 import { AppState } from 'src/app/ngrx/reducers/app.reducer';
 import { environment } from 'src/environments/environment';
-
+import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
 @Component({
   selector: 'app-adress-autocomplete',
   templateUrl: './adress-autocomplete.component.html',
@@ -18,10 +17,11 @@ import { environment } from 'src/environments/environment';
   imports: [
     CommonModule,
     FormsModule,
-    GooglePlaceModule,
     ReactiveFormsModule,
     NzFormModule,
-    NzInputModule
+    NzInputModule,
+    NgxGpAutocompleteModule
+
   ]
 })
 export class AdressAutocompleteComponent implements OnDestroy {
