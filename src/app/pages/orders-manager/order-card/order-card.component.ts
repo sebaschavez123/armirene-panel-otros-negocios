@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
-import { OrderFormComponent } from '../order-form/order-form.component';
+import { OrderFormComponent } from '../../orders/order-form/order-form.component';
 
 @Component({
   selector: 'app-order-card',
@@ -9,11 +9,12 @@ import { OrderFormComponent } from '../order-form/order-form.component';
 })
 export class OrderCardComponent implements OnInit {
 
+  @Input() item;
+
   constructor(private drawerEvent: DrawerEvent) { }
 
   ngOnInit(): void {
   }
-
 
   detailOrder(order: any) {
     this.drawerEvent.changeOpenComponent({ component: OrderFormComponent, data: order })

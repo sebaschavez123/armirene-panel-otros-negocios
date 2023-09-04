@@ -1,0 +1,14 @@
+<div class="orders-list" cdkDropList id="{{id}}" [cdkDropListData]="list" [cdkDropListConnectedTo]="[connectedTo]"
+    (cdkDropListDropped)="drop($event)">
+    <span class="orders-list__title">
+        <ng-content select="[title]"></ng-content>
+    </span>
+    <div class="orders-list__content">
+        <ng-container *ngIf="list.length > 0; else noList">
+            <app-order-card *ngFor="let n of list" [item]="n"></app-order-card>
+        </ng-container>
+        <ng-template #noList>
+            No existen ordenes para listar.
+        </ng-template>
+    </div>
+</div>

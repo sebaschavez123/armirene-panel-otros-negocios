@@ -1,0 +1,36 @@
+
+.orders-container{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    gap: 0.5rem; 
+    padding: 0 1rem;
+    padding-bottom: 1rem;
+}
+.orders-container::-webkit-scrollbar {
+    width: 0.3rem;
+}
+
+/* Estilos barra (thumb) de scroll */
+.orders-container::-webkit-scrollbar-thumb {
+    background: #ccc;
+}
+
+.orders-container::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+.orders-container::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 0.2rem 0.1rem rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos track de scroll */
+.orders-container::-webkit-scrollbar-track {
+    background: #e1e1e1;
+}
+
+.orders-container::-webkit-scrollbar-track:hover,
+.orders-container::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+}
