@@ -29,3 +29,31 @@ nz-select-top-control {
 .ant-drawer-body {
     padding: 0 !important;
 }
+
+::-webkit-scrollbar {
+    width: 1rem;
+}
+
+/* Estilos barra (thumb) de scroll */
+::-webkit-scrollbar-thumb {
+    background: #ccc;
+}
+
+::-webkit-scrollbar-thumb:active {
+    background-color: #999999;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #b3b3b3;
+    box-shadow: 0 0 0.2rem 0.1rem rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos track de scroll */
+::-webkit-scrollbar-track {
+    background: #e1e1e1;
+}
+
+::-webkit-scrollbar-track:hover,
+::-webkit-scrollbar-track:active {
+    background: #d4d4d4;
+}

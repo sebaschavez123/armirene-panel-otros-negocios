@@ -1,0 +1,18 @@
+<div class="container-fluid login-container">
+    <div class="login-container__row row">
+        <div class="login-container__row__paragraph col-lg-6 col-md-6 col-sm-12 col-xs-12 hide-down--md">
+            <p>Nosotros nos <br> encargamos de <br> tus domicilios</p>
+        </div>
+        <div class="login-container__row__login-form-container col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="login-container__row__login-form-container__card">
+                <div class="login-container__row__login-form-container__card__title">
+                    <ng-content select="[title]"></ng-content>
+                </div>
+                <ng-content select="[form]"></ng-content>
+                <div class="login-container__row__login-form-container__card__register" #scrollButton>
+                    <ng-content select="[footer]"></ng-content>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

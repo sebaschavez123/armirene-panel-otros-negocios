@@ -21,34 +21,4 @@
         max-height: 100vh
     }
 
-    /* Tamaño del scroll */
-    &__content::-webkit-scrollbar {
-        width: 0.8rem;
-    }
-
-    /* Estilos barra (thumb) de scroll */
-    &__content::-webkit-scrollbar-thumb {
-        background: #ccc;
-        border-radius: 0.4rem;
-    }
-
-    &__content::-webkit-scrollbar-thumb:active {
-        background-color: #999999;
-    }
-
-    &__content::-webkit-scrollbar-thumb:hover {
-        background: #b3b3b3;
-        box-shadow: 0 0 0.2rem 0.1rem rgba(0, 0, 0, 0.2);
-    }
-
-    /* Estilos track de scroll */
-    &__content::-webkit-scrollbar-track {
-        background: #e1e1e1;
-        border-radius: 0.4rem;
-    }
-
-    &__content::-webkit-scrollbar-track:hover,
-    &__content::-webkit-scrollbar-track:active {
-        background: #d4d4d4;
-    }
 }
