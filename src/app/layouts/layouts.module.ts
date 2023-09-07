@@ -21,6 +21,7 @@ import { LoadingService } from '../services/loading.service';
 import { MessagesService } from '../services/messages.service';
 import { NzToolTipModule } from 'ng-zorro-antd/tooltip';
 import { NzProgressModule } from 'ng-zorro-antd/progress';
+import { OrderNotificationComponent } from '../shared/components/order-notification/order-notification.component';
 
 const COMPONENTS = [AuthenticationLayoutComponent, DashboardLayoutComponent]
 
@@ -46,7 +47,9 @@ const COMPONENTS = [AuthenticationLayoutComponent, DashboardLayoutComponent]
     NzDrawerModule,
     NzAvatarModule,
     LoadingModule,
-    NzToolTipModule
+    NzToolTipModule,
+    OrderNotificationComponent
+
   ],
   providers: [
     LoadingService,

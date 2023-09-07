@@ -16,7 +16,7 @@ import { OrderCardComponent } from './order-card/order-card.component';
   imports: [
     CommonModule,
     OrdersManagerRoutingModule,
-    DragDropModule
+    DragDropModule,
   ]
 })
 export class OrdersManagerModule { }

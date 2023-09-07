@@ -7,11 +7,16 @@
     </span>
     <div class="nz-header__avatar">
       <nz-avatar nzSize="large" nzIcon="user"></nz-avatar>
+      <button nz-button nz-dropdown [nzDropdownMenu]="notifications" nzPlacement="bottomRight">
+        <span nz-icon [nzType]="'bell'"></span>
+      </button>
       <button nz-button nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomRight">
         <span nz-icon [nzType]="'down'"></span>
       </button>
     </div>
-
+    <nz-dropdown-menu #notifications="nzDropdownMenu">
+        <app-order-notification></app-order-notification>
+    </nz-dropdown-menu>
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu>
         <li nz-menu-item [routerLink]="'business'">

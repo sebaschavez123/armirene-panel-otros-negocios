@@ -4,6 +4,7 @@
     border-radius: 0.5rem;
     text-align: center;
     position: relative;
+    width: 35rem;
 
     &__title {
         position: absolute;
@@ -18,7 +19,6 @@
         background-color: white;
         padding: 0.5rem 2rem;
         overflow: auto;
-        max-height: 85vh
     }
 
 }
