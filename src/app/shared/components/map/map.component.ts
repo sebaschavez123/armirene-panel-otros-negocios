@@ -20,6 +20,7 @@ export class MapComponent implements OnInit, OnDestroy {
   @Input() selectedData: selectDataMapInterface;
   onGPS = false;
   mapSubscription: Subscription;
+  @Input() customClasses: string;
 
   constructor(private _store: Store<AppState>) { }
 

@@ -28,6 +28,10 @@ export const DashboardLayout_ROUTES: Routes = [
                 loadChildren: () => import('../../pages/orders-manager/orders-manager.module').then(m => m.OrdersManagerModule)
             },
             {
+                path: 'messengers',
+                loadChildren: () => import('../../pages/messengers/messengers.module').then(m => m.MessengersModule)
+            },
+            {
                 path: 'setting',
                 loadChildren: () => import('../../pages/setting/setting.module').then(m => m.SettingModule)
             },
