@@ -8,12 +8,15 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "deploy-staging-col": "ng build --c col && gcloud app deploy staging.yaml --project=panel-otros-negocios-393215 --no-promote --version",
-    "deploy-prod-col": "ng build --c col && gcloud app deploy production.yaml --project=panel-otros-negocios-393215 --no-promote --version"
+    "deploy-prod-col": "ng build --c col && gcloud app deploy production.yaml --project=panel-otros-negocios-393215 --no-promote --version",
+    "deploy-staging-vzla": "ng build --c ven && gcloud app deploy staging.yaml --project=panel-otros-negocios-vzla --no-promote --version",
+    "deploy-prod-vzla": "ng build --c ven && gcloud app deploy production.yaml --project=panel-otros-negocios-vzla --no-promote --version"
   },
   "private": true,
   "dependencies": {
     "@angular-magic/ngx-gp-autocomplete": "^1.0.4",
     "@angular/animations": "^16.1.5",
+    "@angular/cdk": "^16.2.1",
     "@angular/common": "^16.1.5",
     "@angular/compiler": "^16.1.5",
     "@angular/core": "^16.1.5",

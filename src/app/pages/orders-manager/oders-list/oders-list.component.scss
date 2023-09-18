@@ -4,6 +4,7 @@
     border-radius: 0.5rem;
     text-align: center;
     position: relative;
+    width: 35rem;
 
     &__title {
         position: absolute;
@@ -16,7 +17,8 @@
 
     &__content {
         background-color: white;
-        padding: 2rem;
-        height: 100vh;
+        padding: 0.5rem 2rem;
+        overflow: auto;
     }
+
 }

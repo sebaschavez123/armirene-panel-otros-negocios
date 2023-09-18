@@ -7,6 +7,12 @@
     nz-form-item {
         width: 100%;
     }
+
+    &__city{
+        display: flex; 
+        flex-direction: column; 
+        text-align: left;
+    }
 }
 
 ::ng-deep {

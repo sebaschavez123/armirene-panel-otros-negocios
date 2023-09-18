@@ -5,9 +5,7 @@ import { OrdersRoutingModule } from './orders-routing.module';
 import { ButtonModule } from 'src/app/shared/components/button/button.module';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { OrdersComponent } from './orders.component';
-import { OdersListComponent } from './oders-list/oders-list.component';
 import { OrderFormComponent } from './order-form/order-form.component';
-import { OrderCardComponent } from './order-card/order-card.component';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { PhoneModule } from 'src/app/shared/components/phone/phone.module';
@@ -38,9 +36,7 @@ const antdModule = [
 @NgModule({
   declarations: [
     OrdersComponent,
-    OdersListComponent,
     OrderFormComponent,
-    OrderCardComponent,
     OrderTotalComponent,
     OrderSummaryComponent,
     OrderMessageComponent,

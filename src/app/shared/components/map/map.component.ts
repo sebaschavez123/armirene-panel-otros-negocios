@@ -20,10 +20,29 @@ export class MapComponent implements OnInit, OnDestroy {
   @Input() selectedData: selectDataMapInterface;
   onGPS = false;
   mapSubscription: Subscription;
+  @Input() customClasses: string;
 
   constructor(private _store: Store<AppState>) { }
-
+  marcas = [
+    {
+      lat: 51.5,
+      lng: -0.09,
+      nombre: 'Marca 1'
+    },
+    {
+      lat: 51.51,
+      lng: -0.1,
+      nombre: 'Marca 2'
+    },
+    {
+      lat: 51.41,
+      lng: -0.1,
+      nombre: 'Marca 2'
+    }
+    // Agrega más marcas aquí
+  ];
   ngOnInit() {
+
 
     this.mapSubscription = this._store.select('map').subscribe(res => {
       let { latLng, latLng: { lat, lng } } = res;
@@ -33,6 +52,9 @@ export class MapComponent implements OnInit, OnDestroy {
         this.map?.setView({ lat, lng }, 12);
         this.resolveCoordinatesToAddress({ lat, lng });
         this.map.moveMarker({ lat, lng }, 15)
+        this.marcas.forEach((marca) => {
+          this.map?.addMarker(marca)// Muestra un popup con el nombre al hacer clic en la marca
+        });
       }
     })
 

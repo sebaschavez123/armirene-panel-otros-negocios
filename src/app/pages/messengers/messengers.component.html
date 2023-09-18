@@ -1,0 +1,6 @@
+<div style="position: relative;">
+    <div class="filter-container">
+        <app-cities-select [parentForm]="form"></app-cities-select>
+    </div>
+    <app-map [selectedData]="{ lat: 0, lng: 0 }" [customClasses]="'h-100'"></app-map>
+</div>
