@@ -1,5 +1,8 @@
 export const authentication = {
     auth: 'auth',
     authenticate: 'authenticate',
-    info: 'info'
+    info: 'info',
+    monitor: 'monitor',
+    user: 'user',
+    create: 'create'
 };

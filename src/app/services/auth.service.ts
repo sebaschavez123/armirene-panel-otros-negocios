@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { HttpClient } from "@angular/common/http";
-import { Router } from "@angular/router";
 import { environment } from "src/environments/environment";
 import { authentication } from "../core/networking/authentication.api";
 import { BaseService } from "./base.service";
@@ -26,6 +25,10 @@ export class AuthService {
 
     getInfo(username: string): Observable<AuthResponse> {
         return this._baseService.get(`${this.url}/${authentication.auth}/${authentication.info}/${username}`)
+    }
+
+    register(data): Observable<AuthResponse> {
+        return this._http.post<AuthResponse>(`${this.url}/${authentication.monitor}/${authentication.user}/${authentication.create}`, data)
     }
 
 }

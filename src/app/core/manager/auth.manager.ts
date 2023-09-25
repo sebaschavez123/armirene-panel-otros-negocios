@@ -48,4 +48,8 @@ export class AuthManager {
     getBusinessList(userId) {
         return this._businessService.getBusinessList(userId);
     }
+
+    register(formValue) {
+        return this._authService.login(formValue)
+    }
 }
