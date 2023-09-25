@@ -35,3 +35,25 @@
         border: 1px solid #ebebeb;
     }
 }
+
+.first-login {
+    background-color: red;
+    width: 25rem;
+    height: 11.5rem;
+    position: absolute;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    padding: 1rem;
+    margin: 1rem;
+    line-height: 1.01;
+    font-size: 1.4rem;
+    span{
+        position: absolute; 
+        top: 0.5rem; 
+        right: 0.5rem;
+    }
+}
