@@ -5,7 +5,7 @@
     <ng-container form>
         <form [formGroup]="registerForm" nz-form nzLayout="vertical">
             <nz-form-item>
-                <nz-form-label nzFor="username">Ingresa tu nombre:</nz-form-label>
+                <nz-form-label nzFor="name">Ingresa tu nombre<span id="required"> *</span></nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa tu nombre!">
                     <nz-input-group>
                         <input type="text" formControlName="name" nz-input placeholder="Escribe tu nombre...">
@@ -13,15 +13,15 @@
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <nz-form-label>Ingresa tu apellido:</nz-form-label>
+                <nz-form-label nzFor="lastName">Ingresa tu apellido<span id="required"> *</span></nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa tu apellido!">
                     <nz-input-group>
-                        <input type="password" formControlName="lastName" nz-input placeholder="Escribe tu apellido">
+                        <input type="text" formControlName="lastName" nz-input placeholder="Escribe tu apellido">
                     </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <nz-form-label nzFor="username">Ingresa tu usuario:</nz-form-label>
+                <nz-form-label nzFor="username">Ingresa tu usuario<span id="required"> *</span></nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa tu usuario!">
                     <nz-input-group>
                         <input type="text" formControlName="username" nz-input placeholder="Escribe tu usuario…">
@@ -29,7 +29,7 @@
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-                <nz-form-label nzFor="username">Ingresa tu contraseña:</nz-form-label>
+                <nz-form-label nzFor="password">Ingresa tu contraseña<span id="required"> *</span></nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa tu contraseña">
                     <nz-input-group>
                         <input type="password" formControlName="password" nz-input
@@ -37,32 +37,24 @@
                     </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
+            <app-phone [parentForm]="registerForm"></app-phone>
             <nz-form-item>
-                <nz-form-label nzFor="username">Ingresa tu telefono:</nz-form-label>
-                <nz-form-control nzErrorTip="Por favor ingresa tu telefono!">
-                    <nz-input-group>
-                        <input type="number" formControlName="phone" nz-input placeholder="Escribe tu telefono..">
-                    </nz-input-group>
-                </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-                <nz-form-label nzFor="username">Ingresa tu email:</nz-form-label>
-                <nz-form-control nzErrorTip="Por favor ingresa tu usuario!">
-                    <nz-input-group>
-                        <input type="text" formControlName="email" nz-input placeholder="Escribe tu usuario…">
-                    </nz-input-group>
+                <nz-form-label>Correo electrónico <span id="required"> *</span></nz-form-label>
+                <nz-form-control
+                    [nzErrorTip]="registerForm.controls['email'].hasError('pattern') ? 'Ingrese un correo electrónico valido' : 'Por favor ingresa el correo electrónico'">
+                    <input formControlName="email" type="email" nz-input placeholder="Correo electrónico">
                 </nz-form-control>
             </nz-form-item>
             <nz-form-item>
                 <app-messages></app-messages>
                 <nz-form-control>
-                    <app-button [title]="'Registrarse'" [customClasses]="'main main--h-40 mg-y-10 w-100 font-16'"
-                        [isLoading]="false"></app-button>
+                    <app-button (click)="submitForm()" [title]="'Registrarse'"
+                        [customClasses]="'main main--h-40 mg-y-10 w-100 font-16'" [isLoading]="false"></app-button>
                 </nz-form-control>
             </nz-form-item>
         </form>
     </ng-container>
     <ng-container footer>
-        <a (click)="holaMundo()">Iniciar sesión</a>
+        <a (click)="goLogin()">Iniciar sesión</a>
     </ng-container>
 </app-home-authentication>

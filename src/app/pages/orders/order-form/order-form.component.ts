@@ -68,7 +68,6 @@ export class OrderFormComponent implements OnInit {
 
   goDetailsForm() {
     this.orderId = this.dataForm.orderId;
-    console.log(this.orderId, "ORDERID")
     if (this.orderId) {
       this.current = 3;
       this.showActions = false;

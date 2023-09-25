@@ -18,7 +18,7 @@
         </nz-form-control>
     </nz-form-item> -->
     <nz-form-item>
-        <nz-form-label>Teléfono <span id="required">*</span> </nz-form-label>
+        <nz-form-label>Teléfono <span id="required"> *</span> </nz-form-label>
         <nz-form-control class="w-100"
             [nzErrorTip]="parentForm.controls['phone'].hasError('minlength') ? 'El teléfono debe tener 10 digitos!' : 'Por favor ingresa el télefono!'">
             <input [maxlength]="10" [minlength]="10" required (keypress)="keyPress($event)" [readonly]="ifDisable"

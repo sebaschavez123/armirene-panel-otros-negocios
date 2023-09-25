@@ -13,6 +13,7 @@ import { BusinessFormComponent } from '../shared/components/business-form/busine
 import { RegisterComponent } from './register/register.component';
 import { HomeAuthenticationComponent } from './home-authentication/home-authentication.component';
 import { RouterModule } from '@angular/router';
+import { PhoneModule } from '../shared/components/phone/phone.module';
 
 const antdModule= [
   NzFormModule,
@@ -34,6 +35,7 @@ const antdModule= [
     BusinessFormComponent,
     FormsModule,
     ButtonModule,
+    PhoneModule,
     ...antdModule
   ]
 })

@@ -50,6 +50,6 @@ export class AuthManager {
     }
 
     register(formValue) {
-        return this._authService.login(formValue)
+        return this._authService.register(formValue)
     }
 }
