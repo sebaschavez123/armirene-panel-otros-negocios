@@ -8,7 +8,8 @@
                 <nz-form-label nzFor="name">Ingresa tu nombre<span id="required"> *</span></nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa tu nombre!">
                     <nz-input-group>
-                        <input type="text" formControlName="name" nz-input placeholder="Escribe tu nombre...">
+                        <input type="text" formControlName="name" nz-input placeholder="Escribe tu nombre..."
+                            appNoNumbers>
                     </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
@@ -16,7 +17,8 @@
                 <nz-form-label nzFor="lastName">Ingresa tu apellido<span id="required"> *</span></nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa tu apellido!">
                     <nz-input-group>
-                        <input type="text" formControlName="lastName" nz-input placeholder="Escribe tu apellido">
+                        <input type="text" formControlName="lastName" nz-input placeholder="Escribe tu apellido"
+                            appNoNumbers>
                     </nz-input-group>
                 </nz-form-control>
             </nz-form-item>
