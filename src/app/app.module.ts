@@ -31,7 +31,7 @@ registerLocaleData(en);
     }),
     NgxGpAutocompleteModule.forRoot({
       loaderOptions: {
-        apiKey: 'AIzaSyD4jPeNYRX_bOi_ECG32OH3U6v9ePnZUdQ',
+        apiKey: 'AIzaSyCwUA4-K4ghYYfmxHvrIPmX75NZpJKLzYA',
         libraries: ['places']
       }
     }),

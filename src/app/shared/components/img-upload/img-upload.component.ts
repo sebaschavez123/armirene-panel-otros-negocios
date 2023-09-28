@@ -35,10 +35,10 @@ export class ImgUploadComponent implements OnInit, OnChanges {
     const formData = new FormData();
     this.loading = true;
     formData.append('file', this.selectedFile);
-    this.http.post('https://us-central1-panel-otros-negocios-393215.cloudfunctions.net/upload-img', formData)
+    this.http.post('https://us-central1-armirene-369418.cloudfunctions.net/upload-img', formData)
       .subscribe((res: any) => {
         this.loading = false;
-        this.uploadFile = `https://storage.googleapis.com/pon-images/${res.file?.name}`
+        this.uploadFile = `https://storage.cloud.google.com/armirene-369418.appspot.com/${res.file?.name}`
         this.emitFileUrl.emit(this.uploadFile);
       });
   }
