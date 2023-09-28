@@ -17,6 +17,8 @@ import { BusinessFormVm } from 'src/app/core/view-model/business-form.vm';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { ImgUploadComponent } from '../img-upload/img-upload.component';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+
 const antdModule = [
   NzFormModule,
   NzInputModule,
@@ -28,7 +30,8 @@ const antdModule = [
   MessagesComponent,
   BranchOfficeFormComponent,
   CommonModule,
-  ImgUploadComponent
+  ImgUploadComponent,
+  NzIconModule
 ]
 @Component({
   selector: 'app-business-form',
@@ -46,6 +49,7 @@ export class BusinessFormComponent {
   public businessQuantityList = TEMPORAL_BUSINESS_QUANTITY;
   public businessQuantity: number;
   public businessId: number;
+  public showFirstLogin = false;
   constructor(
     private _vm: BusinessFormVm,
     public _businessForm: BaseFormBusinessService,
@@ -66,6 +70,7 @@ export class BusinessFormComponent {
     if (this.businessId) {
       this.getBusinessById(this.businessId)
     }
+    Storage.getAll(BUSINESS_DATA) ? this.showFirstLogin = false : this.showFirstLogin = true;
   }
 
   getBusinessById(businessId) {

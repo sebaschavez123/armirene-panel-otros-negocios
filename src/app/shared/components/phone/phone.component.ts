@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
+import { countryConfig } from 'src/country-config/country-config';
 
 @Component({
   selector: 'app-phone',
@@ -10,10 +11,12 @@ export class PhoneComponent implements OnInit {
 
   @Input() parentForm: FormGroup;
   @Input() ifDisable: boolean = false;
-
+  phoneSize: number;
   constructor() { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.phoneSize = countryConfig.phoneSize;
+  }
 
   keyPress(event: any) {
     const pattern = /^[0-9]*$/;

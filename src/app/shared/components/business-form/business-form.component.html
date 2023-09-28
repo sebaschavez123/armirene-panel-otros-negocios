@@ -1,3 +1,10 @@
+<div class="first-login" *ngIf="showFirstLogin">
+    <p>
+        Cómo es la primera vez que inicias sesión debes registrar información de tu negocio , para poder seguir
+        usando la aplicación.
+    </p>
+    <span nz-icon nzType="close" nzTheme="outline" (click)="showFirstLogin = false"></span>
+</div>
 <div class="container-fluid">
     <div class="row justify-content-center">
         <div class="enterprise-form col-lg-7 col-md-12 col-sm-12 col-xs-12 pdd-y-20">

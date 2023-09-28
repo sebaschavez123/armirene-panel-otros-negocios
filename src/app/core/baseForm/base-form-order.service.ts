@@ -26,7 +26,7 @@ export class BaseFormOrderService {
 
     setValidators(order: any, form: FormGroup) {
         Object.keys(order).forEach(key => {
-            if (key != 'instructions' && key != 'orderId' && key != 'dni') {
+            if (key != 'instructions' && key != 'orderId' && key != 'dni' && key != 'addressDetail' && key != 'indications') {
                 form.get(key)?.setValidators(Validators.required);
             }
             if (key == 'email') {
