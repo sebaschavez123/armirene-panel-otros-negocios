@@ -3,6 +3,7 @@ import { BusinessManager } from "../manager/business.manager";
 import { BranchOfficeManager } from "../manager/branch-office.manager";
 import { OrderManager } from "../manager/order.manager";
 import { Business } from "../models/business.class";
+import { ClientManager } from "../manager/client.manager";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,8 @@ export class BusinessCardVm {
     constructor(
         private _businessManager: BusinessManager,
         private _orderManager: OrderManager,
-        private _branchOfficeManager: BranchOfficeManager
+        private _branchOfficeManager: BranchOfficeManager,
+        private _clientManager: ClientManager
     ) {
     }
 
@@ -26,6 +28,10 @@ export class BusinessCardVm {
 
     getOrdersByBusiness(businessId: number) {
         return this._orderManager.getOrderByBusiness(businessId)
+    }
+
+    getClientsByBusiness(businessId: number) {
+        return this._clientManager.getClientsByBusiness(businessId)
     }
 
     selectBusiness(business: Business) {

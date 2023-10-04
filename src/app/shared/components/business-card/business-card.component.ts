@@ -55,5 +55,6 @@ export class BusinessCardComponent {
     this._router.navigateByUrl(`/dashboard/start-view`)
     this._vm.getBranchOfficeByBusiness(business.id);
     this._vm.getOrdersByBusiness(business.id)
+    this._vm.getClientsByBusiness(business.id)
   }
 }
