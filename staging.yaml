@@ -1,7 +1,7 @@
 runtime: python27
 api_version: 1
 threadsafe: true,
-service: staging
+service: staging-panel-web-terceros-colombia
 handlers:
   - url: /
     static_files: dist/armirene-panel-otros-negocios/index.html
