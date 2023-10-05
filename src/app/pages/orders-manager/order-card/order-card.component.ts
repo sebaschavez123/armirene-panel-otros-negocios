@@ -14,6 +14,7 @@ export class OrderCardComponent implements OnInit {
   constructor(private drawerEvent: DrawerEvent) { }
 
   ngOnInit(): void {
+    console.log(this.item)
   }
 
   detailOrder(order: any) {

@@ -84,6 +84,12 @@ export class OrderFormComponent implements OnInit {
     }
   }
 
+  getMessenger() {
+    this._vm.getOrderMessenger(this.orderId).subscribe(res =>
+      console.log(res)
+    )
+  }
+
   getBranchOfficeByBusiness() {
     this.branchOfficeList$ = this._vm.returnBranchOfficeByBusiness()
   }
@@ -173,7 +179,7 @@ export class OrderFormComponent implements OnInit {
     if (!this.form.invalid) {
       this.showActions = false;
       this._loadingService.loadingOn()
-      this._vm.saveOrder(this.form.value)
+      this.subsGetOrderMessenger = this._vm.saveOrder(this.form.value)
         .pipe(
           finalize(() => this._loadingService.loadingOff()),
           catchError(err => {
@@ -182,10 +188,15 @@ export class OrderFormComponent implements OnInit {
             this.showActions = true;
             return throwError(() => err);
           }),
+          tap((res: any) => {
+            let { message, data: { orderId } } = res;
+            this.orderId = orderId;
+            console.log("ordenId", this.orderId)
+            this._messagesService.showErrors(message);
+          }),
+          switchMap(res => this._vm.getOrderMessenger(res.data.orderId)),
         ).subscribe(res => {
-          let { message, data: { orderId } } = res;
-          this.orderId = orderId;
-          this._messagesService.showErrors(message);
+          console.log(res, "respuesta al crear")
         })
     } else {
       this.showFormError(this._orderForm.baseForm);

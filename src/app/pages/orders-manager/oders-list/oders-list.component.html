@@ -1,6 +1,5 @@
-<div class="orders-list" cdkDropList id="{{id}}" [cdkDropListData]="list" [cdkDropListConnectedTo]="[connectedTo]"
-    (cdkDropListDropped)="drop($event)">
-    <span class="orders-list__title">
+<div class="orders-list" cdkDropList id="{{id}}" [cdkDropListData]="list" [cdkDropListConnectedTo]="[connectedTo]">
+    <span class=" orders-list__title">
         <ng-content select="[title]"></ng-content>
     </span>
     <div class="orders-list__content">

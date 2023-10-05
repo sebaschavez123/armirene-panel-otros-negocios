@@ -1,5 +1,7 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
+import { OrdersManagerVm } from 'src/app/core/view-model/orders-manager.vm';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-orders-manager',
@@ -7,9 +9,28 @@ import { Component } from '@angular/core';
   styleUrls: ['./orders-manager.component.scss']
 })
 export class OrdersManagerComponent {
+  listOfData$: Observable<any>;
+  enviadas
+  canceladas
+  constructor(
+    private _vm: OrdersManagerVm
+  ) { }
 
-  listNumber1 = [1, 2, 3, 4, 5, 6, 7, 8, 9 , 0, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
-  listNumber2 = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
-  listNumber3 = [1, 2, 3, 4, 5, 6, 7, 8, 9 , 0, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29]
+  ngOnInit(): void {
+    this.init()
+  }
 
+  init() {
+    this.getOrdersByBusiness();
+  }
+
+  getOrdersByBusiness() {
+    this._vm.returnOrderByBusiness().pipe(
+      tap((data: any) => {
+        this.enviadas = data.filter(item => item.state === 'ENVIADA');
+        this.canceladas = data.filter(item => item.state === 'CANCELADA');
+        console.log(this.enviadas, this.canceladas)
+      })
+    ).subscribe();
+  }
 }
