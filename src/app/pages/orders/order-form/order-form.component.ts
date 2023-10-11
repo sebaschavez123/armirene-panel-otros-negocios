@@ -13,6 +13,7 @@ import { MessagesService } from 'src/app/services/messages.service';
 import { ViewportMap } from 'src/app/shared/components/view-port-map/view-port-map';
 import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
 import { selectDataMapInterface } from 'src/app/shared/interfaces/select-data-map.type';
+import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
 
 @Component({
   selector: 'app-order-form',
@@ -28,6 +29,8 @@ export class OrderFormComponent implements OnInit {
   @Input() form: FormGroup
   @Input() dataForm: Order;
   branchOfficeList$: Observable<BranchOffice[]>
+  clients;
+  filteredOptions: string[] = [];
   branchOfficeSelected: BranchOffice;
   current: number = 0;
   firstContent: boolean = true;
@@ -57,6 +60,7 @@ export class OrderFormComponent implements OnInit {
 
   init() {
     this.getBranchOfficeByBusiness();
+    this.getClientsByBusiness();
     this.initForm();
     this.goDetailsForm();
   }
@@ -67,6 +71,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   goDetailsForm() {
+    let filterPipe = new RemoveLeadingZerosPipe()
     this.orderId = this.dataForm.orderId;
     if (this.orderId) {
       this.current = 3;
@@ -76,7 +81,7 @@ export class OrderFormComponent implements OnInit {
         tap(branchOfficeList => {
           this.branchOfficeSelected = branchOfficeList.filter(branchOffice => branchOffice.id == this.dataForm.storeId)[0]
         }),
-        switchMap(a => this._vm.getOrderMessenger(this.orderId))
+        switchMap(a => this._vm.getOrderMessenger(filterPipe.transform(this.orderId)))
       ).subscribe(messenger => {
         let { data } = messenger;
         this.messenger = data;
@@ -86,6 +91,31 @@ export class OrderFormComponent implements OnInit {
 
   getBranchOfficeByBusiness() {
     this.branchOfficeList$ = this._vm.returnBranchOfficeByBusiness()
+  }
+
+
+  getClientsByBusiness() {
+    this._vm.returnClientsByBusiness().subscribe(clients => {
+      this.clients = clients;
+      this.filteredOptions = this.clients;
+    })
+  }
+
+  onChangeDni(value: string): void {
+    this.filteredOptions = this.clients.filter(option => option.dni.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+  }
+
+  onChangeEmail(value: string): void {
+    this.filteredOptions = this.clients.filter(option => option.email.toLowerCase().indexOf(value.toLowerCase()) !== -1);
+  }
+
+  clickAutocompleteClient(client) {
+    this.form.get('client_info')?.patchValue({
+      ...client,
+      first_name: client.firstName,
+      last_name: client.lastName,
+      address: ''
+    })
   }
 
   pre(): void {
@@ -185,11 +215,20 @@ export class OrderFormComponent implements OnInit {
         ).subscribe(res => {
           let { message, data: { orderId } } = res;
           this.orderId = orderId;
+          this.getMessenger(this.orderId);
           this._messagesService.showErrors(message);
         })
     } else {
       this.showFormError(this._orderForm.baseForm);
     }
+  }
+
+  getMessenger(orderId) {
+    let filterPipe = new RemoveLeadingZerosPipe()
+    this._vm.getOrderMessenger(filterPipe.transform(orderId)).subscribe(messenger => {
+      let { data } = messenger;
+      this.messenger = data;
+    })
   }
 
   setCreateOrder() {

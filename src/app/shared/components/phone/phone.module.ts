@@ -5,6 +5,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DirectivesModule } from 'src/app/core/directives/directives.module';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 
 const MODULES = [
   ReactiveFormsModule,
@@ -12,6 +14,8 @@ const MODULES = [
   NzInputModule,
   NzSelectModule,
   CommonModule,
+  DirectivesModule,
+  NzAutocompleteModule
 ]
 
 @NgModule({
