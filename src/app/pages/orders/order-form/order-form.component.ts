@@ -234,7 +234,7 @@ export class OrderFormComponent implements OnInit {
 
   getMessenger(orderId) {
     let filterPipe = new RemoveLeadingZerosPipe()
-    this._vm.getOrderMessenger(filterPipe.transform(orderId)).subscribe(messenger => {
+    this.subsGetOrderMessenger = this._vm.getOrderMessenger(filterPipe.transform(orderId)).subscribe(messenger => {
       let { data } = messenger;
       this.messenger = data;
     })
