@@ -7,6 +7,7 @@
         min-height: 25rem;
         transition: all 0.5s ease;
         height: calc(100vh - 55rem);
+        z-index: 0;
     }
 
 }
