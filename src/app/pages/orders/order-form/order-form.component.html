@@ -183,7 +183,8 @@
                 <app-order-message></app-order-message>
                 <span class="order-form-container__title"> RESUMEN DEL PEDIDO </span>
                 <app-spinner [default]="false" [large]="true"></app-spinner>
-                <app-order-messenger *ngIf="orderId" [messenger]="messenger"></app-order-messenger>
+                <app-order-messenger *ngIf="orderId != 0 && showOrderMesseger" [messenger]="messenger"
+                    [orderState]="dataForm.state"></app-order-messenger>
                 <app-order-summary [order]="form.value" [showActions]="showActions"
                     [branchOffice]="branchOfficeSelected"></app-order-summary>
                 <app-order-total [order]="form.value" *ngIf="form.get('total_value').value"></app-order-total>

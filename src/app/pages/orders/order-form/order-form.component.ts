@@ -43,6 +43,7 @@ export class OrderFormComponent implements OnInit {
   showActions: boolean = true;
   orderId;
   messenger: any;
+  showOrderMesseger: boolean = true;
   private subsGetOrderMessenger: Subscription;
   constructor(
     private drawerEvent: DrawerEvent,
@@ -56,6 +57,7 @@ export class OrderFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.init();
+    this.setShowOrderMessenger();
   }
 
   init() {
@@ -68,6 +70,12 @@ export class OrderFormComponent implements OnInit {
   initForm() {
     this.form = this._orderForm.pathFormData(new Order);
     this.form.patchValue({ ...this.dataForm, storeId: Number(this.dataForm.storeId) });
+  }
+
+  setShowOrderMessenger() {
+    if (this.dataForm?.state == 'CANCELADA') {
+      this.showOrderMesseger = false;
+    }
   }
 
   goDetailsForm() {
@@ -215,6 +223,7 @@ export class OrderFormComponent implements OnInit {
         ).subscribe(res => {
           let { message, data: { orderId } } = res;
           this.orderId = orderId;
+          this.form.get('orderId')?.setValue(orderId)
           this.getMessenger(this.orderId);
           this._messagesService.showErrors(message);
         })
