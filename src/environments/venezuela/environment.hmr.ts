@@ -10,5 +10,6 @@ export const environment = {
   currency: 'VEF',
   cctld: 've',
   coordinates: [10.4696, -66.8037],
-  phoneSize : 11
+  phoneSize: 7,
+  countryCode: 58
 }

@@ -27,5 +27,6 @@ export const environment = {
   isColombia: false,
   currency: 'VEF',
   cctld: 've',
-  coordinates: [10.4696, -66.8037]
+  coordinates: [10.4696, -66.8037],
+  countryCode: 58
 };

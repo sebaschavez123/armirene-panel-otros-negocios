@@ -4,7 +4,7 @@ import { PhoneComponent } from './phone.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from 'src/app/core/directives/directives.module';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 
@@ -15,7 +15,8 @@ const MODULES = [
   NzSelectModule,
   CommonModule,
   DirectivesModule,
-  NzAutocompleteModule
+  NzAutocompleteModule,
+  FormsModule
 ]
 
 @NgModule({

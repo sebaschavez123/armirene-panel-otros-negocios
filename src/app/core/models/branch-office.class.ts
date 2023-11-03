@@ -1,8 +1,9 @@
+import { countryConfig } from "src/country-config/country-config";
 import { BUSINESS_DATA, Storage } from "../storage";
 
 export class BranchOffice {
-    id : number;
-    businessOwner : number;
+    id: number;
+    businessOwner: number;
     name: string;
     city: string;
     state: string;
@@ -11,7 +12,9 @@ export class BranchOffice {
     lat: number;
     lng: number;
     image: string;
-    phone : string
+    phone: string;
+    countryCode: number;
+    phoneCode: string;
     constructor() {
         this.businessOwner = Storage.getAll(BUSINESS_DATA).id;
         this.name = '';
@@ -23,5 +26,7 @@ export class BranchOffice {
         this.lng = 0;
         this.image = '';
         this.phone = ''
+        this.countryCode = countryConfig.countryCode;
+        this.phoneCode = '';
     }
 }

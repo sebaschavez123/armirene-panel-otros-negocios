@@ -12,14 +12,18 @@ export class PhoneComponent implements OnInit {
   @Input() parentForm: FormGroup;
   @Input() clients: any[];
   @Input() ifDisable: boolean = false;
-  phoneSize: number;
+  vzlaCode: number;
+  countryCodes = [
+    { label: '+57', country: countryConfig.countryName, value: 57 },
+    { label: '+58', country: countryConfig.countryName, value: 58 }
+  ]
   filteredOptions: string[] = [];
   constructor() {
     this.filteredOptions = this.clients;
   }
 
   ngOnInit(): void {
-    this.phoneSize = countryConfig.phoneSize;
+    this.countryCodes = this.countryCodes.filter(countryCode => countryCode.value == this.countryConfig.countryCode)
   }
 
   onChangePhone(value: string) {
@@ -35,4 +39,7 @@ export class PhoneComponent implements OnInit {
     })
   }
 
+  get countryConfig() {
+    return countryConfig
+  }
 }

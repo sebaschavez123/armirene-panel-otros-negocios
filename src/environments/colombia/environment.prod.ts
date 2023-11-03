@@ -28,7 +28,8 @@ export const environment = {
   isVenezuela: false,
   currency: 'COP',
   cctld: 'co',
-  coordinates: [4.60971, -74.08175]
+  coordinates: [4.60971, -74.08175],
+  countryCode: 57
 };
 
 

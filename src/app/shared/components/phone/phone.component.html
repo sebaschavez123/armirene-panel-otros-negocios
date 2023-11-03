@@ -1,28 +1,43 @@
 <div [formGroup]="parentForm" class="phone-vzla-container">
-    <!-- <nz-form-item>
-        <nz-form-label>Télefono:</nz-form-label>
+    <nz-form-item>
+        <nz-form-label>Teléfono <span id="required"> *</span> </nz-form-label>
         <nz-form-control>
-            <nz-select>
-                <nz-option [nzLabel]="'Option1'" [nzValue]="'Option1'"></nz-option>
-                <nz-option [nzLabel]="'Option2'" [nzValue]="'Option2'"></nz-option>
+            <nz-select formControlName="countryCode">
+                <nz-option nzCustomContent *ngFor="let countryCode of countryCodes" [nzLabel]="countryCode.label"
+                    [nzValue]="countryCode.value">
+                    {{countryCode.label}}
+                </nz-option>
+            </nz-select>
+        </nz-form-control>
+    </nz-form-item>
+    <nz-form-item id="vzla-code" *ngIf="countryConfig.isVenezuela">
+        <nz-form-label></nz-form-label>
+        <nz-form-control>
+            <nz-select ngModel="412" formControlName="phoneCode" [ngModelOptions]="{standalone: true}">
+                <nz-option nzCustomContent [nzLabel]="'412'" [nzValue]="'412'">
+                    412
+                </nz-option>
+                <nz-option nzCustomContent [nzLabel]="'414'" [nzValue]="'414'">
+                    414
+                </nz-option>
+                <nz-option nzCustomContent [nzLabel]="'416'" [nzValue]="'416'">
+                    416
+                </nz-option>
+                <nz-option nzCustomContent [nzLabel]="'424'" [nzValue]="'424'">
+                    424
+                </nz-option>
+                <nz-option nzCustomContent [nzLabel]="'426'" [nzValue]="'426'">
+                    426
+                </nz-option>
             </nz-select>
         </nz-form-control>
     </nz-form-item>
     <nz-form-item>
         <nz-form-label></nz-form-label>
-        <nz-form-control>
-            <nz-select>
-                <nz-option [nzLabel]="'Option1'" [nzValue]="'Option1'"></nz-option>
-                <nz-option [nzLabel]="'Option2'" [nzValue]="'Option2'"></nz-option>
-            </nz-select>
-        </nz-form-control>
-    </nz-form-item> -->
-    <nz-form-item>
-        <nz-form-label>Teléfono <span id="required"> *</span> </nz-form-label>
         <nz-form-control class="w-100"
-            [nzErrorTip]="parentForm.controls['phone'].hasError('minlength') ? 'El teléfono debe tener ' + phoneSize + ' digitos!' : 'Por favor ingresa el télefono!'">
-            <input [maxlength]="phoneSize" [minlength]="phoneSize" required positivesNumber [readonly]="ifDisable"
-                formControlName="phone" nz-input placeholder="teléfono" type="text"
+            [nzErrorTip]="parentForm.controls['phone'].hasError('minlength') ? 'El teléfono debe tener ' + countryConfig.phoneSize + ' digitos!' : 'Por favor ingresa el télefono!'">
+            <input [maxlength]="countryConfig.phoneSize" [minlength]="countryConfig.phoneSize" required positivesNumber
+                [readonly]="ifDisable" formControlName="phone" nz-input placeholder="teléfono" type="text"
                 (ngModelChange)="onChangePhone($event)" [nzAutocomplete]="auto">
             <nz-autocomplete #auto>
                 <nz-auto-option *ngFor="let client of filteredOptions" [nzValue]="client.phone"

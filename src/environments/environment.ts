@@ -9,5 +9,6 @@ export const environment = {
   currency: '',
   cctld: '',
   coordinates: [],
-  phoneSize: undefined
+  phoneSize: undefined,
+  countryCode: undefined
 };

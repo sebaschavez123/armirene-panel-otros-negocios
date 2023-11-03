@@ -10,5 +10,6 @@ export const environment = {
   currency: 'COP',
   cctld: 'co',
   coordinates: [4.60971, -74.08175],
-  phoneSize: 10
+  phoneSize: 10,
+  countryCode: 57
 }

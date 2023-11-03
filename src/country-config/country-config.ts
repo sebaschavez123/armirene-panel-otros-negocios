@@ -5,7 +5,8 @@ const configuration: any = {
   countryName: environment.countryName,
   isColombia: environment.isColombia,
   isVenezuela: environment.isVenezuela,
-  phoneSize: environment.phoneSize
+  phoneSize: environment.phoneSize,
+  countryCode : environment.countryCode
 };
 
 export { configuration as countryConfig };

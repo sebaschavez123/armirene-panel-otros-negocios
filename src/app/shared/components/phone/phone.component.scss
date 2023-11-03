@@ -4,12 +4,15 @@
     justify-content: space-between;
     gap: 0.5rem;
 
-    nz-form-item:first-of-type+nz-form-item {
-        width: 30%;
+    // nz-form-item:first-of-type+nz-form-item {
+    //     width: 30%;
+    // }
+    #vzla-code{
+        width: 35%;
     }
 
     nz-form-item:first-child {
-        width: 20%;
+        width: 30%;
     }
 
     nz-form-item:last-child {
