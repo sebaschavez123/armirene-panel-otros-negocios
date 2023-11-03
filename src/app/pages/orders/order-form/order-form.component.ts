@@ -14,7 +14,7 @@ import { ViewportMap } from 'src/app/shared/components/view-port-map/view-port-m
 import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
 import { selectDataMapInterface } from 'src/app/shared/interfaces/select-data-map.type';
 import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
-
+import { countryConfig } from 'src/country-config/country-config';
 @Component({
   selector: 'app-order-form',
   templateUrl: './order-form.component.html',
@@ -43,6 +43,7 @@ export class OrderFormComponent implements OnInit {
   showActions: boolean = true;
   orderId;
   messenger: any;
+  countryConfig = countryConfig;
   showOrderMesseger: boolean = true;
   private subsGetOrderMessenger: Subscription;
   constructor(

@@ -41,8 +41,7 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <app-phone [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false"
-                [clients]="clients">
+            <app-phone [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false" [clients]="clients">
             </app-phone>
             <nz-form-item>
                 <nz-form-label>Correo electrónico</nz-form-label>
@@ -146,9 +145,9 @@
                     <label nz-radio [nzValue]="3">
                         <img src="assets/svg/invoice-bill-svgrepo-com-1.svg" alt="">
                         Transacción en línea</label>
-                    <label nz-radio [nzValue]="4">
+                    <label nz-radio [nzValue]="4" *ngIf="countryConfig?.isColombia">
                         <img src="assets/svg/pse.svg" width="20px" alt="">
-                        PSE</label>
+                        PSE{{countryConfig?.isColombia}}</label>
                     <!-- <label nz-radio [nzValue]="3">
                         <img src="assets/svg/invoice-bill-svgrepo-com-1.svg" alt="">
                         Prepagado</label> -->
@@ -167,7 +166,8 @@
             <nz-form-item>
                 <nz-form-label>Comentarios al mensajero</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa comentarios para el mensajero!">
-                    <textarea formControlName="instructions" nz-input placeholder="Escribe los comentarios aquí…"
+                    <textarea maxlength="140" formControlName="instructions" nz-input
+                        placeholder="Escribe los comentarios aquí…"
                         [nzAutosize]="{ minRows: 5, maxRows: 5 }"></textarea>
                 </nz-form-control>
             </nz-form-item>
