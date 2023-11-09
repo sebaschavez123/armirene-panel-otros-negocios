@@ -10,19 +10,29 @@ import { countryConfig } from 'src/country-config/country-config';
 export class PhoneComponent implements OnInit {
 
   @Input() parentForm: FormGroup;
+  @Input() clients: any[];
   @Input() ifDisable: boolean = false;
   phoneSize: number;
-  constructor() { }
+  filteredOptions: string[] = [];
+  constructor() {
+    this.filteredOptions = this.clients;
+  }
 
   ngOnInit(): void {
     this.phoneSize = countryConfig.phoneSize;
   }
 
-  keyPress(event: any) {
-    const pattern = /^[0-9]*$/;
-    let inputChar = String.fromCharCode(event.charCode);
-    if (event.keyCode != 8 && !pattern.test(inputChar)) {
-      event.preventDefault();
-    }
+  onChangePhone(value: string) {
+    this.filteredOptions = this.clients?.filter(option => option.phone.toLowerCase().indexOf(value.toLowerCase()) !== -1);
   }
+
+  clickAutocompleteClient(client) {
+    this.parentForm?.patchValue({
+      ...client,
+      first_name: client.firstName,
+      last_name: client.lastName,
+      address: ''
+    })
+  }
+
 }

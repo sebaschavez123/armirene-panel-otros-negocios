@@ -15,8 +15,14 @@
             <nz-form-item>
                 <nz-form-label>Número de documento</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa un número de documento valido!">
-                    <input formControlName="dni" type="number" nz-input placeholder="Escribe aquí…" min="0"
-                        (keydown)="onKeyDown($event)">
+                    <input positivesNumber formControlName="dni" type="text" nz-input placeholder="Escribe aquí…"
+                        min="0" (ngModelChange)="onChangeDni($event)" [nzAutocomplete]="auto">
+                    <nz-autocomplete #auto>
+                        <nz-auto-option *ngFor="let client of filteredOptions" [nzValue]="client.dni"
+                            (click)="clickAutocompleteClient(client)">{{client.dni}} -
+                            {{client.firstName}} {{client.lastName}} - {{client.email}} -
+                            {{client.phone}}</nz-auto-option>
+                    </nz-autocomplete>
                 </nz-form-control>
             </nz-form-item>
             <div class="order-form-container__row">
@@ -35,13 +41,21 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            <app-phone [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false"></app-phone>
+            <app-phone [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false" [clients]="clients">
+            </app-phone>
             <nz-form-item>
                 <nz-form-label>Correo electrónico</nz-form-label>
                 <nz-form-control
                     [nzErrorTip]="form.get('client_info').controls['email'].hasError('pattern') ? 'Ingrese un correo electrónico valido' : 'Por favor ingresa el correo electrónico'">
                     <input [readonly]=" orderId ? true : false" formControlName="email" type="email" nz-input
+                        (ngModelChange)="onChangeEmail($event)" [nzAutocomplete]="auto"
                         placeholder="Correo electrónico">
+                    <nz-autocomplete #auto>
+                        <nz-auto-option *ngFor="let client of filteredOptions" [nzValue]="client.email"
+                            (click)="clickAutocompleteClient(client)">{{client.dni}} -
+                            {{client.firstName}} {{client.lastName}} - {{client.email}} -
+                            {{client.phone}}</nz-auto-option>
+                    </nz-autocomplete>
                 </nz-form-control>
             </nz-form-item>
             <app-cities-select [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false">
@@ -131,7 +145,7 @@
                     <label nz-radio [nzValue]="3">
                         <img src="assets/svg/invoice-bill-svgrepo-com-1.svg" alt="">
                         Transacción en línea</label>
-                    <label nz-radio [nzValue]="4">
+                    <label nz-radio [nzValue]="4" *ngIf="countryConfig?.isColombia">
                         <img src="assets/svg/pse.svg" width="20px" alt="">
                         PSE</label>
                     <!-- <label nz-radio [nzValue]="3">
@@ -152,7 +166,8 @@
             <nz-form-item>
                 <nz-form-label>Comentarios al mensajero</nz-form-label>
                 <nz-form-control nzErrorTip="Por favor ingresa comentarios para el mensajero!">
-                    <textarea formControlName="instructions" nz-input placeholder="Escribe los comentarios aquí…"
+                    <textarea maxlength="140" formControlName="instructions" nz-input
+                        placeholder="Escribe los comentarios aquí…"
                         [nzAutosize]="{ minRows: 5, maxRows: 5 }"></textarea>
                 </nz-form-control>
             </nz-form-item>
@@ -168,7 +183,8 @@
                 <app-order-message></app-order-message>
                 <span class="order-form-container__title"> RESUMEN DEL PEDIDO </span>
                 <app-spinner [default]="false" [large]="true"></app-spinner>
-                <app-order-messenger *ngIf="orderId" [messenger]="messenger"></app-order-messenger>
+                <app-order-messenger *ngIf="orderId != 0 && showOrderMesseger" [messenger]="messenger"
+                    [orderState]="dataForm.state"></app-order-messenger>
                 <app-order-summary [order]="form.value" [showActions]="showActions"
                     [branchOffice]="branchOfficeSelected"></app-order-summary>
                 <app-order-total [order]="form.value" *ngIf="form.get('total_value').value"></app-order-total>

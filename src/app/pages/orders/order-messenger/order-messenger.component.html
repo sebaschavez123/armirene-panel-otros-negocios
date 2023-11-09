@@ -1,6 +1,6 @@
 <div class="messenger">
     <div class="messenger__state" *ngIf="messenger">
-        El domiciliario va camino a tu dirección
+        El domiciliario {{orderState === 'FINALIZADA' ? 'finalizó la orden':'va en camino a tu dirección' }}
     </div>
     <div class="messenger__container">
         <ng-container *ngIf="messenger; else noMesseger">

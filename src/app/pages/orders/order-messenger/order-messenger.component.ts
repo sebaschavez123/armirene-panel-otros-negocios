@@ -7,6 +7,7 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 })
 export class OrderMessengerComponent implements OnChanges {
   @Input() messenger: any;
+  @Input() orderState: string;
   constructor() {
     console.log(this.messenger, "CONSTRUCTO")
   }

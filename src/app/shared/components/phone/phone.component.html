@@ -21,8 +21,15 @@
         <nz-form-label>Teléfono <span id="required"> *</span> </nz-form-label>
         <nz-form-control class="w-100"
             [nzErrorTip]="parentForm.controls['phone'].hasError('minlength') ? 'El teléfono debe tener ' + phoneSize + ' digitos!' : 'Por favor ingresa el télefono!'">
-            <input [maxlength]="phoneSize" [minlength]="phoneSize" required (keypress)="keyPress($event)"
-                [readonly]="ifDisable" formControlName="phone" nz-input placeholder="teléfono" type="text">
+            <input [maxlength]="phoneSize" [minlength]="phoneSize" required positivesNumber [readonly]="ifDisable"
+                formControlName="phone" nz-input placeholder="teléfono" type="text"
+                (ngModelChange)="onChangePhone($event)" [nzAutocomplete]="auto">
+            <nz-autocomplete #auto>
+                <nz-auto-option *ngFor="let client of filteredOptions" [nzValue]="client.phone"
+                    (click)="clickAutocompleteClient(client)">{{client.dni}} -
+                    {{client.firstName}} {{client.lastName}} - {{client.email}} -
+                    {{client.phone}}</nz-auto-option>
+            </nz-autocomplete>
         </nz-form-control>
     </nz-form-item>
 </div>

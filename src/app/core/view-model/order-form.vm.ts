@@ -26,6 +26,10 @@ export class OrderFormVm {
         return this._branchOfficeManager.returnBranchOfficeByBusiness()
     }
 
+    returnClientsByBusiness() {
+        return this._clientManager.returnClientsByBusiness()
+    }
+
     getOrderMessenger(orderId) {
         return this._orderManager.getOrderMessenger(orderId).pipe(
             tap(res => console.log(res)),

@@ -23,6 +23,7 @@ import { AdressAutocompleteComponent } from 'src/app/shared/components/adress-au
 import { DirectivesModule } from 'src/app/core/directives/directives.module';
 import { OrderMessengerComponent } from './order-messenger/order-messenger.component';
 import { LoadingModule } from 'src/app/shared/components/loading/loading.module';
+import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 
 const antdModule = [
   NzFormModule,
@@ -30,7 +31,8 @@ const antdModule = [
   NzSelectModule,
   NzIconModule,
   NzStepsModule,
-  NzRadioModule
+  NzRadioModule,
+  NzAutocompleteModule
 ]
 
 @NgModule({

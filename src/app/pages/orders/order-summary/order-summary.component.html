@@ -38,9 +38,11 @@
         <p *ngIf="payment_method == 1"><img src="assets/svg/efectivo.svg" alt="">
             Efectivo</p>
         <p *ngIf="payment_method == 2"><img src="assets/svg/datafono.svg" alt="">
-            Punto de venta</p>
+            Datafono</p>
         <p *ngIf="payment_method == 3"><img src="assets/svg/invoice-bill-svgrepo-com-1.svg" alt="">
-            Prepagado</p>
+            Transacción en línea</p>
+        <p *ngIf="payment_method == 4"> <img src="assets/svg/pse.svg" width="20px" alt="">
+            PSE</p>
     </div>
     <div class="order-summary__edit" (click)="clickOrderDetail()" *ngIf="showActions">
         Editar <span nz-icon nzType="edit" nzTheme="outline"></span>
