@@ -51,13 +51,13 @@ export class OrderManager {
         return this.order$
     }
 
-    cancelOrder(orderId: number) {
+    changeStateOrder(orderId: number, state: string) {
         const orders = this.subject.getValue();
         let filterPipe = new RemoveLeadingZerosPipe()
         const index = orders.findIndex(order => filterPipe.transform(order.orderId) == orderId);
         const newOrder: Order = {
             ...orders[index],
-            state: 'CANCELADA'
+            state: state
         };
         const newOrders: Order[] = orders.slice(0);
         newOrders[index] = newOrder;
@@ -74,6 +74,26 @@ export class OrderManager {
 
     getOrderMessenger(orderId) {
         return this._orderService.getOrderMessenger(orderId)
+    }
+
+    updateBranchOffice(branchOfficeId, businessId, changes: Order) {
+        const branchOffices = this.subject.getValue();
+        const index = branchOffices.findIndex(branchOffice => branchOffice.id == branchOfficeId);
+        const newBranchOffice: Order = {
+            ...branchOffices[index],
+            ...changes
+        };
+        const newBranchOffices: Order[] = branchOffices.slice(0);
+        newBranchOffices[index] = newBranchOffice;
+        this.subject.next(newBranchOffices);
+        // return this._orderService.updateOrder(branchOfficeId, businessId, changes).pipe(
+        //     catchError(err => {
+        //         const message = "Could not update branch office";
+        //         this._messages.showErrors(message);
+        //         return throwError(() => err);
+        //     }),
+        //     shareReplay()
+        // )
     }
 
 

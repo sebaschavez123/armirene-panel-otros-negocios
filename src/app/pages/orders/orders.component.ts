@@ -7,6 +7,8 @@ import { NzModalService } from 'ng-zorro-antd/modal';
 import { ORDER_TABLE } from 'src/app/core/tables-info';
 import { Order } from 'src/app/core/models/order.class';
 import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
+import { BaseFormOrderService } from 'src/app/core/baseForm/base-form-order.service';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-orders',
@@ -15,7 +17,7 @@ import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.
   providers: [NzModalService]
 })
 export class OrdersComponent implements OnInit {
-
+  form: FormGroup;
   listOfData$: Observable<any>;
   orderModelList: any = {
     orderId: '', clientFirstName: '', clientLastName: '', clientPhone: '', clientAddress: '', state: ''
@@ -24,7 +26,8 @@ export class OrdersComponent implements OnInit {
   constructor(
     private modal: NzModalService,
     private drawerEvent: DrawerEvent,
-    private _vm: OrdersVm
+    private _vm: OrdersVm,
+    public _orderForm: BaseFormOrderService,
   ) {
   }
 
@@ -48,13 +51,17 @@ export class OrdersComponent implements OnInit {
     if (type == 'show') {
       this.showOrder(data)
     }
+    if (type == 'stop') {
+      this.showFinishOrderConfirm(data)
+      console.log(data, "data")
+    }
   }
 
 
   cancelOrderModal(data) {
     this.modal.confirm({
       nzTitle: '¿Estás seguro de cancelar esta order?',
-      nzContent: 'Si cancelas  esta orden no podrás recuperarlo',
+      nzContent: 'Si cancelas  esta orden no podrás recuperarla',
       nzOkText: 'Aceptar',
       nzOkType: 'primary',
       nzOkDanger: true,
@@ -73,16 +80,20 @@ export class OrdersComponent implements OnInit {
     this.drawerEvent.changeOpenComponent({ component: OrderFormComponent, data: new Order })
   }
 
+  finishOrder({ orderId }) {
+    let filterPipe = new RemoveLeadingZerosPipe()
+    this._vm.finishOrder(filterPipe.transform(orderId)).subscribe()
+  }
 
 
-  showDeleteConfirm(item): void {
+  showFinishOrderConfirm(item): void {
     this.modal.confirm({
-      nzTitle: '¿Estás seguro de eliminar este cliente?',
-      nzContent: 'Si eliminas este cliente no podrás recuperarlo',
+      nzTitle: '¿Estás seguro de FINALIZAR esta orden?',
+      nzContent: 'Si FINALIZAS  esta orden no podrás recuperarla',
       nzOkText: 'Aceptar',
       nzOkType: 'primary',
       nzOkDanger: true,
-      nzOnOk: () => console.log('OK', item),
+      nzOnOk: () => this.finishOrder(item),
       nzCancelText: 'Cancelar',
       nzOnCancel: () => console.log('Cancel')
     });

@@ -23,7 +23,10 @@ export class TableComponent implements OnInit {
       { tooltipText: 'Ver detalles', show: this.isShowItem, icon: 'eye', type: 'show' },
       { tooltipText: 'Editar', show: this.isEditable, icon: 'edit', type: 'edit' },
       { tooltipText: 'Eliminar', show: this.isErasable, icon: 'delete', type: 'delete' },
-      { tooltipText: 'Cancelar', show: this.isCancelable, icon: 'close-circle', type: 'cancel' }]
+      { tooltipText: 'Cancelar', show: this.isCancelable, icon: 'close-circle', type: 'cancel' },
+      { tooltipText: 'Finalizar', show: this.isCancelable, icon: 'stop', type: 'stop' },
+
+    ]
     this.objectKeys = Object.keys(this.objectKeys);
   }
 

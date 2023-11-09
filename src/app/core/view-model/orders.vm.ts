@@ -56,6 +56,10 @@ export class OrdersVm {
     }
 
     cancelOrder(orderId) {
-        return this._orderManager.cancelOrder(orderId)
+        return this._orderManager.changeStateOrder(orderId, 'CANCELADA')
+    }
+
+    finishOrder(orderId) {
+        return this._orderManager.changeStateOrder(orderId, 'FINALIZADA')
     }
 }

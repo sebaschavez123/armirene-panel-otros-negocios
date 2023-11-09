@@ -59,6 +59,7 @@ export class Order {
             indications : ''
         };
         this.country = environment.indicator;
+        this.state = '';
         this.token = 0;
         this.storeId = 0;
     }
