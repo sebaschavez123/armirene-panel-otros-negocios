@@ -1,3 +1,33 @@
+<a nz-dropdown nzTrigger="click" [nzDropdownMenu]="menu" style="
+    margin: 10px; 
+    padding: 10px; 
+    background-color: white; 
+    display: block; 
+    width: 150px; 
+    border-radius: 50px;
+    color: black;
+    font-weight: bold;
+    font-size: 12px;
+    border: 1px solid #cccccc74;">
+    Estados
+    <em nz-icon nzType="down" nzTheme="outline"></em>
+</a>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+    <div class="ant-table-filter-dropdown">
+        <div [formGroup]="_baseFormOrderStates.baseForm" class="search-box">
+            <ul nz-menu>
+                <li *ngFor="let claveValor of _baseFormOrderStates.baseForm.value | keyvalue">
+                    <label nz-checkbox formControlName="{{claveValor.key}}">
+                        {{ claveValor.key }}
+                    </label>
+                </li>
+            </ul>
+            <div style="display: flex; justify-content: center;">
+                <button style="margin-bottom: 5px" nz-button nzSize="small" nzType="primary" (click)="setFilter()">Aplicar</button>
+            </div>
+        </div>
+    </div>
+</nz-dropdown-menu>
 <div class="orders-container">
     <app-oders-list [list]="enviadas" [id]="'ln1'" [connectedTo]="'ln2'">
         <ng-container title>Recibida</ng-container>
