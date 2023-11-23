@@ -71,5 +71,10 @@ export const ORDER_TABLE = {
             compare: (a: any, b: any) => a.address.localeCompare(b.address),
             priority: false
         },
+        {
+            title: 'Fecha',
+            compare: (a: any, b: any) => a.address.localeCompare(b.date),
+            priority: false
+        },
     ]
 }

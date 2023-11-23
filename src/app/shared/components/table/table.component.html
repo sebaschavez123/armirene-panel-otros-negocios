@@ -10,7 +10,7 @@
     <tbody>
         <tr *ngFor="let data of sortTable.data">
             <td *ngFor="let object of objectKeys">
-                {{data[object]}}
+                {{ object === 'createDate' ? (data[object] | date:'medium') : data[object] }}
             </td>
             <td>
                 <div class="justify-content-space-around">

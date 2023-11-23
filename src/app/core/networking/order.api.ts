@@ -3,5 +3,6 @@ export const order = {
     create: 'create',
     all: 'all',
     cancel: 'cancel',
-    messenger: 'messenger'
+    messenger: 'messenger',
+    finalize: 'finalize'
 };

@@ -30,8 +30,13 @@ export class OrderService {
         return this._baseService.get(`${this.url}/${order.order}/${order.cancel}/${orderId}`)
     }
 
-    getOrderMessenger(orderId){
+    getOrderMessenger(orderId) {
         return this._baseService.get(`${this.url}/${order.order}/${order.messenger}/${orderId}`)
+    }
+
+
+    finishOrder(orderId: number): Observable<any> {
+        return this._baseService.post(`${this.url}/${order.order}/${order.finalize}/${orderId}` , {})
     }
 
 }

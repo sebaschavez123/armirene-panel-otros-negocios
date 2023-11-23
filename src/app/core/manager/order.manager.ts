@@ -52,6 +52,7 @@ export class OrderManager {
     }
 
     changeStateOrder(orderId: number, state: string) {
+        let endpoint = state === 'FINALIZADA' ? this._orderService.finishOrder(orderId) : this._orderService.cancelOrder(orderId)
         const orders = this.subject.getValue();
         let filterPipe = new RemoveLeadingZerosPipe()
         const index = orders.findIndex(order => filterPipe.transform(order.orderId) == orderId);
@@ -62,9 +63,9 @@ export class OrderManager {
         const newOrders: Order[] = orders.slice(0);
         newOrders[index] = newOrder;
         this.subject.next(newOrders)
-        return this._orderService.cancelOrder(orderId).pipe(
+        return endpoint.pipe(
             catchError(err => {
-                const message = "Could not cancel order";
+                const message = `Error al intentar cambiar el estado de la orden`;
                 this._messages.showErrors(message);
                 return throwError(() => err);
             }),
@@ -75,26 +76,5 @@ export class OrderManager {
     getOrderMessenger(orderId) {
         return this._orderService.getOrderMessenger(orderId)
     }
-
-    updateBranchOffice(branchOfficeId, businessId, changes: Order) {
-        const branchOffices = this.subject.getValue();
-        const index = branchOffices.findIndex(branchOffice => branchOffice.id == branchOfficeId);
-        const newBranchOffice: Order = {
-            ...branchOffices[index],
-            ...changes
-        };
-        const newBranchOffices: Order[] = branchOffices.slice(0);
-        newBranchOffices[index] = newBranchOffice;
-        this.subject.next(newBranchOffices);
-        // return this._orderService.updateOrder(branchOfficeId, businessId, changes).pipe(
-        //     catchError(err => {
-        //         const message = "Could not update branch office";
-        //         this._messages.showErrors(message);
-        //         return throwError(() => err);
-        //     }),
-        //     shareReplay()
-        // )
-    }
-
 
 }

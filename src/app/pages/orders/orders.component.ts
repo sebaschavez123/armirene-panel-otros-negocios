@@ -20,7 +20,13 @@ export class OrdersComponent implements OnInit {
   form: FormGroup;
   listOfData$: Observable<any>;
   orderModelList: any = {
-    orderId: '', clientFirstName: '', clientLastName: '', clientPhone: '', clientAddress: '', state: ''
+    orderId: '', 
+    clientFirstName: '', 
+    clientLastName: '', 
+    clientPhone: '', 
+    clientAddress: '', 
+    state: '' , 
+    createDate : ''
   };
   listOfColumn = ORDER_TABLE.columns;
   constructor(
