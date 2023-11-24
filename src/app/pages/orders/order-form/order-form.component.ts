@@ -27,7 +27,7 @@ import { countryConfig } from 'src/country-config/country-config';
 export class OrderFormComponent implements OnInit {
 
   @Input() form: FormGroup
-  @Input() dataForm: Order;
+  @Input() dataForm: any;
   branchOfficeList$: Observable<BranchOffice[]>
   clients;
   filteredOptions: string[] = [];
@@ -70,25 +70,25 @@ export class OrderFormComponent implements OnInit {
 
   initForm() {
     this.form = this._orderForm.pathFormData(new Order);
-    this.form.patchValue({ ...this.dataForm, storeId: Number(this.dataForm.storeId) });
+    this.form.patchValue({ ...this.dataForm.item, storeId: Number(this.dataForm.item?.storeId) });
   }
 
   setShowOrderMessenger() {
-    if (this.dataForm?.state == 'CANCELADA') {
+    if (this.dataForm?.item?.state == 'CANCELADA') {
       this.showOrderMesseger = false;
     }
   }
 
   goDetailsForm() {
     let filterPipe = new RemoveLeadingZerosPipe()
-    this.orderId = this.dataForm.orderId;
+    this.orderId = this.dataForm.item?.orderId;
     if (this.orderId) {
       this.current = 3;
       this.showActions = false;
       this.changeContent();
       this.subsGetOrderMessenger = this.branchOfficeList$.pipe(
         tap(branchOfficeList => {
-          this.branchOfficeSelected = branchOfficeList.filter(branchOffice => branchOffice.id == this.dataForm.storeId)[0]
+          this.branchOfficeSelected = branchOfficeList.filter(branchOffice => branchOffice.id == this.dataForm.item?.storeId)[0]
         }),
         switchMap(a => this._vm.getOrderMessenger(filterPipe.transform(this.orderId)))
       ).subscribe(messenger => {
@@ -99,7 +99,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   getBranchOfficeByBusiness() {
-    this.branchOfficeList$ = this._vm.returnBranchOfficeByBusiness()
+    this.branchOfficeList$ = this.dataForm.branchOffices
   }
 
 

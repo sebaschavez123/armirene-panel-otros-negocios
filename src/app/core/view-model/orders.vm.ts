@@ -1,20 +1,25 @@
 import { Injectable } from "@angular/core";
 import { OrderManager } from "../manager/order.manager";
-import { map } from "rxjs";
-import { order } from "../networking/order.api";
+import { BehaviorSubject, Observable, map } from "rxjs";
 import { environment } from "src/environments/environment";
+import { BranchOfficeManager } from "../manager/branch-office.manager";
+import { Order } from "../models/order.class";
 
 @Injectable({
     providedIn: 'root'
 })
 export class OrdersVm {
 
+    private dataList: BehaviorSubject<Order[]> = new BehaviorSubject<Order[]>([]);
+    public dataList$: Observable<Order[]> = this.dataList.asObservable();
+    private cacheList: Order[];
     constructor(
-        private _orderManager: OrderManager
+        private _orderManager: OrderManager,
+        private _branchOfficeManager: BranchOfficeManager
     ) { }
 
     returnOrderByBusiness() {
-        return this._orderManager.returnOrderByBusiness().pipe(
+        this._orderManager.returnOrderByBusiness().pipe(
             map(orders => orders.map(order => {
                 order.business_id = Number(order.businessId),
                     order.createDate = order.createDate,
@@ -53,7 +58,10 @@ export class OrdersVm {
                     }
                 return order
             }))
-        )
+        ).subscribe(res => {
+            this.cacheList = res;
+            this.dataList.next(this.cacheList);
+        })
     }
 
     cancelOrder(orderId) {
@@ -62,5 +70,15 @@ export class OrdersVm {
 
     finishOrder(orderId) {
         return this._orderManager.changeStateOrder(orderId, 'FINALIZADA')
+    }
+
+    returnBranchOfficeByBusiness() {
+        return this._branchOfficeManager.returnBranchOfficeByBusiness()
+    }
+
+    filterData(parameter: number): void {
+        const filteredData = parameter ?
+            this.cacheList.filter(item => item.storeId === parameter) : this.cacheList;
+        this.dataList.next(filteredData);
     }
 }

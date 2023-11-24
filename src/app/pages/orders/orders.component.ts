@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { OrderFormComponent } from './order-form/order-form.component';
 import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
 import { OrdersVm } from 'src/app/core/view-model/orders.vm';
-import { Observable } from 'rxjs';
+import { Observable, filter, of, switchMap, tap } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { ORDER_TABLE } from 'src/app/core/tables-info';
 import { Order } from 'src/app/core/models/order.class';
 import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
 import { BaseFormOrderService } from 'src/app/core/baseForm/base-form-order.service';
 import { FormGroup } from '@angular/forms';
+import { BranchOffice } from 'src/app/core/models/branch-office.class';
 
 @Component({
   selector: 'app-orders',
@@ -19,14 +20,16 @@ import { FormGroup } from '@angular/forms';
 export class OrdersComponent implements OnInit {
   form: FormGroup;
   listOfData$: Observable<any>;
+  branchOfficeList$: Observable<BranchOffice[]>
+  filterBranchOfficeSelected;
   orderModelList: any = {
-    orderId: '', 
-    clientFirstName: '', 
-    clientLastName: '', 
-    clientPhone: '', 
-    clientAddress: '', 
-    state: '' , 
-    createDate : ''
+    orderId: '',
+    clientFirstName: '',
+    clientLastName: '',
+    clientPhone: '',
+    clientAddress: '',
+    state: '',
+    createDate: ''
   };
   listOfColumn = ORDER_TABLE.columns;
   constructor(
@@ -43,10 +46,16 @@ export class OrdersComponent implements OnInit {
 
   init() {
     this.getOrdersByBusiness();
+    this.getBranchOfficeByBusiness();
   }
 
   getOrdersByBusiness() {
-    this.listOfData$ = this._vm.returnOrderByBusiness();
+    this._vm.returnOrderByBusiness();
+    this.listOfData$ = this._vm.dataList$;
+  }
+
+  getBranchOfficeByBusiness() {
+    this.branchOfficeList$ = this._vm.returnBranchOfficeByBusiness();
   }
 
   getTableActions(item): void {
@@ -83,7 +92,7 @@ export class OrdersComponent implements OnInit {
   }
 
   createOrder() {
-    this.drawerEvent.changeOpenComponent({ component: OrderFormComponent, data: new Order })
+    this.drawerEvent.changeOpenComponent({ component: OrderFormComponent, data: { item: new Order, branchOffices: this.branchOfficeList$ } })
   }
 
   finishOrder({ orderId }) {
@@ -107,7 +116,11 @@ export class OrdersComponent implements OnInit {
 
 
   showOrder(item): void {
-    this.drawerEvent.changeOpenComponent({ component: OrderFormComponent, data: item })
+    this.drawerEvent.changeOpenComponent({ component: OrderFormComponent, data: { item, branchOffices: this.branchOfficeList$ } })
+  }
+
+  changeBranchOffice(filterBranchOfficeSelected) {
+    this._vm.filterData(filterBranchOfficeSelected);
   }
 
 }
