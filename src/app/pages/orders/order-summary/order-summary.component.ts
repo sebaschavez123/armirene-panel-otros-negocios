@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { OrderFormComponent } from '../order-form/order-form.component';
-import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
+import { DrawerEvent } from 'src/app/core/events/drawer.event';
 import { Order } from 'src/app/core/models/order.class';
 import { BranchOffice } from 'src/app/core/models/branch-office.class';
 import { Observable, tap } from 'rxjs';

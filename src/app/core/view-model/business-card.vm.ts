@@ -4,6 +4,7 @@ import { BranchOfficeManager } from "../manager/branch-office.manager";
 import { OrderManager } from "../manager/order.manager";
 import { Business } from "../models/business.class";
 import { ClientManager } from "../manager/client.manager";
+import { ChangeBusinessEvent } from "../events/change-business.event";
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,8 @@ export class BusinessCardVm {
         private _businessManager: BusinessManager,
         private _orderManager: OrderManager,
         private _branchOfficeManager: BranchOfficeManager,
-        private _clientManager: ClientManager
+        private _clientManager: ClientManager,
+        private _changeBusinessEvent: ChangeBusinessEvent
     ) {
     }
 
@@ -35,6 +37,6 @@ export class BusinessCardVm {
     }
 
     selectBusiness(business: Business) {
-        this._businessManager.selectBusiness(business)
+        this._changeBusinessEvent.selectBusiness(business)
     }
 }

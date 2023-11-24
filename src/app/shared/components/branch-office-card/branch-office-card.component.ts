@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { BranchOfficeFormComponent } from 'src/app/shared/components/branch-office-form/branch-office-form.component';
-import { DrawerEvent } from '../../event-listeners/drawer.event';
+import { DrawerEvent } from '../../../core/events/drawer.event';
 import { BranchOffice } from 'src/app/core/models/branch-office.class';
 
 @Component({

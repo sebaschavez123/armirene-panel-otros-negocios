@@ -6,7 +6,7 @@ import { Business } from 'src/app/core/models/business.class';
 import { BUSINESS_DATA, Storage } from 'src/app/core/storage';
 import { DashboardLayoutVm } from 'src/app/core/view-model/dashboard-layout.vm';
 import { LoadingService } from 'src/app/services/loading.service';
-import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
+import { DrawerEvent } from 'src/app/core/events/drawer.event';
 @Component({
   selector: 'app-dashboard-layout',
   templateUrl: './dashboard-layout.component.html',

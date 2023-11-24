@@ -3,6 +3,7 @@ import { BusinessManager } from "../manager/business.manager";
 import { Business } from "../models/business.class";
 import { OrderManager } from "../manager/order.manager";
 import { BranchOfficeManager } from "../manager/branch-office.manager";
+import { ChangeBusinessEvent } from "../events/change-business.event";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +13,8 @@ export class BusinessFormVm {
     constructor(
         private _businessManager: BusinessManager,
         private _orderManager: OrderManager,
-        private _branchOfficeManager: BranchOfficeManager
+        private _branchOfficeManager: BranchOfficeManager,
+        private _changeBusinessEvent: ChangeBusinessEvent
     ) { }
 
     saveBusiness(data: Business) {
@@ -20,7 +22,7 @@ export class BusinessFormVm {
     }
 
     selectBusiness(business: Business) {
-        this._businessManager.selectBusiness(business)
+        this._changeBusinessEvent.selectBusiness(business)
     }
 
     updateBusiness(data: Business) {

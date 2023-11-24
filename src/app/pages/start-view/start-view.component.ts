@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
+import { DrawerEvent } from 'src/app/core/events/drawer.event';
 import { BranchOfficeFormComponent } from '../../shared/components/branch-office-form/branch-office-form.component';
 import { BranchOffice } from 'src/app/core/models/branch-office.class';
 import { StartViewVm } from 'src/app/core/view-model/start-view.vm';

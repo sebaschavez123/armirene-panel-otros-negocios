@@ -11,7 +11,7 @@ import { BaseFormBusinessService } from 'src/app/core/baseForm/base-form-busines
 import { CommonModule } from '@angular/common';
 import { MapComponent } from '../map/map.component';
 import { BranchOfficeFormVM } from 'src/app/core/view-model/branch-office-form.vm';
-import { DrawerEvent } from '../../event-listeners/drawer.event';
+import { DrawerEvent } from '../../../core/events/drawer.event';
 import { CitiesSelectComponent } from '../cities-select/cities-select.component';
 import { AdressAutocompleteComponent } from '../adress-autocomplete/adress-autocomplete.component';
 import { Store } from '@ngrx/store';

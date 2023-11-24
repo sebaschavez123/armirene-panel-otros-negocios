@@ -12,8 +12,6 @@ import { Storage, USER_DATA } from "../storage";
 export class BusinessManager {
 
     private subject = new BehaviorSubject<Business[]>([]);
-    private subjectBusinessSelected = new BehaviorSubject<Business>(null!);
-    businessSelected$: Observable<Business> = this.subjectBusinessSelected.asObservable();
     business$: Observable<Business[]> = this.subject.asObservable();
 
     constructor(
@@ -49,9 +47,6 @@ export class BusinessManager {
         return this.business$
     }
 
-    returnBusinessSelected(): Observable<Business> {
-        return this.businessSelected$
-    }
 
     saveBusiness(body: Business) {
         const businessList = this.subject.getValue();
@@ -109,10 +104,6 @@ export class BusinessManager {
             }),
             shareReplay()
         )
-    }
-
-    selectBusiness(business: Business) {
-        this.subjectBusinessSelected.next(business)
     }
 
 }

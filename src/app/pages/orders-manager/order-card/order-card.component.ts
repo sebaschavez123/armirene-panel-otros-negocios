@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
+import { DrawerEvent } from 'src/app/core/events/drawer.event';
 import { OrderFormComponent } from '../../orders/order-form/order-form.component';
 
 @Component({

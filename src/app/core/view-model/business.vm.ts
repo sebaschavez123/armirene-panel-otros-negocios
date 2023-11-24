@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { BranchOfficeManager } from "../manager/branch-office.manager";
 import { BusinessManager } from "../manager/business.manager";
 import { Business } from "../models/business.class";
+import { ChangeBusinessEvent } from "../events/change-business.event";
 
 @Injectable({
     providedIn: 'root'
@@ -9,7 +10,8 @@ import { Business } from "../models/business.class";
 export class BusinessVm {
 
     constructor(
-        private _businessManager: BusinessManager
+        private _businessManager: BusinessManager,
+        private _changeBusinessEvent: ChangeBusinessEvent
     ) {
     }
 
@@ -18,7 +20,7 @@ export class BusinessVm {
     }
 
     selectBusiness(business: Business) {
-        this._businessManager.selectBusiness(business)
+        this._changeBusinessEvent.selectBusiness(business)
     }
 
 }

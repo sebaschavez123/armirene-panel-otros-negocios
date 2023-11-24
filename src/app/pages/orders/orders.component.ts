@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderFormComponent } from './order-form/order-form.component';
-import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
+import { DrawerEvent } from 'src/app/core/events/drawer.event';
 import { OrdersVm } from 'src/app/core/view-model/orders.vm';
 import { Observable, filter, of, switchMap, tap } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';

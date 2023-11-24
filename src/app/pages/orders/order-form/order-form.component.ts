@@ -11,7 +11,7 @@ import { AppState } from 'src/app/ngrx/reducers/app.reducer';
 import { LoadingService } from 'src/app/services/loading.service';
 import { MessagesService } from 'src/app/services/messages.service';
 import { ViewportMap } from 'src/app/shared/components/view-port-map/view-port-map';
-import { DrawerEvent } from 'src/app/shared/event-listeners/drawer.event';
+import { DrawerEvent } from 'src/app/core/events/drawer.event';
 import { selectDataMapInterface } from 'src/app/shared/interfaces/select-data-map.type';
 import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
 import { countryConfig } from 'src/country-config/country-config';
