@@ -22,8 +22,8 @@ export class CitiesServices {
         )
     }
 
-    getCities(cityId): Observable<any[]> {
-        return this._baseService.get(`${this.url}/${cityId}/${cities.cities}`).pipe(
+    getCities(stateId): Observable<any[]> {
+        return this._baseService.get(`${this.url}/${stateId}/${cities.cities}`).pipe(
             map(res => res['data'])
         )
     }

@@ -28,6 +28,8 @@ const MODULES = [
 export class CitiesSelectComponent implements OnInit {
   @Input() parentForm: any;
   @Input() ifDisable: boolean = false;
+  @Input() isFilter: boolean = false;
+  @Input() customClasses: string;
   states = Storage.getAll(STATES);
   public cities = new Array;
 
@@ -51,15 +53,22 @@ export class CitiesSelectComponent implements OnInit {
     let stateId = this.states.filter(state =>
       state.name == stateName
     )[0]?.id;
-    this._vm.getCities(stateId).subscribe(cities => this.cities = cities);
+    if (stateId) {
+      this.parentForm.get('city')?.setValue('');
+      this._vm.getCities(stateId).subscribe(cities => this.cities = cities);
+    } else {
+      this.cities = [];
+    }
   }
 
   changeMunicipality(cityName) {
     let city = this.cities.filter(city =>
       city.name == cityName
     )[0]
-    let { lat, lng } = city
-    let latLng = { lat, lng };
-    this._store.dispatch(saveLatLng({ latLng }))
+    if (!this.isFilter && city) {
+      let { lat, lng } = city
+      let latLng = { lat, lng };
+      this._store.dispatch(saveLatLng({ latLng }))
+    }
   }
 }

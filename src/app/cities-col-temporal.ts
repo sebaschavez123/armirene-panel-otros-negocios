@@ -1,5 +1,17 @@
 export const COUNTRIES_COL = {
   cities: [
+    {
+      id: "BOG",
+      name: "BOGOTA"
+    },
+    {
+      id: "CHI",
+      name: "CHÍA"
+    },
+    {
+      id: "BAR",
+      name: "BARRANQUILLA"
+    },
     //    - {
     //       id: "VVC",
     //       name: "Villavicencio"
@@ -1687,18 +1699,7 @@ export const COUNTRIES_COL = {
     //       id: "ELB",
     //       name: "EL BAGRE"
     //     },
-    {
-      id: "BOG",
-      name: "BOGOTA"
-    },
-    //     {
-    //       id: "CHI",
-    //       name: "Chía"
-    //     },
-    //     {
-    //       id: "BAR",
-    //       name: "Barranquilla"
-    //     },
+
     //     {
     //       id: "CTG",
     //       name: "Cartagena"
