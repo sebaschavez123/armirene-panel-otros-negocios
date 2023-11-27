@@ -28,7 +28,7 @@ registerLocaleData(en);
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
       autoPause: true,
-    }),
+    connectInZone: true}),
     NgxGpAutocompleteModule.forRoot({
       loaderOptions: {
         apiKey: 'AIzaSyCwUA4-K4ghYYfmxHvrIPmX75NZpJKLzYA',
