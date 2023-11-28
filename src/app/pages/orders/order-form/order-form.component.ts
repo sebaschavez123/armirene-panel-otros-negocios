@@ -74,7 +74,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   setShowOrderMessenger() {
-    if (this.dataForm?.item?.state == 'CANCELADA' || this.dataForm?.item?.state == 'FINALIZADA') {
+    if (this.dataForm?.item?.state == 'CANCELADA' ) {
       this.showOrderMesseger = false;
     }
   }
