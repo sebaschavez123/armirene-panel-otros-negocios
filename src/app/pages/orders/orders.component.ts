@@ -29,7 +29,7 @@ export class OrdersComponent implements OnInit {
     clientPhone: '',
     clientAddress: '',
     state: '',
-    createDate: ''
+    // createDate: ''
   };
   listOfColumn = ORDER_TABLE.columns;
   constructor(
