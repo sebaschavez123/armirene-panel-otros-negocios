@@ -1,5 +1,14 @@
-nz-page-header{
-    box-shadow: 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.12); 
-    padding-left: 5rem; 
+@import "../../../assets/scss/var-mixins";
+
+nz-page-header {
+    box-shadow: 0 0.2rem 0.4rem 0 rgba(0, 0, 0, 0.12);
+    padding-left: 5rem;
     padding-right: 5rem;
+}
+
+@include mq-max(large) {
+    nz-page-header {
+        display: flex;
+        justify-content: center;
+    }
 }
