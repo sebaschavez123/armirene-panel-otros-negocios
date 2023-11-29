@@ -1,5 +1,18 @@
+<ng-container *ngIf="(showElement$ | async) as map">
+    <div class="adress-warning-container" *ngIf="map.warningAddress">
+        <div class="adress-warning-container__icon">
+            <span nz-icon nzType="warning" nzTheme="outline" style="font-size: 20px;"></span>
+        </div>
+        <div>
+            <strong>No hemos podido reconocer tu dirección.</strong>
+            <span>
+                Por favor, mueve el marcador hasta que coincida con tu ubicación en el mapa.
+            </span>
+        </div>
+    </div>
+</ng-container>
 <div class="mg-y-5">
     <div class="map-container">
-        <div id="viewport-map" [class]="customClasses" ></div>
+        <div id="viewport-map" [class]="customClasses"></div>
     </div>
 </div>

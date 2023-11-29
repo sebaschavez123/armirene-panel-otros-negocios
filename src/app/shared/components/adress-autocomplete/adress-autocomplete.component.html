@@ -2,7 +2,7 @@
     <nz-form-item>
         <nz-form-label>Dirección<span id="required">*</span></nz-form-label>
         <nz-form-control nzErrorTip="Por favor ingresa la dirección del cliente!">
-            <input class="w-100 mg-y-5" [options]='options' ngx-gp-autocomplete formControlName="address" placeholder="Dirección"
+            <input (input)="changeDir($event)" class="w-100 mg-y-5" [options]='options' ngx-gp-autocomplete formControlName="address" placeholder="Dirección"
                 (onAddressChange)="handleAddressChange($event)" />
         </nz-form-control>
     </nz-form-item>

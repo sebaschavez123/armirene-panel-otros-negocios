@@ -4,15 +4,16 @@ import { ViewportMap } from '../view-port-map/view-port-map';
 import { fromFetch } from 'rxjs/fetch';
 import { Subscription, from, switchMap } from 'rxjs';
 import { AppState } from 'src/app/ngrx/reducers/app.reducer';
-import { Store } from '@ngrx/store';
-import { saveLatLng } from 'src/app/ngrx/actions/map.actions';
+import { Store, select } from '@ngrx/store';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
   standalone: true,
-
+  imports: [NzIconModule, CommonModule],
 })
 export class MapComponent implements OnInit, OnDestroy {
   @Output() sendLatLng = new EventEmitter<any>();
@@ -21,11 +22,11 @@ export class MapComponent implements OnInit, OnDestroy {
   onGPS = false;
   mapSubscription: Subscription;
   @Input() customClasses: string;
-
+  showElement$ = this._store.pipe(select('map')); // Asegúrate de tener el nombre correcto del slice en tu estado
   constructor(private _store: Store<AppState>) { }
   ngOnInit() {
     this.mapSubscription = this._store.select('map').subscribe(res => {
-      let { latLng, latLng: { lat, lng } } = res;
+      let { latLng: { lat, lng } } = res;
       if (lat) {
         this.selectedData.lat = lat;
         this.selectedData.lng = lng;
@@ -62,7 +63,7 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   resolveCoordinatesToAddress({ lat, lng }) {
-    let urlInver = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=0&zoom=40&lat=';
+    let urlInver = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=0&zoom=40';
     urlInver += `&lat=${lat}&lon=${lng}`;
     fromFetch(urlInver)
       .pipe(switchMap((r: any) => from(r.json())))
