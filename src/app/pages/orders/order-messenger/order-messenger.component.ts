@@ -9,7 +9,7 @@ export class OrderMessengerComponent implements OnChanges {
   @Input() messenger: any;
   @Input() orderState: string;
   constructor() {
-    console.log(this.messenger, "CONSTRUCTO")
+    console.log(this.messenger, "CONSTRUCTO" , this.orderState)
   }
 
   ngOnInit() {

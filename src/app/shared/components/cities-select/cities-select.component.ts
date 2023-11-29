@@ -32,7 +32,7 @@ export class CitiesSelectComponent implements OnInit {
   @Input() customClasses: string;
   states = Storage.getAll(STATES);
   public cities = new Array;
-
+  private deparmentChangesCount = 0;
   constructor(
     private _vm: CitiesSelectVM,
     private _store: Store<AppState>
@@ -40,6 +40,15 @@ export class CitiesSelectComponent implements OnInit {
 
   ngOnInit() {
     this.uploadCities();
+    this.changeDeparment();
+  }
+
+  changeDeparment() {
+    this.parentForm.get('state').valueChanges.subscribe((value: any) => {
+      if (this.deparmentChangesCount >= 1) {
+        this.parentForm.get('city')?.setValue('');
+      }
+    });
   }
 
   uploadCities() {
@@ -54,7 +63,7 @@ export class CitiesSelectComponent implements OnInit {
       state.name == stateName
     )[0]?.id;
     if (stateId) {
-      this.parentForm.get('city')?.setValue('');
+      this.deparmentChangesCount++;
       this._vm.getCities(stateId).subscribe(cities => this.cities = cities);
     } else {
       this.cities = [];
