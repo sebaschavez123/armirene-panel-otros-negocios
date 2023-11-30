@@ -22,10 +22,14 @@ export class MapComponent implements OnInit, OnDestroy {
   onGPS = false;
   mapSubscription: Subscription;
   @Input() customClasses: string;
-  showElement$ = this._store.pipe(select('map')); // Asegúrate de tener el nombre correcto del slice en tu estado
+  showMapStoreElement$ = this._store.pipe(select('map')); // Asegúrate de tener el nombre correcto del slice en tu estado
   constructor(private _store: Store<AppState>) { }
   ngOnInit() {
-    this.mapSubscription = this._store.select('map').subscribe(res => {
+    this.setLatLng();
+  }
+
+  setLatLng() {
+    this.mapSubscription = this.showMapStoreElement$.subscribe(res => {
       let { latLng: { lat, lng } } = res;
       if (lat) {
         this.selectedData.lat = lat;
@@ -35,7 +39,6 @@ export class MapComponent implements OnInit, OnDestroy {
         this.map.moveMarker({ lat, lng }, 15)
       }
     })
-
     this.map.callbackDrop = (data) => {
       this.selectedData.lat = data?.lat;
       this.selectedData.lng = data?.lng;
@@ -48,7 +51,6 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   getCurrentLocation() {
-    //console.clear();
     navigator.geolocation.getCurrentPosition((position) => {
       if (this.selectedData.lat == 0) {
         this.onGPS = true;
