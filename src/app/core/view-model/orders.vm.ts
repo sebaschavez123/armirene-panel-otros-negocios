@@ -4,19 +4,29 @@ import { BehaviorSubject, Observable, map } from "rxjs";
 import { environment } from "src/environments/environment";
 import { BranchOfficeManager } from "../manager/branch-office.manager";
 import { Order } from "../models/order.class";
+import { countryConfig } from 'src/country-config/country-config';
+import { COUNTRIES_COL } from "src/app/cities-col-temporal";
+import { COUNTRIES_VZLA } from "src/app/cities-ven-temporal";
 
 @Injectable({
     providedIn: 'root'
 })
 export class OrdersVm {
-
+    private cities;
     private dataList: BehaviorSubject<Order[]> = new BehaviorSubject<Order[]>([]);
     public dataList$: Observable<Order[]> = this.dataList.asObservable();
     private cacheList: Order[];
+    public cityIds;
+    public cityMap;
     constructor(
         private _orderManager: OrderManager,
         private _branchOfficeManager: BranchOfficeManager
-    ) { }
+    ) {
+        this.cities = countryConfig.isColombia ? COUNTRIES_COL.cities : COUNTRIES_VZLA.cities;
+        const cityNames = this.cities.map(item => item.name);
+        this.cityIds = this.cities.map(item => item.id);
+        this.cityMap = Object.fromEntries(this.cities.map(item => [item.name, item.id]));
+    }
 
     returnOrderByBusiness() {
         this._orderManager.returnOrderByBusiness().pipe(
@@ -60,7 +70,7 @@ export class OrdersVm {
             }))
         ).subscribe(res => {
             this.cacheList = res;
-            this.dataList.next(this.cacheList);
+            this.updateDataList(this.cacheList)
         })
     }
 
@@ -76,9 +86,28 @@ export class OrdersVm {
         return this._branchOfficeManager.returnBranchOfficeByBusiness()
     }
 
-    filterData(parameter: number): void {
-        const filteredData = parameter ?
-            this.cacheList.filter(item => item.storeId === parameter) : this.cacheList;
-        this.dataList.next(filteredData);
+    filterData(changes): void {
+        console.log(changes)
+        let { branchOffice, city } = changes;
+        if (city) {
+            const cityId = this.cityMap[city];
+            if (branchOffice) {
+                let filteredData = this.cacheList.filter(item => item.storeId === branchOffice && item.cityId === cityId);
+                this.updateDataList(filteredData)
+            } else {
+                let filteredData = this.cacheList.filter(item => item.cityId === cityId);
+                this.updateDataList(filteredData)
+            }
+        } else if (branchOffice) {
+            let filteredData = this.cacheList.filter(item => item.storeId === branchOffice);
+            this.updateDataList(filteredData)
+        } else {
+            this.updateDataList(this.cacheList)
+        }
     }
+
+    updateDataList(list): void {
+        this.dataList.next(list);
+    }
+
 }

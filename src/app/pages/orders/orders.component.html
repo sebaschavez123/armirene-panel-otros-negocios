@@ -17,14 +17,17 @@
     </div>
     <div class="row mg-y-30">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <nz-select [(ngModel)]="filterBranchOfficeSelected" nzAllowClear
-                nzPlaceHolder="Seleccione una sucursal"
-                (ngModelChange)="changeBranchOffice(filterBranchOfficeSelected)">
-                <nz-option nzLabel="Listar todas las ordenes"></nz-option>
-                <nz-option *ngFor="let branchOffice of branchOfficeList$ | async" nzLabel="{{branchOffice.name}}"
-                    nzValue="{{branchOffice.id}}"></nz-option>
-            </nz-select>
-
+            <form class="filter" [formGroup]="filterForm">
+                <nz-form-item>
+                    <nz-select nzAllowClear formControlName="branchOffice" nzPlaceHolder="Seleccione una sucursal">
+                        <nz-option nzLabel="Listar todas las ordenes"></nz-option>
+                        <nz-option *ngFor="let branchOffice of branchOfficeList$ | async"
+                            nzLabel="{{branchOffice.name}}" nzValue="{{branchOffice.id}}"></nz-option>
+                    </nz-select>
+                </nz-form-item>
+                <app-cities-select [isFilter]="true" [parentForm]="filterForm"
+                    [customClasses]="'cities-container--filter'"></app-cities-select>
+            </form>
             <app-table [objectKeys]="orderModelList" [isShowItem]="true" [isCancelable]="true"
                 [listOfColumn]="listOfColumn" [listOfData]="listOfData$ | async"
                 (sendItem)="getTableActions($event)"></app-table>

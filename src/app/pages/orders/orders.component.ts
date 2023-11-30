@@ -8,7 +8,7 @@ import { ORDER_TABLE } from 'src/app/core/tables-info';
 import { Order } from 'src/app/core/models/order.class';
 import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
 import { BaseFormOrderService } from 'src/app/core/baseForm/base-form-order.service';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BranchOffice } from 'src/app/core/models/branch-office.class';
 
 @Component({
@@ -18,7 +18,7 @@ import { BranchOffice } from 'src/app/core/models/branch-office.class';
   providers: [NzModalService]
 })
 export class OrdersComponent implements OnInit {
-  form: FormGroup;
+  filterForm: FormGroup;
   listOfData$: Observable<any>;
   branchOfficeList$: Observable<BranchOffice[]>
   filterBranchOfficeSelected;
@@ -29,7 +29,7 @@ export class OrdersComponent implements OnInit {
     clientPhone: '',
     clientAddress: '',
     state: '',
-    createDate: ''
+    // createDate: ''
   };
   listOfColumn = ORDER_TABLE.columns;
   constructor(
@@ -37,14 +37,27 @@ export class OrdersComponent implements OnInit {
     private drawerEvent: DrawerEvent,
     private _vm: OrdersVm,
     public _orderForm: BaseFormOrderService,
+    private fb: FormBuilder
   ) {
   }
 
   ngOnInit(): void {
     this.init()
+    this.filterForm.valueChanges.subscribe(changes => {
+      this.changeFilter(changes);
+    });
+  }
+
+  createFilterForm() {
+    this.filterForm = this.fb.group({
+      branchOffice: '',
+      state: '',
+      city: ''
+    })
   }
 
   init() {
+    this.createFilterForm();
     this.getOrdersByBusiness();
     this.getBranchOfficeByBusiness();
   }
@@ -119,8 +132,8 @@ export class OrdersComponent implements OnInit {
     this.drawerEvent.changeOpenComponent({ component: OrderFormComponent, data: { item, branchOffices: this.branchOfficeList$ } })
   }
 
-  changeBranchOffice(filterBranchOfficeSelected) {
-    this._vm.filterData(filterBranchOfficeSelected);
+  changeFilter(changes) {
+    this._vm.filterData(changes);
   }
 
 }

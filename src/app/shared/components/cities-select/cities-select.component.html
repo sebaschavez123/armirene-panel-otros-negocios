@@ -1,9 +1,9 @@
-<form [formGroup]="parentForm" class="cities-container">
+<form [formGroup]="parentForm" [class]="'cities-container ' + customClasses">
     <nz-form-item>
-        <strong>Departamento <span id="required">*</span></strong>
+        <strong *ngIf="!isFilter">Departamento <span id="required">*</span></strong>
         <nz-form-control nzErrorTip="Porfavor ingrese el departamento!">
-            <nz-select appNoNumbers [nzDisabled]="ifDisable" nzShowSearch formControlName="state" id="state"
-                nzPlaceHolder="Departamento" (ngModelChange)="changeState($event)">
+            <nz-select appNoNumbers [nzDisabled]="ifDisable" nzShowSearch nzAllowClear formControlName="state"
+                id="state" nzPlaceHolder="Departamento" (ngModelChange)="changeState($event)">
                 <ng-container *ngFor="let state of states">
                     <nz-option [nzValue]="state.name" nzLabel="{{state.name}}"></nz-option>
                 </ng-container>
@@ -11,9 +11,9 @@
         </nz-form-control>
     </nz-form-item>
     <nz-form-item class="cities-container__city">
-        <strong>Ciudad <span id="required">*</span></strong>
+        <strong *ngIf="!isFilter">Ciudad <span id="required">*</span></strong>
         <nz-form-control nzErrorTip="Porfavor ingrese la ciudad!">
-            <nz-select appNoNumbers [nzDisabled]="ifDisable" nzShowSearch formControlName="city" id="city"
+            <nz-select appNoNumbers [nzDisabled]="ifDisable" nzShowSearch nzAllowClear formControlName="city" id="city"
                 nzPlaceHolder="Ciudad" (ngModelChange)="changeMunicipality($event)">
                 <ng-container *ngFor="let city of cities">
                     <nz-option [nzValue]="city.name" nzLabel="{{city.name}}"></nz-option>
