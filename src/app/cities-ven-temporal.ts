@@ -16,6 +16,10 @@ export const COUNTRIES_VZLA = {
             id: "VAL",
             name: "VALENCIA"
         },
+        {
+            id: "CABU",
+            name: "CABUDARE"
+        },
         // {
         //     id: "OSP",
         //     name: "Ospino"
