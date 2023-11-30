@@ -2,7 +2,7 @@ export const COUNTRIES_VZLA = {
     cities: [
         {
             id: "BQTO",
-            name: "Barquisimeto"
+            name: "BARQUISIMETO"
         },
         {
             id: "CCS",
