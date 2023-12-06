@@ -18,7 +18,10 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/ngrx/reducers/app.reducer';
 import { saveLatLng } from 'src/app/ngrx/actions/map.actions';
 import { ImgUploadComponent } from '../img-upload/img-upload.component';
-
+import { ConfirmAddressPopupComponent } from '../confirm-address-popup/confirm-address-popup.component';
+import { ConfirmAddressPopupService } from 'src/app/core/events/confirm-addres-popup.event';
+import { mergeMap, filter, takeWhile, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 const MODULES = [
   ButtonModule,
   ReactiveFormsModule,
@@ -30,7 +33,8 @@ const MODULES = [
   MapComponent,
   CitiesSelectComponent,
   AdressAutocompleteComponent,
-  ImgUploadComponent
+  ImgUploadComponent,
+  ConfirmAddressPopupComponent
 ]
 @Component({
   selector: 'app-branch-office-form',
@@ -50,8 +54,8 @@ export class BranchOfficeFormComponent implements OnInit {
     private _branchOfficeForm: BaseFormBusinessService,
     private _vm: BranchOfficeFormVM,
     private _drawerEvent: DrawerEvent,
-    private _store: Store<AppState>
-  ) {
+    private _store: Store<AppState>,
+    private _confirmPopupService: ConfirmAddressPopupService) {
   }
 
   ngOnInit(): void {
@@ -83,12 +87,19 @@ export class BranchOfficeFormComponent implements OnInit {
 
   saveBranchOffice() {
     if (!this.form.invalid) {
-      this._vm.saveBranchOffice(this.form.value).subscribe(() => {
-        this.closeDrawer()
-      })
+      this.confirmBranchOffice(this._vm.saveBranchOffice(this.form.value))
     } else {
       this.showFormError();
     }
+  }
+
+  confirmBranchOffice(action: any) {
+    this.showAddresConfirmPopup();
+    this._confirmPopupService.userResponse$.pipe(
+      takeWhile(response => response), // Se detendrá cuando la respuesta sea false
+      filter(response => response === true),
+      mergeMap(() => action)
+    ).subscribe((res) => this.closeDrawer())
   }
 
   deleteBranchOfficeByBusiness(data) {
@@ -104,7 +115,7 @@ export class BranchOfficeFormComponent implements OnInit {
       ...data,
       ...this.form.value
     }
-    this._vm.updateBranchOffice(body).subscribe(() => this.closeDrawer())
+    this.confirmBranchOffice(this._vm.updateBranchOffice(body))
   }
 
   getCoordinates(coordinates) {
@@ -126,8 +137,12 @@ export class BranchOfficeFormComponent implements OnInit {
     this.form.get('image')?.setValue(url);
   }
 
+  showAddresConfirmPopup() {
+    this._confirmPopupService.showPopup();
+  }
+
   ngOnDestroy() {
     let latLng = {};
-    this._store.dispatch(saveLatLng({ latLng }))
+    this._store.dispatch(saveLatLng({ latLng }));
   }
 }
