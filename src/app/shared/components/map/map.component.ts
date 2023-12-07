@@ -7,6 +7,7 @@ import { AppState } from 'src/app/ngrx/reducers/app.reducer';
 import { Store, select } from '@ngrx/store';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CommonModule } from '@angular/common';
+import { saveLatLng } from 'src/app/ngrx/actions/map.actions';
 
 @Component({
   selector: 'app-map',
@@ -37,11 +38,14 @@ export class MapComponent implements OnInit, OnDestroy {
         this.map?.setView({ lat, lng }, 12);
         this.resolveCoordinatesToAddress({ lat, lng });
         this.map.moveMarker({ lat, lng }, 15)
+
       }
     })
     this.map.callbackDrop = (data) => {
       this.selectedData.lat = data?.lat;
       this.selectedData.lng = data?.lng;
+      let latLng = { data }
+      this._store.dispatch(saveLatLng({ latLng }));
       this.resolveCoordinatesToAddress(this.selectedData);
     }
     setTimeout(() => { this.getCurrentLocation(); }, 5);
@@ -76,6 +80,7 @@ export class MapComponent implements OnInit, OnDestroy {
           lng: Number(JSON.parse(JSON.stringify(json)).lon)
         }
         // this.getAddress(coordinates)
+        let latLng = { ...coordinates }
         this.sendLatLng.emit(coordinates);
       }, (error) => {
         console.log(error);

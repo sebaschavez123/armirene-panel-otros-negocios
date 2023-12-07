@@ -24,17 +24,18 @@ import { NgxGpAutocompleteModule } from '@angular-magic/ngx-gp-autocomplete';
 
   ]
 })
-export class AdressAutocompleteComponent implements OnDestroy , OnInit {
+export class AdressAutocompleteComponent implements OnDestroy, OnInit {
   center;
   defaultBounds;
   options;
   formattedAddress;
   @Input() parentForm: any;
   closeAddressAutocomplete: Subscription;
-
+  warningAddress: boolean
   constructor(private _store: Store<AppState>) {
     this.closeAddressAutocomplete = this._store.select('map').subscribe(res => {
-      let { latLng: { lat, lng } } = res;
+      let { latLng: { lat, lng }, warningAddress } = res;
+      this.warningAddress = warningAddress;
       this.center = { lat, lng };
       this.defaultBounds = {
         north: this.center.lat + 1,
@@ -54,7 +55,9 @@ export class AdressAutocompleteComponent implements OnDestroy , OnInit {
   }
 
   ngOnInit(): void {
-    this._store.dispatch(saveWarningAddress({ warningAddress: false }))
+    if (!this.parentForm.get('address').value && this.warningAddress) {
+      this._store.dispatch(saveWarningAddress({ warningAddress: false }))
+    }
   }
 
   public handleAddressChange(address: any) {
@@ -64,7 +67,7 @@ export class AdressAutocompleteComponent implements OnDestroy , OnInit {
     this._store.dispatch(saveWarningAddress({ warningAddress: false }))
   }
 
-  changeDir(e){
+  changeDir(e) {
     this._store.dispatch(saveWarningAddress({ warningAddress: true }))
   }
 

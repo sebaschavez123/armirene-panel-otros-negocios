@@ -188,6 +188,7 @@
 
 <div class="actions-container" *ngIf="showActions"
     [ngClass]="current === 3 ? 'actions-container--order-summary p-absolute right-0' : '' || (current === 1 || current == 2)? 'p-absolute' : ''">
+    <app-confirm-address-popup></app-confirm-address-popup>
     <app-button [title]="'Atrás'" (click)="pre()" [isLoading]="false"
         [customClasses]="'negative-main-btn negative-main-btn--form main--h-40  font-16'"></app-button>
     <app-button [title]="'Siguiente'" [customClasses]="'main main--form main--h-40  font-16'" (click)="next()"

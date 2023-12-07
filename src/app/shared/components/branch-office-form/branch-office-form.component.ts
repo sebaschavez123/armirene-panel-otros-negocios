@@ -20,7 +20,7 @@ import { saveLatLng } from 'src/app/ngrx/actions/map.actions';
 import { ImgUploadComponent } from '../img-upload/img-upload.component';
 import { ConfirmAddressPopupComponent } from '../confirm-address-popup/confirm-address-popup.component';
 import { ConfirmAddressPopupService } from 'src/app/core/events/confirm-addres-popup.event';
-import { mergeMap, filter, takeWhile, tap } from 'rxjs/operators';
+import { mergeMap, filter, takeWhile, tap, distinctUntilChanged } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 const MODULES = [
   ButtonModule,
@@ -96,6 +96,7 @@ export class BranchOfficeFormComponent implements OnInit {
   confirmBranchOffice(action: any) {
     this.showAddresConfirmPopup();
     this._confirmPopupService.userResponse$.pipe(
+      distinctUntilChanged(),
       takeWhile(response => response), // Se detendrá cuando la respuesta sea false
       filter(response => response === true),
       mergeMap(() => action)
