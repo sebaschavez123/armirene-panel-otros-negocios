@@ -1,7 +1,8 @@
 <nz-layout>
   <nz-header class="nz-header">
     <!-- <div class="nz-header__logo" [routerLink]="'start-view'"></div> -->
-    <div class="nz-header__logo"></div>
+    <div class="nz-header__logo nz-header__logo--desktop hide-down--md"></div>
+    <div class="nz-header__logo nz-header__logo--mobile hide-up--md"></div>
     <span class="nz-header__trigger" (click)="isCollapsed = !isCollapsed" *ngIf="showDrawerRef">
       <span nz-icon [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"></span>
     </span>
@@ -15,7 +16,7 @@
       </button>
     </div>
     <nz-dropdown-menu #notifications="nzDropdownMenu">
-        <app-order-notification></app-order-notification>
+      <app-order-notification></app-order-notification>
     </nz-dropdown-menu>
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu>
@@ -60,7 +61,7 @@
       </ul>
     </nz-sider>
     <nz-content class="content"
-      [ngStyle]="{'padding-left': ((isCollapsed && showDrawerRef) ? '8rem' : '') || (( !showDrawerRef) ? '2rem' : '25rem') } ">
+      [ngStyle]="{'padding-left': ((isCollapsed && showDrawerRef) ? '8rem' : '') || (( !showDrawerRef) ? '0rem' : '25rem') } ">
       <app-spinner></app-spinner>
       <router-outlet (activate)="onActivate($event)"></router-outlet>
     </nz-content>

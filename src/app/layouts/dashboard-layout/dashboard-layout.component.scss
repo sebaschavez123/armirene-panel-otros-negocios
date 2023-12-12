@@ -1,3 +1,5 @@
+@import "../../../assets/scss/var-mixins";
+
 .nz-header {
   background-color: white;
   padding: 0 2rem;
@@ -7,13 +9,24 @@
   width: 100%;
 
   &__logo {
-    width: 13rem;
     height: 4rem;
-    background-image: url('../../../assets/images/logo-armi.webp');
     background-size: cover;
-    margin: 1.2rem 2.4rem;
     float: left;
+
+    &--desktop {
+      width: 13rem;
+      background-image: url('../../../assets/images/logo-armi.webp');
+      margin: 1.2rem 2.4rem;
+    }
+
+    &--mobile {
+      width: 4rem;
+      background-image: url('../../../assets/svg/icono-armi.svg');
+      margin: 1.2rem 0;
+    }
   }
+
+
 
   &__trigger {
     height: 6.4rem;
@@ -42,7 +55,6 @@
     }
   }
 }
-
 
 .menu-sidebar {
   position: fixed;
@@ -93,10 +105,37 @@
   }
 }
 
-.layout-content{
+.layout-content {
   padding-top: 6.4rem
 }
 
 .content {
   overflow-y: hidden;
+}
+
+
+::ng-deep {
+  @include mq-max(small) {
+    .ant-drawer-content-wrapper {
+      width: 100% !important;
+    }
+  }
+
+  @include mq-min-max(small, medium) {
+    .ant-drawer-content-wrapper {
+      width: 70% !important;
+    }
+  }
+
+  @include mq-min-max(medium, xs-large) {
+    .ant-drawer-content-wrapper {
+      width: 65% !important;
+    }
+  }
+
+  @include mq-min(xs-large) {
+    .ant-drawer-content-wrapper {
+      width: 40% !important;
+    }
+  }
 }
