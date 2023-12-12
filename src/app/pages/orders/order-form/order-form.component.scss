@@ -1,3 +1,5 @@
+@import "src/assets/scss/var-mixins";
+
 .order-form-container {
     padding: 2rem;
     position: relative;
@@ -53,5 +55,13 @@
 
     .ant-steps-horizontal:not(.ant-steps-label-vertical) .ant-steps-item {
         padding: 0;
+    }
+}
+
+@include mq-max(small) {
+    .order-form-container {
+        &__row {
+            display: block;
+        }
     }
 }
