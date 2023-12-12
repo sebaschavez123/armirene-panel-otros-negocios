@@ -4,11 +4,11 @@ $breakpoints-min : (xs-small: 481px,
   medium: 768px,
   large: 992px,
   xs-large: 1200px);
-$breakpoints-max : (xs-small: 480px,
-  small: 575px,
-  medium: 767px,
-  large: 991px,
-  xs-large: 1199px);
+$breakpoints-max : (xs-small: 481px,
+  small: 576px,
+  medium: 768px,
+  large: 992px,
+  xs-large: 1200px);
 
 //Min
 @mixin mq-min($mq-breakpoint, $mq-breakpoints: $breakpoints-min) {
