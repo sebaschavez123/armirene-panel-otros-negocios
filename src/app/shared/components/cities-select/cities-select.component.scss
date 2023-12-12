@@ -1,3 +1,5 @@
+@import "src/assets/scss/var-mixins";
+
 .cities-container {
     display: flex;
     flex-direction: row;
@@ -8,13 +10,13 @@
         width: 100%;
     }
 
-    &__city{
-        display: flex; 
-        flex-direction: column; 
+    &__city {
+        display: flex;
+        flex-direction: column;
         text-align: left;
     }
 
-    &--filter{
+    &--filter {
         width: 40rem;
     }
 }
@@ -22,5 +24,11 @@
 ::ng-deep {
     .ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector input {
         height: 100%;
+    }
+}
+
+@include mq-max(small) {
+    .cities-container {
+        display: block;
     }
 }
