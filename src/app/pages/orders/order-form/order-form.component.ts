@@ -105,7 +105,9 @@ export class OrderFormComponent implements OnInit {
 
   getClientsByBusiness() {
     this._vm.returnClientsByBusiness().subscribe(clients => {
-      this.clients = clients;
+      this.clients = clients.map(client => {
+        return { ...client, email: client.email ? client.email : '' }
+      });
       this.filteredOptions = this.clients;
     })
   }
