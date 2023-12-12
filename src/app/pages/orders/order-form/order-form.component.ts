@@ -15,6 +15,8 @@ import { DrawerEvent } from 'src/app/core/events/drawer.event';
 import { selectDataMapInterface } from 'src/app/shared/interfaces/select-data-map.type';
 import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
 import { countryConfig } from 'src/country-config/country-config';
+import { ScreenWidth } from 'src/app/core/events/screen-width.event';
+import { LARGE } from 'src/app/core/break-points';
 @Component({
   selector: 'app-order-form',
   templateUrl: './order-form.component.html',
@@ -45,6 +47,7 @@ export class OrderFormComponent implements OnInit {
   messenger: any;
   countryConfig = countryConfig;
   showOrderMesseger: boolean = true;
+  screenWidth: number;
   private subsGetOrderMessenger: Subscription;
   constructor(
     private drawerEvent: DrawerEvent,
@@ -53,12 +56,15 @@ export class OrderFormComponent implements OnInit {
     private _messagesService: MessagesService,
     private _drawerEvent: DrawerEvent,
     private _loadingService: LoadingService,
-    private _store: Store<AppState>
+    private _store: Store<AppState>,
+    private _screenWidth: ScreenWidth
   ) { }
 
   ngOnInit(): void {
     this.init();
     this.setShowOrderMessenger();
+    this.screenWidth = this._screenWidth.getScreenWidth();
+    console.log("ESCREEN WIDT ", this.screenWidth)
   }
 
   init() {
@@ -74,7 +80,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   setShowOrderMessenger() {
-    if (this.dataForm?.item?.state == 'CANCELADA' ) {
+    if (this.dataForm?.item?.state == 'CANCELADA') {
       this.showOrderMesseger = false;
     }
   }
@@ -200,7 +206,7 @@ export class OrderFormComponent implements OnInit {
         this.secondContent = false;
         this.thirdContent = false;
         this.fourthContent = true;
-        this.drawerEvent.changeWidthComponent({ width: '90%' })
+        this.drawerEvent.changeWidthComponent({ width: this.screenWidth < LARGE ? '100% !important' : '90% !important' })
         break;
       }
       default: {
