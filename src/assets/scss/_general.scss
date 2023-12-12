@@ -393,6 +393,22 @@ $size50: 5rem;
   }
 }
 
+@include mq-max(small) {
+  .actions-container {
+    justify-content: initial;
+    flex-direction: column;
+    display: block;
+    height: 10rem;
+    text-align: center;
+    padding: 0 1rem;
+
+    button {
+      width: 100% !important;
+      margin: 0.5rem 0;
+    }
+  }
+}
+
 //Spin Animation
 .spin {
   -webkit-animation-name: spin;
@@ -424,16 +440,31 @@ $size50: 5rem;
 }
 
 @-moz-keyframes spin {
-  from {-moz-transform: rotate(0deg);}
-  to {-moz-transform: rotate(360deg);}
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(360deg);
+  }
 }
 
 @-webkit-keyframes spin {
-  from {-webkit-transform: rotate(0deg);}
-  to {-webkit-transform: rotate(360deg);}
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spin {
-  from {transform: rotate(0deg);}
-  to {transform: rotate(360deg);}
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
