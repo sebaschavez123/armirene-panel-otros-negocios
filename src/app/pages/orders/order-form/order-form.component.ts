@@ -63,11 +63,11 @@ export class OrderFormComponent implements OnInit {
   ngOnInit(): void {
     this.init();
     this.setShowOrderMessenger();
-    this.screenWidth = this._screenWidth.getScreenWidth();
     console.log("ESCREEN WIDT ", this.screenWidth)
   }
 
   init() {
+    this.screenWidth = this._screenWidth.getScreenWidth();
     this.getBranchOfficeByBusiness();
     this.getClientsByBusiness();
     this.initForm();
