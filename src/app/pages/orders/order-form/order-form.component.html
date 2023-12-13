@@ -61,13 +61,6 @@
             <app-cities-select [parentForm]="form.get('client_info')" [ifDisable]="orderId ? true : false">
             </app-cities-select>
             <app-adress-autocomplete [parentForm]="form.get('client_info')"></app-adress-autocomplete>
-            <!-- <nz-form-item>
-                <nz-form-label>Dirección <span id="required">*</span></nz-form-label>
-                <nz-form-control nzErrorTip="Por favor ingresa la dirección!">
-                    <input [readonly]=" orderId ? true : false" formControlName="address" type="text" nz-input
-                        placeholder="Escribe aquí…">
-                </nz-form-control>
-            </nz-form-item> -->
             <nz-form-item>
                 <nz-form-label>Detalle de la dirección</nz-form-label>
                 <nz-form-control>
@@ -195,6 +188,7 @@
 
 <div class="actions-container" *ngIf="showActions"
     [ngClass]="current === 3 ? 'actions-container--order-summary p-absolute right-0' : '' || (current === 1 || current == 2)? 'p-absolute' : ''">
+    <app-confirm-address-popup></app-confirm-address-popup>
     <app-button [title]="'Atrás'" (click)="pre()" [isLoading]="false"
         [customClasses]="'negative-main-btn negative-main-btn--form main--h-40  font-16'"></app-button>
     <app-button [title]="'Siguiente'" [customClasses]="'main main--form main--h-40  font-16'" (click)="next()"

@@ -24,6 +24,7 @@ import { DirectivesModule } from 'src/app/core/directives/directives.module';
 import { OrderMessengerComponent } from './order-messenger/order-messenger.component';
 import { LoadingModule } from 'src/app/shared/components/loading/loading.module';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { ConfirmAddressPopupComponent } from 'src/app/shared/components/confirm-address-popup/confirm-address-popup.component';
 
 const antdModule = [
   NzFormModule,
@@ -32,7 +33,8 @@ const antdModule = [
   NzIconModule,
   NzStepsModule,
   NzRadioModule,
-  NzAutocompleteModule
+  NzAutocompleteModule,
+  ConfirmAddressPopupComponent
 ]
 
 @NgModule({
