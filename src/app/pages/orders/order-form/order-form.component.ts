@@ -17,6 +17,9 @@ import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.
 import { countryConfig } from 'src/country-config/country-config';
 import { ScreenWidth } from 'src/app/core/events/screen-width.event';
 import { LARGE } from 'src/app/core/break-points';
+import { ConfirmAddressPopupService } from 'src/app/core/events/confirm-addres-popup.event';
+import { mergeMap, filter, takeWhile, takeLast, distinctUntilChanged } from 'rxjs/operators';
+
 @Component({
   selector: 'app-order-form',
   templateUrl: './order-form.component.html',
@@ -57,7 +60,8 @@ export class OrderFormComponent implements OnInit {
     private _drawerEvent: DrawerEvent,
     private _loadingService: LoadingService,
     private _store: Store<AppState>,
-    private _screenWidth: ScreenWidth
+    private _screenWidth: ScreenWidth,
+    private _confirmPopupService: ConfirmAddressPopupService
   ) { }
 
   ngOnInit(): void {
@@ -135,6 +139,11 @@ export class OrderFormComponent implements OnInit {
     })
   }
 
+
+  showAddresConfirmPopup() {
+    this._confirmPopupService.showPopup();
+  }
+
   pre(): void {
     this.current -= 1;
     this.changeContent();
@@ -147,12 +156,30 @@ export class OrderFormComponent implements OnInit {
     }
   }
 
+  confirmPopupAddress() {
+    this.showAddresConfirmPopup()
+    this._confirmPopupService.userResponse$.pipe(
+      distinctUntilChanged(),
+      takeWhile(response => response), // Se detendrá cuando la respuesta sea false
+      filter(response => response === true),
+    ).subscribe((res) => {
+      this.current += 1;
+      this.changeContent();
+    })
+  }
+
   next(): void {
     if (this.validClientForm && this.current != 2) {
       this.setCity();
-      this.current += 1;
-      this.changeContent();
+      if (this.current == 1) {
+        this.confirmPopupAddress();
+      } else {
+        this.current += 1;
+        this.changeContent();
+      }
     }
+
+
 
     if (!this.validOrderForm && this.current == 0) {
       this.showFormError(this.form.controls['client_info'] as FormGroup)
@@ -278,7 +305,7 @@ export class OrderFormComponent implements OnInit {
   }
 
   getCoordinates(coordinates) {
-    let { lat, lng } = coordinates
+    let { lat, lng } = coordinates;
     this.form.controls['client_info']?.get('lat')?.setValue(lat);
     this.form.controls['client_info']?.get('lng')?.setValue(lng);
   }

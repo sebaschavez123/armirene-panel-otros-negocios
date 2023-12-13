@@ -1,5 +1,18 @@
 <div class="mg-y-5">
     <div class="map-container">
-        <div id="viewport-map" [class]="customClasses" ></div>
+        <div id="viewport-map" [class]="customClasses"></div>
     </div>
 </div>
+<ng-container *ngIf="(showMapStoreElement$ | async) as map">
+    <div class="adress-warning-container mg-y-15" *ngIf="map.warningAddress">
+        <div class="adress-warning-container__icon">
+            <span nz-icon nzType="warning" nzTheme="outline" class="font-20"></span>
+        </div>
+        <div>
+            <strong>No hemos podido reconocer la dirección.</strong>
+            <span>
+                Por favor, mueve el marcador hasta que coincida con la ubicación de la dirección registrada.
+            </span>
+        </div>
+    </div>
+</ng-container>

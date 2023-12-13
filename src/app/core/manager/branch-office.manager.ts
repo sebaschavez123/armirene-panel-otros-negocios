@@ -82,8 +82,8 @@ export class BranchOfficeManager {
         };
         const newBranchOffices: BranchOffice[] = branchOffices.slice(0);
         newBranchOffices[index] = newBranchOffice;
-        this.subject.next(newBranchOffices);
         return this._branchOfficeService.updateBranchOffice(branchOfficeId, businessId, changes).pipe(
+            tap(() => this.subject.next(newBranchOffices)),
             catchError(err => {
                 const message = "Could not update branch office";
                 this._messages.showErrors(message);

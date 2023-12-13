@@ -1,0 +1,31 @@
+.address-popup {
+    position: absolute;
+    background-color: #eae9e9;
+    font-weight: bold;
+    right: 20px;
+    width: 50%;
+    bottom: 50px;
+    border-radius: 5px;
+    padding: 15px;
+
+    &__actions {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+        margin: 5px 0;
+        
+        button{
+            width: 40%;
+            border: 1px solid #ccc;
+        }
+
+        &--red{
+            color: red;
+        }
+
+        &--blue{
+            color: blue;
+        }
+    }
+}

@@ -27,6 +27,7 @@
     <span><span id="required">*</span>Campos obligatorios</span>
 </form>
 <div class="actions-container" *ngIf="showDrawerActions">
+    <app-confirm-address-popup></app-confirm-address-popup>
     <a *ngIf="dataForm.id" (click)="deleteBranchOffice()">Eliminar sucursal</a>
     <app-button [title]="'Atrás'" (click)="closeDrawer()"
         [customClasses]="'negative-main-btn negative-main-btn--form main--h-40  font-16'"></app-button>

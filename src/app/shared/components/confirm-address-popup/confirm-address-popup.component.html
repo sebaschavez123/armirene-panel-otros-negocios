@@ -1,0 +1,7 @@
+<div class="address-popup" *ngIf="isPopupVisible">
+    ¿La ubicación del marcador coincide con la dirección?
+    <div class="address-popup__actions">
+        <button class="address-popup__actions--red" (click)="confirm(false)">NO</button>
+        <button class="address-popup__actions--blue" (click)="confirm(true)">SI</button>
+    </div>
+</div>
