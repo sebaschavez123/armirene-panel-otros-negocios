@@ -1,0 +1,11 @@
+@import "src/assets/scss/var-mixins";
+
+img {
+    width: 15rem;
+}
+
+@include mq-max(small) {
+    img {
+        width: 6.5rem;
+    }
+}

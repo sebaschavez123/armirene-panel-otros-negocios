@@ -7,18 +7,20 @@ import { AuthResponse } from "../models/auth-response.class";
 })
 export class ScreenWidth implements OnInit {
 
-    @HostListener('window:resize', ['$event'])
-    onResize(event: any): void {
-        this.getScreenWidth();
-    }
-
-    constructor() { }
-
     ngOnInit() {
     }
 
-    public getScreenWidth() {
-        return window.innerWidth;
+    private widthSubject: BehaviorSubject<number> = new BehaviorSubject(window.innerWidth);
+    width$: Observable<number> = this.widthSubject.asObservable();
+
+    constructor() {
+        this.initializeResizeListener();
+    }
+
+    private initializeResizeListener() {
+        window.addEventListener('resize', () => {
+            this.widthSubject.next(window.innerWidth);
+        });
     }
 
 }

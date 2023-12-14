@@ -16,7 +16,7 @@ import { selectDataMapInterface } from 'src/app/shared/interfaces/select-data-ma
 import { RemoveLeadingZerosPipe } from 'src/app/shared/pipes/removeleadingzeros.pipe';
 import { countryConfig } from 'src/country-config/country-config';
 import { ScreenWidth } from 'src/app/core/events/screen-width.event';
-import { LARGE } from 'src/app/core/break-points';
+import { LARGE, MEDIUM } from 'src/app/core/break-points';
 import { ConfirmAddressPopupService } from 'src/app/core/events/confirm-addres-popup.event';
 import { mergeMap, filter, takeWhile, takeLast, distinctUntilChanged } from 'rxjs/operators';
 
@@ -50,8 +50,8 @@ export class OrderFormComponent implements OnInit {
   messenger: any;
   countryConfig = countryConfig;
   showOrderMesseger: boolean = true;
-  screenWidth: number;
   private subsGetOrderMessenger: Subscription;
+  private screenWidth: Subscription;
   constructor(
     private drawerEvent: DrawerEvent,
     public _orderForm: BaseFormOrderService,
@@ -67,11 +67,10 @@ export class OrderFormComponent implements OnInit {
   ngOnInit(): void {
     this.init();
     this.setShowOrderMessenger();
-    console.log("ESCREEN WIDT ", this.screenWidth)
+    this.setScreenWidth();
   }
 
   init() {
-    this.screenWidth = this._screenWidth.getScreenWidth();
     this.getBranchOfficeByBusiness();
     this.getClientsByBusiness();
     this.initForm();
@@ -93,6 +92,7 @@ export class OrderFormComponent implements OnInit {
     let filterPipe = new RemoveLeadingZerosPipe()
     this.orderId = this.dataForm.item?.orderId;
     if (this.orderId) {
+      this.fourthContent = true;
       this.current = 3;
       this.showActions = false;
       this.changeContent();
@@ -210,7 +210,7 @@ export class OrderFormComponent implements OnInit {
         this.secondContent = false;
         this.thirdContent = false;
         this.fourthContent = false;
-        this.drawerEvent.changeWidthComponent({ width: '40%' })
+        this.setScreenWidth();
         break;
       }
       case 1: {
@@ -225,7 +225,7 @@ export class OrderFormComponent implements OnInit {
         this.secondContent = false;
         this.thirdContent = true;
         this.fourthContent = false;
-        this.drawerEvent.changeWidthComponent({ width: '40%' })
+        this.setScreenWidth();
         break;
       }
       case 3: {
@@ -233,13 +233,27 @@ export class OrderFormComponent implements OnInit {
         this.secondContent = false;
         this.thirdContent = false;
         this.fourthContent = true;
-        this.drawerEvent.changeWidthComponent({ width: this.screenWidth < LARGE ? '100% !important' : '90% !important' })
+        this.setScreenWidth();
         break;
       }
       default: {
         this.closeDrawer();
       }
     }
+  }
+
+  setScreenWidth() {
+    this._screenWidth.width$.subscribe((width) => {
+      if (width < MEDIUM) {
+        this.drawerEvent.changeWidthComponent({ width: '100% !important' })
+      }
+      if (width > LARGE && this.fourthContent) {
+        this.drawerEvent.changeWidthComponent({ width: '90% !important' })
+      }
+      if (width > MEDIUM && !this.fourthContent) {
+        this.drawerEvent.changeWidthComponent({ width: '40%' })
+      }
+    });
   }
 
   createOrder() {
@@ -330,5 +344,6 @@ export class OrderFormComponent implements OnInit {
     let latLng = {};
     this._store.dispatch(saveLatLng({ latLng }));
     this.subsGetOrderMessenger?.unsubscribe();
+    this.screenWidth?.unsubscribe();
   }
 }
