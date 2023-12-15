@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MEDIUM } from 'src/app/core/break-points';
+import { ScreenWidth } from 'src/app/core/events/screen-width.event';
 
 @Component({
   selector: 'app-table',
@@ -15,8 +17,11 @@ export class TableComponent implements OnInit {
   @Input() isCancelable: boolean = false;
   @Input() isShowItem: boolean = false;
   @Output() sendItem = new EventEmitter();
+  isMediumScreenWidth: boolean;
   actions
-  constructor() { }
+  constructor(
+    private _screenWidth: ScreenWidth,
+  ) { }
 
   ngOnInit(): void {
     this.actions = [
@@ -28,9 +33,20 @@ export class TableComponent implements OnInit {
 
     ]
     this.objectKeys = Object.keys(this.objectKeys);
+    this.setScreenWidth();
   }
 
   sendEventItem(type, data) {
     this.sendItem.emit({ type: type, data })
+  }
+
+  setScreenWidth() {
+    this._screenWidth.width$.subscribe((width) => {
+      if (width < MEDIUM) {
+        this.isMediumScreenWidth = true;
+      } else {
+        this.isMediumScreenWidth = false;
+      }
+    });
   }
 }

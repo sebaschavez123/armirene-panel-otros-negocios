@@ -1,7 +1,24 @@
 <nz-table #sortTable [nzData]="listOfData" nzTableLayout="fixed">
+    <ng-container *ngIf="isMediumScreenWidth; else isLarge ">
+        <div class="order-card" *ngFor="let data of sortTable.data">
+            <div *ngFor="let column of listOfColumn">
+                <strong>{{ column.title }} : </strong>
+                {{ data[column.name] }}
+            </div>
+            <div class="order-card__actions">
+                <ng-container *ngFor="let action of actions">
+                    <span class="u-pointer font-20 mg-x-5" *ngIf="action.show" nzTooltipTitle="{{action.tooltipText}}"
+                        nzTooltipPlacement="bottomLeft" nz-tooltip nz-icon nzType="{{action.icon}}"
+                        (click)="sendEventItem(action.type,data)"></span>
+                </ng-container>
+            </div>
+        </div>
+    </ng-container>
+</nz-table>
+<ng-template #isLarge #sortTable>
     <thead>
         <tr>
-            <th *ngFor="let column of listOfColumn" [nzSortFn]="column.compare" [nzSortPriority]="column.priority">
+            <th *ngFor="let column of listOfColumn">
                 {{ column.title }}
             </th>
             <th></th>
@@ -23,4 +40,4 @@
             </td>
         </tr>
     </tbody>
-</nz-table>
+</ng-template>
