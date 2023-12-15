@@ -1,5 +1,17 @@
-.filter{
-    display: flex; 
-    flex-direction: row; 
+@import "src/assets/scss/var-mixins";
+
+.filter {
+    display: flex;
+    flex-direction: row;
     gap: 0.5rem;
+}
+
+@include mq-max(large) {
+    .filter {
+        flex-direction: column;
+
+        nz-select {
+            width: 100%;
+        }
+    }
 }

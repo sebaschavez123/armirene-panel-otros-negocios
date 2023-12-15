@@ -27,8 +27,12 @@
     }
 }
 
-@include mq-max(small) {
+@include mq-max(large) {
     .cities-container {
         display: block;
+
+        &--filter {
+            width: 100%;
+        }
     }
 }
