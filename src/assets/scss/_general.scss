@@ -372,6 +372,11 @@ $size50: 5rem;
 
 //FORM
 
+.business-form-actions {
+  display: flex;
+  justify-content: center;
+}
+
 .actions-container {
   display: flex;
   align-items: center;
@@ -402,6 +407,20 @@ $size50: 5rem;
     text-align: center;
     padding: 0 1rem;
     width: 100%;
+
+    button {
+      width: 100% !important;
+      margin: 0.5rem 0;
+    }
+  }
+
+  .business-form-actions {
+    flex-direction: column;
+    display: block;
+    text-align: center;
+    padding: 0 1rem;
+    width: 100%;
+
     button {
       width: 100% !important;
       margin: 0.5rem 0;

@@ -1,6 +1,20 @@
-.filter-container{
+@import "src/assets/scss/var-mixins";
+
+.filter-container {
     position: absolute;
-    z-index:500;
-    min-width: 230px;
-    left: 5%;
+    z-index: 500;
+    min-width: 23rem;
+    left: 7%;
+}
+
+@include mq-max(small) {
+    .filter-container {
+        left: 17%;
+    }
+}
+
+@include mq-min-max(small, medium) {
+    .filter-container {
+        left: 10%;
+    }
 }

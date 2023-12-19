@@ -1,5 +1,5 @@
 <form [formGroup]="parentForm" [class]="'cities-container ' + customClasses">
-    <nz-form-item>
+    <nz-form-item class="cities-container__deparment">
         <strong *ngIf="!isFilter">Departamento <span id="required">*</span></strong>
         <nz-form-control nzErrorTip="Porfavor ingrese el departamento!">
             <nz-select appNoNumbers [nzDisabled]="ifDisable" nzShowSearch nzAllowClear formControlName="state"
