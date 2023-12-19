@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/core/models/client.class';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { DrawerEvent } from 'src/app/core/events/drawer.event';
 import { ClientFormComponent } from './client-form/client-form.component';
