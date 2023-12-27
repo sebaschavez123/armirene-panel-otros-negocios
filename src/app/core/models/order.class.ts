@@ -23,6 +23,7 @@ export class Order {
     state: string;
     storeId: number;
     cityId : string;
+    createDate : string;
     constructor() {
         this.orderId = 0;
         this.business_id = Storage.getAll(BUSINESS_DATA).id;
@@ -64,5 +65,6 @@ export class Order {
         this.token = 0;
         this.storeId = 0;
         this.cityId = '';
+        this.createDate = '';
     }
 }

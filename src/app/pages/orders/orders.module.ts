@@ -25,6 +25,7 @@ import { OrderMessengerComponent } from './order-messenger/order-messenger.compo
 import { LoadingModule } from 'src/app/shared/components/loading/loading.module';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 import { ConfirmAddressPopupComponent } from 'src/app/shared/components/confirm-address-popup/confirm-address-popup.component';
+import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 
 const antdModule = [
   NzFormModule,
@@ -34,6 +35,7 @@ const antdModule = [
   NzStepsModule,
   NzRadioModule,
   NzAutocompleteModule,
+  NzDatePickerModule,
   ConfirmAddressPopupComponent
 ]
 
