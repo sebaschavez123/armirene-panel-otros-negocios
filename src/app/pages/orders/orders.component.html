@@ -27,6 +27,7 @@
                 </nz-form-item>
                 <app-cities-select [isFilter]="true" [parentForm]="filterForm"
                     [customClasses]="'cities-container--filter'"></app-cities-select>
+                <nz-range-picker formControlName="date"></nz-range-picker>
             </form>
             <app-table [objectKeys]="orderModelList" [isShowItem]="true" [isCancelable]="true"
                 [listOfColumn]="listOfColumn" [listOfData]="listOfData$ | async"

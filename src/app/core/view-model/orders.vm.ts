@@ -7,6 +7,7 @@ import { Order } from "../models/order.class";
 import { countryConfig } from 'src/country-config/country-config';
 import { COUNTRIES_COL } from "src/app/cities-col-temporal";
 import { COUNTRIES_VZLA } from "src/app/cities-ven-temporal";
+import * as moment from "moment";
 
 @Injectable({
     providedIn: 'root'
@@ -87,20 +88,30 @@ export class OrdersVm {
     }
 
     filterData(changes): void {
-        console.log(changes)
-        let { branchOffice, city } = changes;
+        let { branchOffice, city, date } = changes;
         if (city) {
             const cityId = this.cityMap[city];
             if (branchOffice) {
-                let filteredData = this.cacheList.filter(item => item.storeId === branchOffice && item.cityId === cityId);
-                this.updateDataList(filteredData)
+                if (date.length > 0) {
+                    this.filterByBranchOfficeCityAndDate(branchOffice, cityId, date)
+                } else {
+                    this.filterByBranchOfficeAndCity(branchOffice, cityId);
+                }
             } else {
-                let filteredData = this.cacheList.filter(item => item.cityId === cityId);
-                this.updateDataList(filteredData)
+                if (date?.length > 0) {
+                    this.filterByCityAndDate(cityId, date)
+                } else {
+                    this.filterByCity(cityId)
+                }
             }
         } else if (branchOffice) {
-            let filteredData = this.cacheList.filter(item => item.storeId === branchOffice);
-            this.updateDataList(filteredData)
+            if (date?.length > 0) {
+                this.filterByBranchOfficeAndDate(branchOffice, date)
+            } else {
+                this.filterByBranchOffice(branchOffice);
+            }
+        } else if (date?.length > 0) {
+            this.filterByDate(date)
         } else {
             this.updateDataList(this.cacheList)
         }
@@ -108,6 +119,64 @@ export class OrdersVm {
 
     updateDataList(list): void {
         this.dataList.next(list);
+    }
+
+    filterByBranchOfficeCityAndDate(branchOffice: number, cityId: string, date): void {
+        const startDate = moment(date[0]).format('YYYY-MM-DD');
+        const endDate = moment(date[1]).format('YYYY-MM-DD');
+        let filteredData = this.cacheList.filter(item =>
+            item.storeId === branchOffice &&
+            item.cityId === cityId &&
+            (moment(item.createDate).format('YYYY-MM-DD') >= startDate &&
+                moment(item.createDate).format('YYYY-MM-DD') <= endDate)
+        );
+        this.updateDataList(filteredData);
+    }
+
+    filterByBranchOfficeAndDate(branchOffice: number, date): void {
+        const startDate = moment(date[0]).format('YYYY-MM-DD');
+        const endDate = moment(date[1]).format('YYYY-MM-DD');
+        let filteredData = this.cacheList.filter(item =>
+            item.storeId === branchOffice &&
+            (moment(item.createDate).format('YYYY-MM-DD') >= startDate &&
+                moment(item.createDate).format('YYYY-MM-DD') <= endDate)
+        );
+        this.updateDataList(filteredData);
+    }
+
+    filterByCityAndDate(cityId: string, date): void {
+        const startDate = moment(date[0]).format('YYYY-MM-DD');
+        const endDate = moment(date[1]).format('YYYY-MM-DD');
+        let filteredData = this.cacheList.filter(item =>
+            item.cityId === cityId &&
+            (moment(item.createDate).format('YYYY-MM-DD') >= startDate &&
+                moment(item.createDate).format('YYYY-MM-DD') <= endDate)
+        );
+        this.updateDataList(filteredData);
+    }
+
+    filterByDate(date): void {
+        const startDate = moment(date[0]).format('YYYY-MM-DD');
+        const endDate = moment(date[1]).format('YYYY-MM-DD');
+        let filteredData = this.cacheList.filter(item =>
+        (moment(item.createDate).format('YYYY-MM-DD') >= startDate &&
+            moment(item.createDate).format('YYYY-MM-DD') <= endDate));
+        this.updateDataList(filteredData);
+    }
+
+    filterByBranchOfficeAndCity(branchOffice: number, cityId: string): void {
+        let filteredData = this.cacheList.filter(item => item.storeId === branchOffice && item.cityId === cityId);
+        this.updateDataList(filteredData);
+    }
+
+    filterByCity(cityId: string): void {
+        let filteredData = this.cacheList.filter(item => item.cityId === cityId);
+        this.updateDataList(filteredData);
+    }
+
+    filterByBranchOffice(branchOffice: number): void {
+        let filteredData = this.cacheList.filter(item => item.storeId === branchOffice);
+        this.updateDataList(filteredData);
     }
 
 }
