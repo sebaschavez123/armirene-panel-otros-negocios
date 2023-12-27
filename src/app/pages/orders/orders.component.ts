@@ -52,7 +52,8 @@ export class OrdersComponent implements OnInit {
     this.filterForm = this.fb.group({
       branchOffice: '',
       state: '',
-      city: ''
+      city: '',
+      date: null
     })
   }
 
