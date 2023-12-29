@@ -26,6 +26,7 @@ export class OrderSummaryComponent implements OnInit, OnChanges {
   public instructions;
   public orderInvoice;
   public orderId;
+  public createDate;
   constructor(
     public orderFormComponent: OrderFormComponent,
     private _vm: OrderSummaryVm,
@@ -38,13 +39,14 @@ export class OrderSummaryComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['order']) {
-      let { client_info, payment_method, vehicle_type, instructions, orderInvoice, orderId } = changes['order'].currentValue;
+      let { client_info, payment_method, vehicle_type, instructions, orderInvoice, orderId, createDate } = changes['order'].currentValue;
       this.client_info = client_info;
       this.payment_method = payment_method;
       this.vehicle_type = vehicle_type;
       this.instructions = instructions;
       this.orderInvoice = orderInvoice;
       this.orderId = orderId;
+      this.createDate = createDate;
     }
   }
 

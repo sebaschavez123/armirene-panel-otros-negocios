@@ -84,10 +84,11 @@ export const ORDER_TABLE = {
             priority: false,
             name: 'state'
         },
-        // {
-        //     title: 'Fecha',
-        //     compare: (a: any, b: any) => a.address.localeCompare(b.date),
-        //     priority: false
-        // },
+        {
+            title: 'Fecha',
+            compare: (a: any, b: any) => a.address.localeCompare(b.date),
+            priority: false,
+            name: 'createDate'
+        },
     ]
 }
