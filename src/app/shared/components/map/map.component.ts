@@ -69,22 +69,23 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   resolveCoordinatesToAddress({ lat, lng }) {
-    let urlInver = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=0&zoom=40';
-    urlInver += `&lat=${lat}&lon=${lng}`;
-    fromFetch(urlInver)
-      .pipe(switchMap((r: any) => from(r.json())))
-      .subscribe((json) => {
-        console.log(json)
-        let coordinates = {
-          lat: Number(JSON.parse(JSON.stringify(json)).lat),
-          lng: Number(JSON.parse(JSON.stringify(json)).lon)
-        }
-        // this.getAddress(coordinates)
-        let latLng = { ...coordinates }
-        this.sendLatLng.emit(coordinates);
-      }, (error) => {
-        console.log(error);
-      });
+    this.sendLatLng.emit({ lat, lng });
+    // let urlInver = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=0&zoom=40';
+    // urlInver += `&lat=${lat}&lon=${lng}`;
+    // fromFetch(urlInver)
+    //   .pipe(switchMap((r: any) => from(r.json())))
+    //   .subscribe((json) => {
+    //     console.log(json)
+    //     let coordinates = {
+    //       lat: Number(JSON.parse(JSON.stringify(json)).lat),
+    //       lng: Number(JSON.parse(JSON.stringify(json)).lon)
+    //     }
+    //     // this.getAddress(coordinates)
+    //     let latLng = { ...coordinates }
+    //     this.sendLatLng.emit(coordinates);
+    //   }, (error) => {
+    //     console.log(error);
+    //   });
   }
 
   getAddress(coordinates) {
