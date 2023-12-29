@@ -4,6 +4,12 @@
         <p>{{orderId}}</p>
     </div>
 </div>
+<div class="order-summary" *ngIf="createDate">
+    <div class="order-summary__title">
+        <span>Fecha:</span>
+        <p>{{createDate}}</p>
+    </div>
+</div>
 <div class="order-summary">
     <div class="order-summary__title">
         <span>Datos del cliente:</span>
